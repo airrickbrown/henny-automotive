@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed": "#66ff8e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#005322",
+                    "primary": "#ffb3ae",
+                    "on-primary-fixed-variant": "#930015",
+                    "on-tertiary-container": "#434200",
+                    "secondary": "#41e575",
+                    "outline": "#ad8885",
+                    "on-primary": "#68000c",
+                    "on-error": "#690005",
+                    "surface-variant": "#353534",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "outline-variant": "#5d3f3d",
+                    "on-secondary-container": "#004d1f",
+                    "on-surface-variant": "#e6bdb9",
+                    "primary-fixed": "#ffdad7",
+                    "inverse-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "on-tertiary-fixed": "#1d1d00",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#b3b000",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#3de273",
+                    "secondary-container": "#06c85d",
+                    "on-primary-container": "#fff8f7",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-tertiary": "#333200",
+                    "tertiary-fixed": "#ece900",
+                    "on-tertiary-fixed-variant": "#4a4900",
+                    "on-secondary": "#003915",
+                    "primary-container": "#e11d2e",
+                    "inverse-primary": "#c0001f",
+                    "inverse-on-surface": "#313030",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#cfcc00",
+                    "surface-tint": "#ffb3ae",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#cfcd00",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#410004",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(19, 19, 19, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .ignition-gradient {
+            background: linear-gradient(135deg, #e11d2e 0%, #930015 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-border {
+            border-bottom: 2px solid #E11D2E;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 glass-nav">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
+<div class="text-2xl font-black italic text-white tracking-tighter font-headline">
+                HENNY AUTOMOTIVE
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-headline uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Home</a>
+<a class="font-headline uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Inventory</a>
+<a class="font-headline uppercase tracking-widest text-sm font-bold text-primary-container border-b-2 border-primary-container pb-1" href="#">Parts</a>
+<a class="font-headline uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">About</a>
+<a class="font-headline uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-white/70 hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-secondary text-on-secondary-fixed font-headline font-bold uppercase tracking-widest text-xs px-6 py-2 rounded-md hover:brightness-110 transition-all active:scale-95">
+                    WhatsApp
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-20">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div>
+<span class="font-label text-primary-container uppercase tracking-[0.2em] font-bold text-xs mb-4 block">Performance Components</span>
+<h1 class="font-headline text-6xl md:text-8xl font-black italic tracking-tighter leading-none uppercase">Precision <br/>Engineering.</h1>
+</div>
+<div class="max-w-md">
+<p class="text-on-surface-variant text-lg leading-relaxed">Genuine performance parts curated for the discerning enthusiast. From high-output engines to bespoke interior accessories.</p>
+</div>
+</div>
+</header>
+<!-- Category Filter -->
+<section class="mb-16">
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-3 bg-primary-container text-white font-headline font-bold uppercase tracking-widest text-xs rounded-md shadow-[0_0_20px_rgba(225,29,46,0.3)]">All Parts</button>
+<button class="px-8 py-3 bg-surface-container-high hover:bg-surface-bright text-white/70 font-headline font-bold uppercase tracking-widest text-xs rounded-md transition-all">Engines</button>
+<button class="px-8 py-3 bg-surface-container-high hover:bg-surface-bright text-white/70 font-headline font-bold uppercase tracking-widest text-xs rounded-md transition-all">Tires &amp; Wheels</button>
+<button class="px-8 py-3 bg-surface-container-high hover:bg-surface-bright text-white/70 font-headline font-bold uppercase tracking-widest text-xs rounded-md transition-all">Interior</button>
+<button class="px-8 py-3 bg-surface-container-high hover:bg-surface-bright text-white/70 font-headline font-bold uppercase tracking-widest text-xs rounded-md transition-all">Performance Kits</button>
+</div>
+</section>
+<!-- Parts Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Part Item 1 -->
+<div class="group bg-surface-container-low p-6 rounded-md hover:bg-surface-container-high transition-all duration-500 relative overflow-hidden">
+<div class="aspect-square mb-8 overflow-hidden rounded-sm relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="close-up view of a high-performance V8 racing engine with polished chrome manifolds and red valve covers in a dark studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNMoir3rIsocR_aNPXIn_M13m8MCcK4eqIWvw7D7tW1F8ugT6lgfDXNGYErshYWC9WZCCvEWp-cg7B-kgTDZBxYEOLHEo2v2ufEn9AB9xa46x4yjKIBKtuKydXuPF1GZS5mryJO32xWrh7Y5K-ez9B_IkUosbpXHq2RyMzqpptxNomtbrUT9GcK-Uqa7ia3J5qbF6-pGnnVjDId_5XbD2FiaHoFKKPm-J6fWXLV1tQIJmUb9Ae1wjXX8YYtGse3DGIrXT7j7YdGZY"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-white font-label text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-sm">Powerplant</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="font-headline text-2xl font-bold uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">V8 Engine for 2018 Mustang</h3>
+<span class="material-symbols-outlined text-primary-container">settings_input_component</span>
+</div>
+<div class="flex gap-4">
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">5.0L Coyote</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">New</span>
+</div>
+</div>
+<button class="w-full ignition-gradient text-white font-headline font-bold uppercase tracking-widest text-xs py-4 rounded-md flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(225,29,46,0.4)] transition-all active:scale-[0.98]">
+                        Inquire on WhatsApp
+                        <span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</div>
+</div>
+<!-- Part Item 2 -->
+<div class="group bg-surface-container-low p-6 rounded-md hover:bg-surface-container-high transition-all duration-500 relative overflow-hidden">
+<div class="aspect-square mb-8 overflow-hidden rounded-sm relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="four premium black alloy sport wheels with red brake calipers visible through spokes on a dark textured background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDePRMOqmRTxgSrDF5jxVAkvHfxkgfJhmCh9MkLzGtl4yQ4C7og1oOiVE9o1xjHSoI2W6Io4BQvIY0Qu5KAqH8eElL76GQQb7govoHPi8X3jrdrd-MpZAQePKZJChWX_OcBFMdtRzfl8r3NMFdF97eWaplWtVvf5uYGouhBNa0-l7dcYS_1Ufj-BCW_rTIMYhjrUa5hyfftVDF9XmKwNLa36DvD15MKtEXHMd4JmBKlUlI0cQLHKQ8TWCln1PhB27efez9GVJVUvUM"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-white font-label text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-sm">Footwork</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="font-headline text-2xl font-bold uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">Bespoke 21" Forged Alloy Set</h3>
+<span class="material-symbols-outlined text-primary-container">tire_repair</span>
+</div>
+<div class="flex gap-4">
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Forged 6061</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Limited</span>
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary-fixed font-headline font-bold uppercase tracking-widest text-xs py-4 rounded-md flex items-center justify-center gap-3 hover:brightness-110 hover:shadow-[0_0_30px_rgba(65,229,117,0.3)] transition-all active:scale-[0.98]">
+                        Inquire on WhatsApp
+                        <span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</div>
+</div>
+<!-- Part Item 3 -->
+<div class="group bg-surface-container-low p-6 rounded-md hover:bg-surface-container-high transition-all duration-500 relative overflow-hidden">
+<div class="aspect-square mb-8 overflow-hidden rounded-sm relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="luxury carbon fiber steering wheel with red stitching and integrated digital display in a modern supercar cockpit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu0OdZv3RuImK8jh8fmKaI3izt5A4kN-7YnOrLnk4eXQszynRpxRZu-z0L_4ojAySzncwQKq2LeC-QOYvs4NQ3tsM1Wc3X3I02qcrxnmF8ejM4hA-LrEqcF1HlWlrw0MDObcyT0gTCgEBoW1Sj5VIyP1DOMen1AYOUO7mOIeAtMCBw6ewFd209SFpcBEqixIFTjIcKSdRImKNhwrolRhuJDyI6qz8rEfvk0NpbGvqfKaFVNchJhBKTCzpTPANOpO6PA4Ir530BeXw"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-white font-label text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-sm">Interior</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="font-headline text-2xl font-bold uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">Carbon Fiber M-Sport Wheel</h3>
+<span class="material-symbols-outlined text-primary-container">steering_wheel_heat</span>
+</div>
+<div class="flex gap-4">
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Real Carbon</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Custom</span>
+</div>
+</div>
+<button class="w-full ignition-gradient text-white font-headline font-bold uppercase tracking-widest text-xs py-4 rounded-md flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(225,29,46,0.4)] transition-all active:scale-[0.98]">
+                        Inquire on WhatsApp
+                        <span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</div>
+</div>
+<!-- Part Item 4 -->
+<div class="group bg-surface-container-low p-6 rounded-md hover:bg-surface-container-high transition-all duration-500 relative overflow-hidden">
+<div class="aspect-square mb-8 overflow-hidden rounded-sm relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="extreme close up of a bright red high performance brake caliper on a drilled ceramic disc brake" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9_i5LHU48WK3ErPvjvZltqggS8ilwMBnQVLJ7kldUCCriKK-iEvh704R-2tkgH_v7Q7YMlT-XZkJ-PaVdTLZCczM8_N5dSTS60dMGrrHxhb7vFBEUo2WTosFw64JEl-eyeI8Q8m63HAcaKqmPjcM2bfJYfdFLfA6xk_lgedjdq9SQhmM0rbndkVnZKTdzN_fb-p93_hugSA7bC6xH2M_fxycSfrkrhsiYRz3qH0OAFtARxonrELCh0nSZA-AWBtywibz7T2ge9vM"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-white font-label text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-sm">Chassis</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="font-headline text-2xl font-bold uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">Brembo 6-Piston Brake Kit</h3>
+<span class="material-symbols-outlined text-primary-container">precision_manufacturing</span>
+</div>
+<div class="flex gap-4">
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Carbon Ceramic</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">In Stock</span>
+</div>
+</div>
+<button class="w-full ignition-gradient text-white font-headline font-bold uppercase tracking-widest text-xs py-4 rounded-md flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(225,29,46,0.4)] transition-all active:scale-[0.98]">
+                        Inquire on WhatsApp
+                        <span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</div>
+</div>
+<!-- Part Item 5 -->
+<div class="group bg-surface-container-low p-6 rounded-md hover:bg-surface-container-high transition-all duration-500 relative overflow-hidden">
+<div class="aspect-square mb-8 overflow-hidden rounded-sm relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="shiny chrome dual exhaust tips emerging from a sleek black carbon fiber diffuser on a luxury sports car" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuIFi8puP_vjZmuBQ4fWJtsZOYK8z0w9wc2UKaEN1LrKFHRxP-sko19KOvbUUXdjyoOdfGU4jERUFVDMzmWYzQGQ6bo7jPuRIfEiTiwyDau83i9aZ_rejoPNSZQojBuHUEPHS-yH0hR0aHxW3TdJDlY9stjuJxR31mcoLYYaBK3yyZRSt7R_3XGvx5UM_7cMMwOZhi7pkq_-1JuwwJ9_LVGk4W7SpqsLQB9IYvjJVs_lkTmEv0-o19TrzcVccHIMQS08OfGCAOLUk"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-white font-label text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-sm">Exhaust</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="font-headline text-2xl font-bold uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">Titanium Variable Valve System</h3>
+<span class="material-symbols-outlined text-primary-container">air</span>
+</div>
+<div class="flex gap-4">
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Ultra-Light</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Cat-Back</span>
+</div>
+</div>
+<button class="w-full ignition-gradient text-white font-headline font-bold uppercase tracking-widest text-xs py-4 rounded-md flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(225,29,46,0.4)] transition-all active:scale-[0.98]">
+                        Inquire on WhatsApp
+                        <span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</div>
+</div>
+<!-- Part Item 6 -->
+<div class="group bg-surface-container-low p-6 rounded-md hover:bg-surface-container-high transition-all duration-500 relative overflow-hidden">
+<div class="aspect-square mb-8 overflow-hidden rounded-sm relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="modern led headlight of a supercar showing complex geometric lenses and sharp light signatures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5fgT9y45Ev5el2N4DwKWYuPzTpEzkf_658AW5N-dyDL7NLmqFpOe1ra4s-cv1VYs-FJoXRGRotOc1SJjWWI5a7WpaPJzMKn40Wo-tfWgkmsHZv2ckvokk6Q0TTYpCJo3QpuqN0de8WSq_gk4MYDlG1pGWwD9FiDAvAmV-W-X1oi2nPgeRYAm927ZkiDSyIRe6mvQTfJVKC6JEUcTsTHWslckSu4xCXlsGvb9xCcNGrJgcZocgkXsoBznHchEJh_3QAccZld7WlMg"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-white font-label text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-sm">Lighting</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<h3 class="font-headline text-2xl font-bold uppercase tracking-tight leading-tight group-hover:text-primary transition-colors">Matrix LED Conversion Kit</h3>
+<span class="material-symbols-outlined text-primary-container">light_mode</span>
+</div>
+<div class="flex gap-4">
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">Smart Beam</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-highest/50 border border-outline-variant/20 rounded-sm">
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter text-on-surface-variant">New Tech</span>
+</div>
+</div>
+<button class="w-full ignition-gradient text-white font-headline font-bold uppercase tracking-widest text-xs py-4 rounded-md flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(225,29,46,0.4)] transition-all active:scale-[0.98]">
+                        Inquire on WhatsApp
+                        <span class="material-symbols-outlined text-lg">chat</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Lead-Gen Dock -->
+<div class="fixed bottom-8 right-8 z-[100] flex flex-col gap-4">
+<a class="w-14 h-14 bg-secondary flex items-center justify-center rounded-md shadow-[0_8px_32px_rgba(6,200,93,0.4)] hover:scale-110 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined text-on-secondary-fixed text-3xl">chat</span>
+</a>
+<a class="w-14 h-14 glass-nav bg-white/10 flex items-center justify-center rounded-md hover:scale-110 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined text-white text-3xl">add_a_photo</span>
+</a>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-20 px-8">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline text-3xl font-black text-white mb-6">HENNY</div>
+<p class="text-gray-400 text-sm leading-relaxed max-w-xs">Global automotive logistics, sourcing the world's most exclusive parts and vehicles for USA and Ghana markets.</p>
+</div>
+<div>
+<h4 class="font-headline text-white font-bold uppercase tracking-widest text-xs mb-8">Navigation</h4>
+<ul class="space-y-4">
+<li><a class="text-gray-400 hover:text-white transition-colors text-sm" href="#">Inventory</a></li>
+<li><a class="text-gray-400 hover:text-white transition-colors text-sm" href="#">USA Logistics</a></li>
+<li><a class="text-gray-400 hover:text-white transition-colors text-sm" href="#">Ghana Showroom</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-white font-bold uppercase tracking-widest text-xs mb-8">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-gray-400 hover:text-white transition-colors text-sm" href="#">WhatsApp</a></li>
+<li><a class="text-gray-400 hover:text-white transition-colors text-sm" href="#">Snapchat</a></li>
+<li><a class="text-gray-400 hover:text-white transition-colors text-sm" href="#">Shipping Tracker</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-white font-bold uppercase tracking-widest text-xs mb-8">The Mission</h4>
+<p class="text-gray-400 text-sm italic">"Precision in every component, speed in every delivery."</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-gray-500 text-xs font-label uppercase tracking-widest">© 2024 Henny Automotive. The Kinetic Monolith.</p>
+<div class="flex gap-8">
+<a class="text-gray-500 hover:text-white transition-colors text-xs font-label uppercase tracking-widest" href="#">Privacy</a>
+<a class="text-gray-500 hover:text-white transition-colors text-xs font-label uppercase tracking-widest" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom NavBar (Hidden on Desktop) -->
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 md:hidden bg-[#1C1B1B]/80 backdrop-blur-lg shadow-[0_-8px_32px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-primary-container/20" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter mt-1">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-white rounded-md p-2 mx-1 scale-90" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter mt-1">Contact</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-primary-container/20" href="#">
+<span class="material-symbols-outlined">flag</span>
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter mt-1">USA Office</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-primary-container/20" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label text-[10px] uppercase font-bold tracking-tighter mt-1">Ghana Hub</span>
+</a>
+</div>
+</body></html>

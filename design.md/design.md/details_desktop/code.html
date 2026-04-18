@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed": "#66ff8e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#005322",
+                    "primary": "#ffb3ae",
+                    "on-primary-fixed-variant": "#930015",
+                    "on-tertiary-container": "#434200",
+                    "secondary": "#41e575",
+                    "outline": "#ad8885",
+                    "on-primary": "#68000c",
+                    "on-error": "#690005",
+                    "surface-variant": "#353534",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "outline-variant": "#5d3f3d",
+                    "on-secondary-container": "#004d1f",
+                    "on-surface-variant": "#e6bdb9",
+                    "primary-fixed": "#ffdad7",
+                    "inverse-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "on-tertiary-fixed": "#1d1d00",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#b3b000",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#3de273",
+                    "secondary-container": "#06c85d",
+                    "on-primary-container": "#fff8f7",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-tertiary": "#333200",
+                    "tertiary-fixed": "#ece900",
+                    "on-tertiary-fixed-variant": "#4a4900",
+                    "on-secondary": "#003915",
+                    "primary-container": "#e11d2e",
+                    "inverse-primary": "#c0001f",
+                    "inverse-on-surface": "#313030",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#cfcc00",
+                    "surface-tint": "#ffb3ae",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#cfcd00",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#410004",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #131313; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-dock { background: rgba(32, 31, 31, 0.6); backdrop-filter: blur(20px); }
+        .hero-text-shadow { text-shadow: 0 4px 24px rgba(0,0,0,0.8); }
+    </style>
+</head>
+<body class="font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
+<div class="text-2xl font-black italic text-white tracking-tighter uppercase font-headline">HENNY AUTOMOTIVE</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Home</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-[#E11D2E] border-b-2 border-[#E11D2E] pb-1" href="#">Inventory</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Parts</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">About</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-[#E11D2E] text-white px-6 py-2 font-headline font-bold uppercase tracking-widest text-xs hover:brightness-125 transition-all">WhatsApp</button>
+</div>
+</nav>
+<main class="pt-24 pb-32">
+<!-- Vehicle Hero Gallery (Asymmetric Layout) -->
+<section class="max-w-[1440px] mx-auto px-8 grid grid-cols-12 gap-4 h-[716px]">
+<div class="col-span-8 h-full rounded-md overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Sleek black 2018 Mercedes-Benz C300 parked in a high-end modern garage with moody studio lighting and reflective floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAas4PxLMpiY8bseFAUxSNEv_XhzumF2u6Wfx0Ny8KnJNUnybSkwGgOf9RbCtQCCDgw4xc9gg5w-qLK9Ex_t3iOfGSVprufT3ojkda8DYtu2WMi6YjAY-kHYR6GaZWCZiq8Ivf90Y6o13Q8YUV8iid8gNENrxEoueS0-udr1KYdmnbuXM_gKHnUIF7TnAd5eZhO_8Re1UWv6FzDsFFjumwNCuwqS58S-ZIAYt_XIoLGgr-ma-oZOLkpqwmFwdGRqvpVTDUAwei7RqY"/>
+<div class="absolute bottom-12 left-12">
+<h1 class="font-headline text-7xl font-black italic tracking-tighter text-white hero-text-shadow leading-tight">
+                        2018 MERCEDES-BENZ <br/> <span class="text-primary-container">C300</span>
+</h1>
+</div>
+</div>
+<div class="col-span-4 grid grid-rows-2 gap-4 h-full">
+<div class="rounded-md overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close up of the interior dashboard of a Mercedes-Benz featuring leather steering wheel and digital console in warm ambient light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu-NeNT4YEzQWS6MjCip03YKhYtrB04QQYneNZACwquLzqTaF4fDiBrmJPei7WDt8LX7JhXtlxjNUCLG86RbKzJhRAFBMg11UARRcZ_pOlT5jxP9J6KyhEbZ11rfZZ_tDGL0vl2yeCEl6hzYyRESLyRIPDX7S2faHnRBCy3eDdxMszw6mf8QXwrROR27tjXvBqXNyZpXCdGDjJEJe4pbRs9E2Hp33UdFpTc1IQjodfsdDIImqz-Pu3ey_vWxD-F7TTxbfGUEw84qg"/>
+</div>
+<div class="rounded-md overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Rear view of a Mercedes C300 showing the signature LED tail lights and chrome exhaust tips at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4w3Hi6dBQhxSnuK5ziJuCnJYwVlt9Ub28BhL_LbigM-WnM9DEmgCrURRQ6XG-3IUfADjQ19irvxB0aa4VnFIyOi7_BDB783kNaIkrpBuj5xy6w1v_DMBidHzKNLSwJRJQXSl036aGE_I4uRZFvJHKLRwXumBTZSqdTnr-CCKoIepOLehIJ6WCZ2ha_XfNuWkgwgGk6ptI0NL6Wj7lKFYnWi5N87ldnZXLVrvTvFqPx13s1j0MsjbUXMlax9dSorH5pTdXZPuNiIQ"/>
+</div>
+</div>
+</section>
+<!-- Vehicle Intel & Actions -->
+<section class="max-w-[1440px] mx-auto px-8 mt-12 grid grid-cols-12 gap-12">
+<!-- Details Column -->
+<div class="col-span-7 space-y-12">
+<div class="bg-surface-container-low p-10 rounded-md">
+<div class="flex items-center gap-4 mb-8">
+<span class="bg-primary-container text-white px-3 py-1 text-[10px] font-bold tracking-widest uppercase">Just Arrived</span>
+<span class="border border-outline-variant/20 text-on-surface-variant px-3 py-1 text-[10px] font-bold tracking-widest uppercase">Premium Grade</span>
+</div>
+<div class="grid grid-cols-3 gap-8 border-b border-outline-variant/10 pb-10">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Engine</p>
+<p class="font-headline text-2xl font-bold italic text-white">2.0L TURBO</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Mileage</p>
+<p class="font-headline text-2xl font-bold italic text-white">42,000 KM</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 font-bold">Transmission</p>
+<p class="font-headline text-2xl font-bold italic text-white">AUTOMATIC</p>
+</div>
+</div>
+<div class="mt-10">
+<h3 class="font-headline text-xl font-bold text-white mb-4 uppercase tracking-wider">Provenance &amp; Condition</h3>
+<p class="text-on-surface-variant leading-relaxed text-lg font-light">
+                            Clean title, USA sourced, premium condition. This C300 has been meticulously maintained and represents the pinnacle of compact executive luxury. Sourced directly from Houston, TX 🇺🇸 and now available for immediate inspection at our Tema Showroom 🇬🇭.
+                        </p>
+</div>
+</div>
+<!-- Logistics Card -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-high p-8 rounded-md flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container text-3xl">public</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Origin</p>
+<p class="text-white font-medium">Houston, TX, USA</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-md flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary text-3xl">location_on</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Current Location</p>
+<p class="text-white font-medium">Tema Hub, Ghana</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Column -->
+<div class="col-span-5">
+<div class="bg-surface-container-low p-8 rounded-md sticky top-28 space-y-6">
+<div class="mb-8">
+<p class="text-on-surface-variant text-sm font-medium mb-1">Asking Price</p>
+<p class="text-5xl font-headline font-black italic text-white">PRICE ON REQ.</p>
+</div>
+<!-- WhatsApp Primary -->
+<button class="w-full bg-secondary hover:brightness-110 text-on-secondary-fixed font-headline font-black text-lg py-5 rounded-md flex items-center justify-center gap-3 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+                        CHAT ON WHATSAPP
+                    </button>
+<!-- Snapchat Secondary -->
+<button class="w-full bg-[#FFFC00] hover:brightness-110 text-black font-headline font-black text-lg py-5 rounded-md flex items-center justify-center gap-3 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swipe</span>
+                        CONTACT ON SNAPCHAT
+                    </button>
+<!-- Call Now Outline -->
+<button class="w-full border-2 border-outline-variant/30 hover:border-white text-white font-headline font-black text-lg py-5 rounded-md flex items-center justify-center gap-3 transition-all">
+<span class="material-symbols-outlined">call</span>
+                        CALL NOW
+                    </button>
+<div class="pt-6 border-t border-outline-variant/10">
+<p class="text-[10px] text-center uppercase tracking-[0.2em] text-on-surface-variant font-bold">24/7 Concierge Service Available</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Vehicles -->
+<section class="max-w-[1440px] mx-auto px-8 mt-24">
+<h2 class="font-headline text-4xl font-black italic text-white uppercase tracking-tighter mb-12">Similiar Performance</h2>
+<div class="grid grid-cols-3 gap-8">
+<!-- Vehicle Card 1 -->
+<div class="group cursor-pointer">
+<div class="h-64 overflow-hidden rounded-md mb-6 bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern silver BMW 3 Series sedan parked in a minimalist architectural setting with clean lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYd8M1yK37wilWuglOpV99J_bckEO-Z3SjG2_Fr6jsdOK-h77HqZO9m44yn5HMxvan9OCVa-lh__A2zAfZEE-km4jDni8z61w-tXJFBpdceQQtnJxOJaVue1mdW4y_GsDA163YnIdo4Orof5lvZsqsogrsTk6xzrW96vjZ4t8PgnLZXzcKGwGdwHYAvKDgSBHMm4oucrP2Sv7gjiQ-1EMO4TOl2G2IKFUqG-XkqP8VivcO7voY8XYnJC4FX8Iig-czxxQVyJ6eCgI"/>
+</div>
+<p class="text-[10px] font-bold text-primary-container tracking-widest uppercase mb-1">USA Sourced</p>
+<h3 class="font-headline text-xl font-bold text-white mb-2 italic">2019 BMW 330I M-SPORT</h3>
+<div class="flex gap-4 text-on-surface-variant text-xs">
+<span>38,000 KM</span>
+<span>•</span>
+<span>SHIPPING FROM NJ</span>
+</div>
+</div>
+<!-- Vehicle Card 2 -->
+<div class="group cursor-pointer">
+<div class="h-64 overflow-hidden rounded-md mb-6 bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="White Audi A4 driving on an open coastal road during sunset with high contrast reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjzNsc7ULk7BATNhCHVMD_w7_j6jhsIAz3DhFdDhM9ny5dJn_meVGbLY7t3l5UkvF261Z1mioBgRneJTqFyblGqgKCbD3NvuwS4RT9Wkj8aIhpMsR1Fw4VN9N_AK7X9UrI-SmgX902XnD7-MUgl2dL-MA-vK1U5Uf_MQiD5CUf7NwHWbwfl-eK2JsVUSYf2n2C5C1U1GJ5bYIAhzLhtGshw14eQzn3uQTj_2Xe7Pn6775vVEAFRhlAfXM9lQBrOAYa2D_aoip1oc0"/>
+</div>
+<p class="text-[10px] font-bold text-primary-container tracking-widest uppercase mb-1">In Showroom</p>
+<h3 class="font-headline text-xl font-bold text-white mb-2 italic">2020 AUDI A4 S-LINE</h3>
+<div class="flex gap-4 text-on-surface-variant text-xs">
+<span>25,000 KM</span>
+<span>•</span>
+<span>TEMA SHOWROOM</span>
+</div>
+</div>
+<!-- Vehicle Card 3 -->
+<div class="group cursor-pointer">
+<div class="h-64 overflow-hidden rounded-md mb-6 bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Lexus IS 350 in deep blue color parked in a vibrant urban environment with neon sign reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIV013fBJcslRYt7HtOqCkr_D56PP9E7E2RhyFPeZ5cgefXkMVhfQYO3qqpA6qNRFtsQrZDSyjhnURN3nGq111gJdlpDrZaZ77zfqT7RzTekiOCZ6rswUVKGytjH1MolsFQcLfCOwrcMe8KY998RtywEBEICAyjC3RyvxsqgP8gRdtfju9QINFRmq_eGdN_QMkBtPgUVLHXprCriMvty-5EmBAA1tA682Fke3ktK_QolAu9rTY8kEv8YGvTpq3spHjkyvSSkWfGvE"/>
+</div>
+<p class="text-[10px] font-bold text-primary-container tracking-widest uppercase mb-1">USA Sourced</p>
+<h3 class="font-headline text-xl font-bold text-white mb-2 italic">2018 LEXUS IS 350</h3>
+<div class="flex gap-4 text-on-surface-variant text-xs">
+<span>55,000 KM</span>
+<span>•</span>
+<span>SOURCED FROM TX</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating WhatsApp Action -->
+<a class="fixed bottom-8 right-8 z-[100] bg-secondary text-on-secondary-fixed p-4 rounded-md shadow-2xl hover:scale-110 transition-transform flex items-center justify-center" href="#">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">chat</span>
+</a>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full py-16 px-8 mt-auto border-t border-outline-variant/5">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-['Space_Grotesk'] text-3xl font-black text-white italic mb-6">HENNY</div>
+<p class="font-['Inter'] text-sm leading-relaxed text-gray-400">
+                    The Kinetic Monolith. Premium automotive sourcing from USA to Ghana. 
+                </p>
+</div>
+<div>
+<h4 class="font-headline text-white font-bold mb-6 text-sm uppercase tracking-widest">Inventory</h4>
+<div class="flex flex-col gap-4">
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">Sedans</a>
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">SUVs</a>
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">Performance</a>
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">USA Stock</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline text-white font-bold mb-6 text-sm uppercase tracking-widest">Offices</h4>
+<div class="flex flex-col gap-4">
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">USA Logistics (TX)</a>
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">Ghana Showroom (Tema)</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline text-white font-bold mb-6 text-sm uppercase tracking-widest">Social</h4>
+<div class="flex flex-col gap-4">
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">Snapchat</a>
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">WhatsApp</a>
+<a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 text-sm" href="#">Instagram</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex justify-between items-center text-[10px] uppercase tracking-widest text-gray-500 font-bold">
+<div>© 2024 Henny Automotive. The Kinetic Monolith.</div>
+<div class="flex gap-8">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

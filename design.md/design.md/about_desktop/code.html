@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Henny Automotive | The Kinetic Monolith</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed": "#66ff8e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#005322",
+                    "primary": "#ffb3ae",
+                    "on-primary-fixed-variant": "#930015",
+                    "on-tertiary-container": "#434200",
+                    "secondary": "#41e575",
+                    "outline": "#ad8885",
+                    "on-primary": "#68000c",
+                    "on-error": "#690005",
+                    "surface-variant": "#353534",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "outline-variant": "#5d3f3d",
+                    "on-secondary-container": "#004d1f",
+                    "on-surface-variant": "#e6bdb9",
+                    "primary-fixed": "#ffdad7",
+                    "inverse-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "on-tertiary-fixed": "#1d1d00",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#b3b000",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#3de273",
+                    "secondary-container": "#06c85d",
+                    "on-primary-container": "#fff8f7",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-tertiary": "#333200",
+                    "tertiary-fixed": "#ece900",
+                    "on-tertiary-fixed-variant": "#4a4900",
+                    "on-secondary": "#003915",
+                    "primary-container": "#e11d2e",
+                    "inverse-primary": "#c0001f",
+                    "inverse-on-surface": "#313030",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#cfcc00",
+                    "surface-tint": "#ffb3ae",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#cfcd00",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#410004",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Space Grotesk"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ignition-glow:hover {
+            box-shadow: 0 0 20px rgba(225, 29, 46, 0.4);
+        }
+        .glass-dock {
+            background: rgba(58, 57, 57, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-white overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
+<div class="text-2xl font-black italic text-white tracking-tighter font-headline">HENNY AUTOMOTIVE</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Home</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Inventory</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Parts</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-[#E11D2E] border-b-2 border-[#E11D2E] pb-1" href="#">About</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold text-white/70 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-white px-6 py-2 font-headline font-bold uppercase tracking-widest text-sm ignition-glow transition-all active:scale-95">
+                WhatsApp
+            </button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex items-center px-8 overflow-hidden bg-surface">
+<div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+<div class="md:col-span-7">
+<span class="inline-block bg-primary-container text-white px-3 py-1 text-xs font-bold tracking-[0.2em] mb-6 font-label uppercase">Established 2014</span>
+<h1 class="text-6xl md:text-8xl font-black font-headline tracking-tighter leading-none mb-8 -ml-1">
+                        THE HENNY <br/>
+<span class="text-primary-container">LEGACY</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-xl leading-relaxed font-body">
+                        Bridging USA Quality and Ghana Trust. We don't just export vehicles; we deliver precision-engineered confidence from Houston to Accra.
+                    </p>
+</div>
+</div>
+<!-- Asymmetric Image Placement -->
+<div class="absolute right-0 top-0 w-1/2 h-full opacity-40 md:opacity-100 mix-blend-screen overflow-hidden">
+<img alt="Luxury black SUV parked in a dark industrial showroom with high-contrast dramatic lighting" class="w-full h-full object-cover" data-alt="Sleek black luxury SUV in a high-end dark showroom, dramatic overhead spot lighting, polished concrete floors, minimalist industrial aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQXeAoW8M5GNmsQ6DClFk69O47wywBafx2CimsqX-KD3A-F73_neD242b9YgYTYzLnuuMUExLuVR623iB2uROMXAVgxYFKgsjSksu_ghr0SXbb-6SVK42jp5bck9UVeMtcNRf3t5jX1yv5NZHz8Yl2oNibFpsVKnKkOrgHCbsSE90hdWM8l1vXTEwIke4jLks6VwDo6JK_2WVnWZVT-GSd3IE4SNrFOphV7g_x_ncuZXHHqzmxlJNZl1Gep5xawXB5TS6R9xoNU5c"/>
+</div>
+</section>
+<!-- Global Presence Bento Grid -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Houston HQ -->
+<div class="md:col-span-2 bg-surface-container-high p-12 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-3xl font-headline font-black mb-2 uppercase italic tracking-tighter">HQ: Houston, TX</h3>
+<p class="text-on-surface-variant mb-8 max-w-xs">Our primary sourcing and 150-point inspection facility. Where quality control begins.</p>
+<span class="material-symbols-outlined text-4xl text-primary-container">location_on</span>
+</div>
+<div class="absolute right-0 bottom-0 w-2/3 h-2/3 opacity-20 group-hover:scale-110 transition-transform duration-700">
+<img alt="Aerial view of Houston Texas skyline at dusk" class="w-full h-full object-cover grayscale" data-alt="Wide angle aerial sunset view of Houston skyline, orange and purple sky, city lights beginning to glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhnKd7ncEmj2Snr-pTmPM0ZUyFXH_uijE_ULX7-980ILk0DBHAnP4nOherL_2ciJYgTXBV4y4XFs2A5Cuxa4-y4vYiYWpq_3fGoK_dzgGethtMdz2F4lbtX_2_rf4MiIFUSa143yVNWyz9vZUbbnAVeWYHd9jN5GquhiERPHO367tcEXrTmU1gUudcp72p2_L5XMzw_0zuVbBTC3KNgUEVD66qb6Bcgc_yjKfKHsDcamhLwkCFU1jpCUxs5AUwChD3WC2KoaU_QZM"/>
+</div>
+</div>
+<!-- Accra Hub -->
+<div class="md:col-span-2 bg-surface-container-high p-12 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-3xl font-headline font-black mb-2 uppercase italic tracking-tighter">Showroom: Accra</h3>
+<p class="text-on-surface-variant mb-8 max-w-xs">Direct port clearance and local support. The gateway to luxury automotive in West Africa.</p>
+<span class="material-symbols-outlined text-4xl text-primary-container">location_on</span>
+</div>
+<div class="absolute right-0 bottom-0 w-2/3 h-2/3 opacity-20 group-hover:scale-110 transition-transform duration-700">
+<img alt="Modern architectural building in Accra" class="w-full h-full object-cover grayscale" data-alt="Clean architectural lines of a modern commercial building in Accra under bright daylight with palm tree shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEQTl5JWp2meYkBckCIlioWypng0ObwvRsj8_Lw6KyDVk4oRLs8zFY-sFtAAlO4NF-R12_-ZtQoBgxcSY0Qzt7IeLZnBPC4blMqMb7WK_ratIye2vU1_1w7Dn0rvbolruwZI48nheO-wqgneWa4IdSOfIakBaRfepXtpDW--2S3E1f2YmOqmSjWzcLi8y1thuPtmEJVZoyPbmNEtolf0MaBkiHeMQb8ALFMHMPudrn8lY-XEHtxZKzCYrtxXdZisThyAo5jPcmJ4o"/>
+</div>
+</div>
+<!-- Inspection Detail -->
+<div class="md:col-span-1 bg-surface-container-high p-8">
+<span class="material-symbols-outlined text-primary-container text-3xl mb-4" data-weight="fill">verified</span>
+<h4 class="font-headline font-bold text-lg mb-2 uppercase tracking-tighter">150-Point Inspection</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Every bolt, every sensor. We certify before we ship.</p>
+</div>
+<!-- Logistics Detail -->
+<div class="md:col-span-1 bg-surface-container-high p-8">
+<span class="material-symbols-outlined text-primary-container text-3xl mb-4" data-weight="fill">sailing</span>
+<h4 class="font-headline font-bold text-lg mb-2 uppercase tracking-tighter">Direct Port Clearance</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">White-glove logistics from Galveston to Tema. Hassle-free delivery.</p>
+</div>
+<!-- Inventory Detail -->
+<div class="md:col-span-2 bg-primary-container p-8 flex items-center justify-between group cursor-pointer overflow-hidden">
+<div>
+<h4 class="font-headline font-black text-3xl text-white uppercase italic leading-none mb-1">View Current <br/> Inventory</h4>
+<p class="text-white/80 font-bold uppercase text-xs tracking-widest">Ready for export</p>
+</div>
+<span class="material-symbols-outlined text-6xl text-white group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- The Vision Section -->
+<section class="py-32 bg-surface">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="relative">
+<div class="aspect-[4/5] bg-surface-container-high overflow-hidden">
+<img alt="Luxury car front grill macro" class="w-full h-full object-cover" data-alt="High-detail macro shot of a performance car front grille, carbon fiber textures, aggressive aero design, dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2rhYi6VE-UTD8p5WasdFTrf6hKHsZTF7zWWfMvXm1V9SwWQQbVeNhgktJO3nidi5FsuRUe8XCDh3oeIfwdOBnRumQQECya-tcOyn16Hq3UMaU-mZ4cY6VPTwgTK_nPp01qkrJk-ZnGvAND_ldYv3b9dmU59JeY5lKrV8S0q4-8jCqoV2dF-0KA4UPjyGfo0jiXlvN55yd8poOAr_9d04YXQn9pHVF3ghCSrnGzmt5Qzt1k535zZ8i3AIZUmcURjzqJdjAi-hX0cg"/>
+</div>
+<!-- Overlapping Text -->
+<div class="absolute -bottom-12 -right-12 bg-surface-container p-8 max-w-sm hidden md:block">
+<p class="font-body text-sm italic border-l-2 border-primary-container pl-4 text-on-surface-variant">
+                            "We saw a gap between Western quality standards and West African availability. Henny Automotive is the bridge built on engineering excellence and absolute transparency."
+                        </p>
+</div>
+</div>
+<div>
+<h2 class="text-5xl font-headline font-black uppercase tracking-tighter mb-8 leading-none">THE KINETIC <br/> <span class="text-primary-container">MONOLITH</span></h2>
+<div class="space-y-6 text-on-surface-variant font-body">
+<p>Henny Automotive was founded with a singular purpose: to redefine the luxury vehicle sourcing experience for the discerning Ghanaian professional.</p>
+<p>By controlling the entire chain—from acquisition in the premier Texas markets to final detailing in Accra—we eliminate the uncertainty that has long plagued the trans-Atlantic automotive trade.</p>
+<p>Every vehicle in our inventory undergoes a rigorous 150-point diagnostic process at our Houston HQ before ever seeing a shipping container. We don't sell cars; we sell the peace of mind that comes from owning a machine that has been vetted by master technicians on two continents.</p>
+</div>
+<div class="mt-12 grid grid-cols-2 gap-8">
+<div>
+<h5 class="text-3xl font-headline font-black text-white">500+</h5>
+<p class="text-xs font-label uppercase tracking-widest text-primary-container">Vehicles Delivered</p>
+</div>
+<div>
+<h5 class="text-3xl font-headline font-black text-white">100%</h5>
+<p class="text-xs font-label uppercase tracking-widest text-primary-container">Clear Title Guarantee</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Port Clearance Visual -->
+<section class="h-[614px] relative overflow-hidden group">
+<img alt="Rows of luxury cars at a shipping port" class="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s]" data-alt="Endless rows of luxury SUVs and performance cars at a vast shipping terminal at blue hour, industrial lights reflecting off car paint" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGqm5_M4E34Up8N7L9Y-SpOgQ4buS01eikRnBSyhhwB5duAbiy99B3gfNbPB9qSY0I-Pe2lw8tRMcOYKo7sgAmW5UAtBAs2GbinAmc8zHqKHUtut1TBAgmCbfhE3sNZAabzksg_8EcRBpBa3Q1isA3yTP6Qp7JDqIgsnOb7lWMdcBaJlYAwikx8yJxQMzKarisuagdggjHU803archPlAXBEvm20FXBJ6rhuBciefyftS6Q22VDcUQCwBjxdlLS0Du4XjEK_T-HOQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="text-center max-w-2xl px-8">
+<h2 class="text-4xl md:text-6xl font-headline font-black text-white uppercase italic tracking-tighter mb-6">GLOBAL LOGISTICS. <br/> LOCAL TRUST.</h2>
+<p class="font-body text-white/80">From Galveston to Tema, we manage the entire journey so you don't have to.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-8 mt-auto bg-[#0A0A0A]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="md:col-span-2">
+<div class="font-['Space_Grotesk'] text-3xl font-black text-white mb-6 uppercase tracking-tighter">HENNY AUTOMOTIVE</div>
+<p class="font-['Inter'] text-sm leading-relaxed text-gray-400 max-w-sm">
+                    The Kinetic Monolith. Premium automotive sourcing and logistics connecting the United States to West Africa.
+                </p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-white uppercase text-sm mb-6 tracking-widest">Navigation</h4>
+<ul class="space-y-4 font-['Inter'] text-sm">
+<li><a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform inline-block" href="#">Inventory</a></li>
+<li><a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform inline-block" href="#">USA Logistics</a></li>
+<li><a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform inline-block" href="#">Ghana Showroom</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-white uppercase text-sm mb-6 tracking-widest">Connect</h4>
+<ul class="space-y-4 font-['Inter'] text-sm">
+<li><a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform flex items-center gap-2" href="#">
+<span class="w-2 h-2 rounded-full bg-yellow-400"></span> Snapchat
+                    </a></li>
+<li><a class="text-gray-400 hover:text-white hover:translate-x-2 transition-transform flex items-center gap-2" href="#">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> WhatsApp
+                    </a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:row items-center justify-between">
+<p class="font-['Inter'] text-xs text-gray-500 uppercase tracking-widest">© 2024 Henny Automotive. The Kinetic Monolith.</p>
+<div class="flex gap-8 mt-4 md:mt-0">
+<span class="text-[10px] text-gray-600 font-bold uppercase tracking-tighter">Houston HQ: +1 (713) XXX-XXXX</span>
+<span class="text-[10px] text-gray-600 font-bold uppercase tracking-tighter">Accra Hub: +233 XX XXX XXXX</span>
+</div>
+</div>
+</footer>
+<!-- Lead-Gen Floating Dock -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+<div class="glass-dock flex items-center gap-6 px-8 py-4 rounded-xl border border-white/10 shadow-2xl">
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 bg-secondary flex items-center justify-center rounded-md text-white group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(65,229,117,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-white hidden md:block">WhatsApp</span>
+</a>
+<div class="w-px h-6 bg-white/20"></div>
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 bg-yellow-400 flex items-center justify-center rounded-md text-[#131313] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">swipe</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-white hidden md:block">Snapchat</span>
+</a>
+</div>
+</div>
+<!-- Mobile BottomNavBar (Hidden on desktop) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-[60] flex justify-around items-center px-4 py-2 bg-[#1C1B1B]/80 backdrop-blur-lg shadow-[0_-8px_32px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20 transition-all scale-90" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter mt-1">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20 transition-all scale-90" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter mt-1">Contact</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20 transition-all scale-90" href="#">
+<span class="material-symbols-outlined">flag</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter mt-1">USA Office</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20 transition-all scale-90" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter mt-1">Ghana Hub</span>
+</a>
+</nav>
+</body></html>

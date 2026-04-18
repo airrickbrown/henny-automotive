@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard | HENNY AUTOMOTIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed": "#66ff8e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#005322",
+                    "primary": "#ffb3ae",
+                    "on-primary-fixed-variant": "#930015",
+                    "on-tertiary-container": "#434200",
+                    "secondary": "#41e575",
+                    "outline": "#ad8885",
+                    "on-primary": "#68000c",
+                    "on-error": "#690005",
+                    "surface-variant": "#353534",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "outline-variant": "#5d3f3d",
+                    "on-secondary-container": "#004d1f",
+                    "on-surface-variant": "#e6bdb9",
+                    "primary-fixed": "#ffdad7",
+                    "inverse-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "on-tertiary-fixed": "#1d1d00",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#b3b000",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#3de273",
+                    "secondary-container": "#06c85d",
+                    "on-primary-container": "#fff8f7",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-tertiary": "#333200",
+                    "tertiary-fixed": "#ece900",
+                    "on-tertiary-fixed-variant": "#4a4900",
+                    "on-secondary": "#003915",
+                    "primary-container": "#e11d2e",
+                    "inverse-primary": "#c0001f",
+                    "inverse-on-surface": "#313030",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#cfcc00",
+                    "surface-tint": "#ffb3ae",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#cfcd00",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#410004",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            @apply bg-primary-container text-on-primary-container;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3a3939; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-white">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-40 hidden md:flex flex-col border-r border-outline-variant/10">
+<div class="p-8">
+<h1 class="text-2xl font-headline font-black italic text-white tracking-tighter leading-none">
+                HENNY<br/><span class="text-primary-container">AUTOMOTIVE</span>
+</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label uppercase tracking-widest text-xs font-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-white transition-all duration-300 rounded-lg group shadow-lg shadow-primary-container/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="font-label uppercase tracking-widest text-xs font-bold">Inventory Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label uppercase tracking-widest text-xs font-bold">Car Parts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label uppercase tracking-widest text-xs font-bold">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label uppercase tracking-widest text-xs font-bold">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="bg-surface-container-high p-4 rounded-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center font-bold text-white">HA</div>
+<div>
+<p class="text-xs font-bold uppercase tracking-tight text-white">Admin Unit</p>
+<p class="text-[10px] text-white/40 uppercase">Root Access</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Mobile Navigation Shell -->
+<div class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-[#1C1B1B]/80 backdrop-blur-lg flex justify-around items-center px-4 py-2 shadow-[0_-8px_32px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-gray-500 p-2" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#E11D2E] text-white rounded-md p-2 mx-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Leads</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2" href="#">
+<span class="material-symbols-outlined">flag</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Hubs</span>
+</a>
+</div>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 p-4 md:p-8 pb-24 md:pb-8">
+<!-- Top App Bar Content (Internal) -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
+<div>
+<h2 class="text-4xl font-headline font-black uppercase tracking-tighter text-white">Inventory Management</h2>
+<p class="text-white/50 text-sm mt-1 uppercase tracking-widest font-label">The Kinetic Monolith Control Center</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-surface-container-high text-white px-6 py-3 rounded-md font-label uppercase text-xs font-bold tracking-widest hover:bg-white/10 transition-colors border border-outline-variant/20">
+                    Remove Sold listings
+                </button>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-md font-label uppercase text-xs font-bold tracking-widest hover:opacity-90 transition-all shadow-lg shadow-primary-container/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_circle</span> Add Vehicle
+                </button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Vehicle Upload Form Section -->
+<section class="lg:col-span-8 space-y-6">
+<div class="bg-surface-container-low rounded-lg p-8 border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-1 h-8 bg-primary-container"></div>
+<h3 class="text-xl font-headline font-bold uppercase tracking-tight text-white">Vehicle Specifications</h3>
+</div>
+<form class="space-y-8">
+<!-- Media Upload -->
+<div class="space-y-4">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40">Visual Assets (Images &amp; Videos)</label>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="aspect-square bg-surface-container-high rounded border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center cursor-pointer hover:bg-surface-bright transition-colors group">
+<span class="material-symbols-outlined text-primary-container mb-2 group-hover:scale-110 transition-transform">add_a_photo</span>
+<span class="text-[10px] font-bold text-white/60">UPLOAD PRIMARY</span>
+</div>
+<div class="relative aspect-square rounded overflow-hidden group">
+<img class="object-cover w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-500" data-alt="front three-quarter view of a sleek black modern sports car in a high-end photography studio with moody dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx1Vr40QXUtZsdoZs1rXJXYNr6R5gxhNEaKYU9-yrqjYi0ewdjLA7oSr2XQutdU41Q5yLuLdgdUuPsbtC6-TNAdZu2TRlboluikQt43pwINVrSF2nZAa7ykBe50Wi9FvzHbMM-lborZUXgMrl3coUxge7L66OyjKUenPQaRqMTbr89C372q1dxtjH0oVeoO9lUjg-JsHOwQ0YL2-9_akh6C_Mc6vDG8OSn9C3jlXvTghIua98sKEw-Nvifg39f9rSwJhnEJPFQSwU"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-red-600 p-2 rounded-full text-white"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<div class="relative aspect-square rounded overflow-hidden group">
+<img class="object-cover w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-500" data-alt="interior cockpit of a luxury vehicle showing carbon fiber details and digital dashboard with red ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz5lRal7AwAIZqhDLxbSdHMCJZZY_1YWCMalsZWPLQ_0-CSvDw9ktVAphkdqBxi63PIN04Romq_Kr2Xk81i8iBrZ_x7pdWpucFx1Gcz0edWd9JozzoRf-NU_3SwfbxTfpcoY04OFHTb5Q_RGrcVwWP4DA-DGKJOHQKpWdJ1JcfJea3sHuH436Omgl_0XICsZpyI_yZt09G3e7eLAg9djtxhxHGPPDA8GV5rzQJ-jNYZp3y9zXFtqvPKZituloNyI8B971fGZkakgM"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-red-600 p-2 rounded-full text-white"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<div class="relative aspect-square rounded overflow-hidden group">
+<img class="object-cover w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-500" data-alt="rear view of a high-performance vehicle showcasing aggressive aerodynamic lines and quad exhaust in a minimalist dark environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmI83s_S_5FvSSd4XLAlfWqHXXympZlstgs89BTZgQ7OF-QpMYtBpxwkygez1zctBpzHdZV8Js-sddXQBAYEjYoRSyZ_-OZ6gt2rfUILnbxF4FhudUmz5bzL5UA49fgTulodVYcYKjWZG7OtRHGFJXjfZR3cIibxGGc8rCc-Sas_ClYPgvf7ri8u070SFhLSIAqDNm1mnDFLATtWDQtpCcx0NAtHKwF27gFZNIJG5qqz4wB7bQo1vEH3c0_2vDuijmpl7N9QbivKw"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-red-600 p-2 rounded-full text-white"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Form Fields -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40">Vehicle Name / Model</label>
+<input class="w-full bg-surface-container-high border-none focus:ring-1 focus:ring-primary-container text-white p-4 font-label text-sm rounded" placeholder="e.g. Porsche 911 GT3 RS" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40">Manufacturing Year</label>
+<input class="w-full bg-surface-container-high border-none focus:ring-1 focus:ring-primary-container text-white p-4 font-label text-sm rounded" placeholder="2024" type="number"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40">Mileage (KM)</label>
+<input class="w-full bg-surface-container-high border-none focus:ring-1 focus:ring-primary-container text-white p-4 font-label text-sm rounded" placeholder="0 - Delivery Miles" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40">Retail Price ($)</label>
+<input class="w-full bg-surface-container-high border-none focus:ring-1 focus:ring-primary-container text-white p-4 font-label text-sm rounded" placeholder="225,000" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-white/40">Technical Description</label>
+<textarea class="w-full bg-surface-container-high border-none focus:ring-1 focus:ring-primary-container text-white p-4 font-label text-sm rounded" placeholder="Describe the engine specs, modifications, and unique selling points..." rows="4"></textarea>
+</div>
+<!-- Switches & Toggles Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-t border-outline-variant/10">
+<div class="space-y-4">
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-white/40">Pricing Visibility</h4>
+<div class="flex items-center justify-between p-4 bg-surface-container-high rounded border border-outline-variant/5">
+<span class="text-xs font-bold uppercase tracking-tight text-white">Show Public Price</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-high rounded border border-outline-variant/5">
+<span class="text-xs font-bold uppercase tracking-tight text-white">Contact for Price</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-white/40">Showroom Status</h4>
+<div class="flex items-center justify-between p-4 bg-surface-container-high rounded border border-outline-variant/5">
+<span class="text-xs font-bold uppercase tracking-tight text-white">Mark as Featured</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-high rounded border border-outline-variant/5">
+<span class="text-xs font-bold uppercase tracking-tight text-white">Hot Deal (Pulse Tag)</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary-container text-white py-6 rounded font-headline font-black uppercase text-xl tracking-widest hover:brightness-110 transition-all shadow-xl shadow-primary-container/20" type="submit">
+                            Push to Inventory
+                        </button>
+</form>
+</div>
+</section>
+<!-- Sidebar / Inventory Preview Section -->
+<section class="lg:col-span-4 space-y-6">
+<!-- Quick Stats -->
+<div class="bg-surface-container-low rounded-lg p-6 border border-outline-variant/10">
+<h3 class="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">Stock Overview</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<span class="text-xs text-white/60 uppercase">Available Vehicles</span>
+<span class="text-lg font-headline font-bold text-white">42</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/10">
+<span class="text-xs text-white/60 uppercase">Sold (MTD)</span>
+<span class="text-lg font-headline font-bold text-secondary">18</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-xs text-white/60 uppercase">Active Leads</span>
+<span class="text-lg font-headline font-bold text-primary-container">124</span>
+</div>
+</div>
+</div>
+<!-- Live Inventory Feed -->
+<div class="space-y-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-[10px] font-bold uppercase tracking-widest text-white">Live Inventory</h3>
+<a class="text-[10px] font-bold text-primary-container uppercase hover:underline" href="#">View All</a>
+</div>
+<!-- Inventory Items Grid -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-4 rounded-lg flex gap-4 group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="w-24 h-24 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="side profile of a bright red high-performance supercar in a clean dark modern parking garage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBpy3Hq72SmBkFObA_lgxzpf6sr_KU8GvIcWuPAo4BdnQ0jYSzBXCUoOQLN1zZHTVov-Gv25-zivf9_ZTHjT47SU5bK-3-K_RsjZPvRySrufszXjsQ8EkgWEUB1_3q3w5Gatwgic3ftF0CiZcyEopBi5BvzFWn9plxKgxExyhrB5MgldQDeM6k7CI9kclZ7Lck0stSPStNfGICDpZ2nalYYth8Zk9VmnxbvzUxziJ71BSNEOfQzVBgpcoHEkEbDxdUqlW2dkmfHkM"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-headline font-bold text-white uppercase leading-tight">Ferrari SF90</h4>
+<span class="text-[8px] bg-secondary/10 text-secondary px-2 py-0.5 rounded border border-secondary/20 font-black">AVAILABLE</span>
+</div>
+<p class="text-[10px] text-white/40 mt-1 uppercase">2023 • 1,200 KM</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-sm font-headline font-bold text-white">$525,000</p>
+<button class="text-white/20 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-4 rounded-lg flex gap-4 group opacity-60">
+<div class="w-24 h-24 rounded overflow-hidden flex-shrink-0 grayscale">
+<img class="w-full h-full object-cover" data-alt="front view of a white luxury car in a professional dealership showroom with soft overhead lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_76ZOsRIHKBI9mVgF7kP2D0pgiNaz0qYGSzzsDCT3Sno56SLjqtgah8sPh9yEv4QsWIpDl8cH8UYZzJHfiqBhzIzI2MxYNBdHz27fPJCU5GlenuUvblyuYWFwwxH_R470_IJPZ2mGTFZF8w-QVazxdbT68M-ftKsGV9GkA0yna99DyiCCD0B3QlcTPhCgr_mu4YaEiJlbglAOPgYDt8PGST1ZcHd-Wq-TSXqwlBL4umrtkdMbXGq0JVWZRHNu1kvK3UUgK4ohLw4"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-headline font-bold text-white uppercase leading-tight">BMW M5 CS</h4>
+<span class="text-[8px] bg-white/10 text-white/40 px-2 py-0.5 rounded border border-white/10 font-black">SOLD</span>
+</div>
+<p class="text-[10px] text-white/40 mt-1 uppercase">2022 • 8,400 KM</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-sm font-headline font-bold text-white">$145,000</p>
+<button class="text-white/20 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low p-4 rounded-lg flex gap-4 group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="w-24 h-24 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close up of a modern suv headlight and grille with sharp design lines in a dimly lit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFjWHAnifNV8EoqTaXbhcHEprmXCaxSNaR3FZvkPBa71teoC7dvPMNaYQxgsapuUlhCNNAnh7Z98nGNhnUYKD1MuU0EwTAw4NNn_Y_2tHxeiTUrj8pudRGbZNtRHwZpQbNa0XeaPfdi9WTP_kHXqEQ2-Du7J2JLkMK8KRy2t-Iri215xsXJXSyrVpMhsKtDxvAYFyY3uYfOMD2BEkLbI7-llDw8hLDpDIZ4VBDpyB5O4OTnHjwWRaEsJ63zvrq1uIh8aeNNd_GAd8"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-headline font-bold text-white uppercase leading-tight">Range Rover SV</h4>
+<span class="text-[8px] bg-secondary/10 text-secondary px-2 py-0.5 rounded border border-secondary/20 font-black">AVAILABLE</span>
+</div>
+<p class="text-[10px] text-white/40 mt-1 uppercase">2024 • BRAND NEW</p>
+</div>
+<div class="flex justify-between items-end">
+<p class="text-sm font-headline font-bold text-white">$210,000</p>
+<button class="text-white/20 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Market Intelligence Card -->
+<div class="bg-primary-container/10 border border-primary-container/20 rounded-lg p-6 relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'wght' 700;">trending_up</span>
+</div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-primary-container mb-2">Market Alert</h3>
+<p class="text-sm text-white/80 font-label">Search volume for <span class="text-white font-bold">2024 Inventory</span> has increased by 24% in the Ghana Hub this week.</p>
+<button class="mt-4 text-[10px] font-bold uppercase text-white tracking-widest hover:text-primary-container transition-colors">Analyze Metrics →</button>
+</div>
+</section>
+</div>
+<!-- Footer Shell -->
+<footer class="mt-12 py-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[10px] text-white/40 uppercase tracking-widest font-bold">© 2024 Henny Automotive. The Kinetic Monolith.</p>
+<div class="flex gap-6">
+<a class="text-[10px] text-white/40 uppercase tracking-widest font-bold hover:text-white transition-colors" href="#">Inventory</a>
+<a class="text-[10px] text-white/40 uppercase tracking-widest font-bold hover:text-white transition-colors" href="#">USA Logistics</a>
+<a class="text-[10px] text-white/40 uppercase tracking-widest font-bold hover:text-white transition-colors" href="#">WhatsApp Support</a>
+</div>
+</footer>
+</main>
+</body></html>

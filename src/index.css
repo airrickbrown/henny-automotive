@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background-color: #131313;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #131313;
+    color: #e5e2e1;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #e11d2e;
+    color: white;
+  }
+}
+
+@layer utilities {
+  /* Material Symbols */
+  .font-material {
+    font-family: 'Material Symbols Outlined';
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: inherit;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+  }
+
+  .font-material-filled {
+    font-family: 'Material Symbols Outlined';
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: inherit;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+  }
+
+  /* Ghost outline text — used on mobile hero "MONOLITH" */
+  .text-stroke-white {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    color: transparent;
+  }
+
+  /* Tight editorial letter spacing for display headlines */
+  .kinetic {
+    letter-spacing: -0.02em;
+  }
+
+  /* Glassmorphism — top navigation */
+  .glass-nav {
+    background: rgba(19, 19, 19, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Glassmorphism — scrolled nav (stronger opacity) */
+  .glass-nav-scrolled {
+    background: rgba(19, 19, 19, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Glassmorphism — mobile bottom navigation */
+  .glass-mobile-nav {
+    background: rgba(28, 27, 27, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* Glassmorphism — ghost CTA button (hero secondary) */
+  .glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Ghost border — inputs, spec chips, ghost buttons */
+  .ghost-border {
+    border: 1px solid rgba(93, 63, 61, 0.2);
+  }
+
+  /* Ignition red glow on hover */
+  .ignition-glow:hover {
+    box-shadow: 0 0 20px rgba(225, 29, 46, 0.4);
+  }
+
+  /* Hide scrollbar cross-browser — used on FilterTabBar, SimilarVehicles mobile */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

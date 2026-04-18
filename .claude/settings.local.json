@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npm run *)",
+      "Bash(npm --version)",
+      "Bash(dir \"C:\\\\Users\\\\Eric Ampadu Ameyaw\\\\OneDrive\\\\Desktop\\\\henny-automotive\\\\node_modules\" /b)"
+    ]
+  }
+}

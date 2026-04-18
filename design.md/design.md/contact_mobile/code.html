@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed": "#66ff8e",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#005322",
+                    "primary": "#ffb3ae",
+                    "on-primary-fixed-variant": "#930015",
+                    "on-tertiary-container": "#434200",
+                    "secondary": "#41e575",
+                    "outline": "#ad8885",
+                    "on-primary": "#68000c",
+                    "on-error": "#690005",
+                    "surface-variant": "#353534",
+                    "background": "#131313",
+                    "surface-dim": "#131313",
+                    "outline-variant": "#5d3f3d",
+                    "on-secondary-container": "#004d1f",
+                    "on-surface-variant": "#e6bdb9",
+                    "primary-fixed": "#ffdad7",
+                    "inverse-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "on-tertiary-fixed": "#1d1d00",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#b3b000",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#3de273",
+                    "secondary-container": "#06c85d",
+                    "on-primary-container": "#fff8f7",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-tertiary": "#333200",
+                    "tertiary-fixed": "#ece900",
+                    "on-tertiary-fixed-variant": "#4a4900",
+                    "on-secondary": "#003915",
+                    "primary-container": "#e11d2e",
+                    "inverse-primary": "#c0001f",
+                    "inverse-on-surface": "#313030",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#cfcc00",
+                    "surface-tint": "#ffb3ae",
+                    "on-surface": "#e5e2e1",
+                    "tertiary": "#cfcd00",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#410004",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(42, 42, 42, 0.6);
+        backdrop-filter: blur(20px);
+      }
+      .ignition-glow:hover {
+        box-shadow: 0 0 20px rgba(225, 29, 46, 0.4);
+      }
+      .whatsapp-glow:hover {
+        box-shadow: 0 0 20px rgba(65, 229, 117, 0.3);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#131313]/60 backdrop-blur-xl flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
+<div class="text-2xl font-black italic text-white tracking-tighter">HENNY AUTOMOTIVE</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm weight-bold text-white/70 hover:text-white transition-colors" href="#">Home</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm weight-bold text-white/70 hover:text-white transition-colors" href="#">Inventory</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm weight-bold text-white/70 hover:text-white transition-colors" href="#">Parts</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm weight-bold text-[#E11D2E] border-b-2 border-[#E11D2E] pb-1" href="#">Contact</a>
+</div>
+<div class="text-[#E11D2E] font-['Space_Grotesk'] uppercase tracking-widest text-sm font-bold md:block hidden">WhatsApp</div>
+</nav>
+<main class="pt-24 pb-32 px-6">
+<!-- Hero Header -->
+<header class="mb-12">
+<h1 class="font-headline text-5xl font-black italic tracking-tighter text-white mb-2 leading-none uppercase">Get In <span class="text-primary-container">Gear</span></h1>
+<p class="font-body text-on-surface-variant text-lg max-w-xs">Direct access to the USA and Ghana's most exclusive automotive inventory.</p>
+</header>
+<!-- Dynamic Lead Section -->
+<section class="grid grid-cols-1 gap-4 mb-12">
+<!-- Primary WhatsApp CTA -->
+<a class="flex items-center justify-between p-6 bg-secondary-container text-on-secondary-container rounded-lg ignition-glow transition-all active:scale-95 group" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<div>
+<span class="block font-headline font-bold text-xl leading-tight uppercase">Chat on WhatsApp</span>
+<span class="text-xs font-bold tracking-widest opacity-80 uppercase">Instant Ghana Support</span>
+</div>
+</div>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<!-- Snapchat/Phone Secondary Grid -->
+<div class="grid grid-cols-2 gap-4">
+<a class="flex flex-col items-center justify-center p-6 bg-surface-container-high rounded-lg border border-outline-variant/20 hover:bg-surface-bright transition-colors" href="#">
+<span class="material-symbols-outlined text-3xl mb-2 text-yellow-400" data-icon="photo_camera" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+<span class="font-label text-[10px] font-bold tracking-widest uppercase">Snapchat</span>
+</a>
+<a class="flex flex-col items-center justify-center p-6 bg-surface-container-high rounded-lg border border-outline-variant/20 hover:bg-surface-bright transition-colors" href="#">
+<span class="material-symbols-outlined text-3xl mb-2 text-primary-container" data-icon="call" style="font-variation-settings: 'FILL' 1;">call</span>
+<span class="font-label text-[10px] font-bold tracking-widest uppercase">Call Direct</span>
+</a>
+</div>
+</section>
+<!-- Contact Form Section -->
+<section class="bg-surface-container-low p-8 rounded-lg mb-12">
+<div class="mb-8">
+<h2 class="font-headline text-2xl font-bold uppercase tracking-tight text-white mb-2">Request Information</h2>
+<p class="text-on-surface-variant text-sm">Tell us which vehicle you're hunting for.</p>
+</div>
+<form class="space-y-6">
+<div>
+<label class="block font-label text-[10px] font-bold tracking-widest uppercase text-white/50 mb-2">Full Name</label>
+<input class="w-full bg-surface-container text-white border-b border-outline-variant focus:border-primary-container focus:ring-0 px-0 py-3 transition-colors placeholder:text-surface-bright" placeholder="Enter your name" type="text"/>
+</div>
+<div>
+<label class="block font-label text-[10px] font-bold tracking-widest uppercase text-white/50 mb-2">Vehicle Interest</label>
+<input class="w-full bg-surface-container text-white border-b border-outline-variant focus:border-primary-container focus:ring-0 px-0 py-3 transition-colors placeholder:text-surface-bright" placeholder="e.g. Ford Raptor 2024" type="text"/>
+</div>
+<div>
+<label class="block font-label text-[10px] font-bold tracking-widest uppercase text-white/50 mb-2">Message</label>
+<textarea class="w-full bg-surface-container text-white border-b border-outline-variant focus:border-primary-container focus:ring-0 px-0 py-3 transition-colors placeholder:text-surface-bright" placeholder="Detail your inquiry..." rows="3"></textarea>
+</div>
+<button class="w-full py-5 bg-primary-container text-white font-headline font-bold uppercase tracking-widest rounded-lg ignition-glow active:scale-95 transition-all" type="submit">
+                    Send Inquiry
+                </button>
+</form>
+</section>
+<!-- Location Cards (Bento Style) -->
+<section class="grid grid-cols-1 gap-6">
+<div class="relative overflow-hidden rounded-lg group aspect-video">
+<img class="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" data-alt="Modern high-end car showroom in USA with sleek glass windows and luxury sports cars on display at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARjQ6FyTTXQiW7YKP3VE47d_dWwr38EpSI1xiG-3qbCjp821TeQusT9HWN09lnY86sbrQeLU3p42hZmbcQzX-X5hJRD-zp9SluC7CMp7kA6qhQdO4rEa2qHpBt9H3Mh4J9fPE8rMhvImExKa_gK4kHJEJgy9KKxqC4i6eo4T0OCTIEcdYGzisOPR31KgNDzIE2UgLsLmNcsUXPD7I6bedROzVvoZwmVUD9RwG8Vvo6zwEEvbWdQjlhUOlCAVmodc4iSSXsIbENgg4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-90"></div>
+<div class="absolute bottom-6 left-6">
+<span class="inline-block px-2 py-1 bg-white/10 backdrop-blur-md font-label text-[10px] font-bold tracking-widest uppercase text-white mb-2">USA Logistics Hub</span>
+<h3 class="font-headline text-xl font-bold text-white uppercase italic">Chicago, IL</h3>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg group aspect-video">
+<img class="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0" data-alt="Dynamic street level view of a modern building in Accra Ghana under clear blue sky with palm trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxaWuAl8zfDui5xCzxs9vD0Eg0AZy4gz5x-kuoFfA9vxJ9zo7JEKSY3SdaaZYMe9HZOe2WrvALYn1deMdVjCtW6KtQIhNuUg26TvxcaiRn4uNMTo6VaNBkSdnSfdBCMlKSzvxvd49WIlyWmvRA62OpRNOyWLvi1uvkv2D-lMuQaQIkoDOUz-IOGYwq-1bjasYCLfyh1Cjmw-73ahBnZWBRtj0Szk9PkC1H4iGQyxoBTOWTdx5WKuom7oOc-KcRRQpSbvp1uwOeN0U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-90"></div>
+<div class="absolute bottom-6 left-6">
+<span class="inline-block px-2 py-1 bg-white/10 backdrop-blur-md font-label text-[10px] font-bold tracking-widest uppercase text-white mb-2">Ghana Showroom</span>
+<h3 class="font-headline text-xl font-bold text-white uppercase italic">Accra, GH</h3>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Lead-Gen Dock -->
+<div class="fixed bottom-20 right-6 z-50">
+<a class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center shadow-[0_8px_32px_rgba(65,229,117,0.4)] transition-transform active:scale-90 animate-bounce" href="#">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+</a>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 md:hidden bg-[#1C1B1B]/80 backdrop-blur-lg shadow-[0_-8px_32px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Inventory</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#E11D2E] text-white rounded-md p-2 mx-1">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Contact</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20">
+<span class="material-symbols-outlined" data-icon="flag">flag</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">USA Office</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 p-2 active:bg-[#E11D2E]/20">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold tracking-tighter">Ghana Hub</span>
+</div>
+</nav>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full py-16 px-8 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-2">
+<span class="font-['Space_Grotesk'] text-3xl font-black text-white italic tracking-tighter block mb-4 uppercase">Henny Automotive</span>
+<p class="font-['Inter'] text-sm leading-relaxed text-gray-400 max-w-sm">The Kinetic Monolith. Defining the standard of luxury automotive logistics between the United States and West Africa.</p>
+</div>
+<div>
+<h4 class="font-label text-[10px] font-bold tracking-widest text-white uppercase mb-6">Quick Links</h4>
+<ul class="space-y-4">
+<li><a class="font-['Inter'] text-sm leading-relaxed text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 block" href="#">Inventory</a></li>
+<li><a class="font-['Inter'] text-sm leading-relaxed text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 block" href="#">USA Logistics</a></li>
+<li><a class="font-['Inter'] text-sm leading-relaxed text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 block" href="#">Ghana Showroom</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label text-[10px] font-bold tracking-widest text-white uppercase mb-6">Connect</h4>
+<ul class="space-y-4">
+<li><a class="font-['Inter'] text-sm leading-relaxed text-gray-400 hover:text-white hover:translate-x-2 transition-transform duration-300 block" href="#">Snapchat</a></li>
+<li><a class="font-['Inter'] text-sm leading-relaxed text-[#E11D2E] hover:translate-x-2 transition-transform duration-300 block" href="#">WhatsApp</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
+<p class="font-['Inter'] text-[10px] uppercase tracking-widest text-gray-600">© 2024 Henny Automotive. The Kinetic Monolith.</p>
+</div>
+</footer>
+</body></html>
