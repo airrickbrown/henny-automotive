@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
+import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
 
 const NAV_ITEMS = [
@@ -12,6 +13,13 @@ const NAV_ITEMS = [
 
 export default function AdminSidebar() {
   const isActive = useActiveRoute()
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    logout()
+    navigate('/admin/login', { replace: true })
+  }
 
   return (
     <aside className="w-[280px] fixed top-0 left-0 h-screen bg-surface-container-low flex flex-col z-40">
@@ -50,9 +58,9 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      {/* Bottom — admin user */}
+      {/* Bottom — admin user + logout */}
       <div className="px-6 py-4 border-t border-white/5">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
             <span className="font-headline text-xs font-black text-white">HA</span>
           </div>
@@ -61,6 +69,13 @@ export default function AdminSidebar() {
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Henny Automotive</p>
           </div>
         </div>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 w-full px-3 py-2 rounded text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-150 font-label text-xs uppercase tracking-wider"
+        >
+          <span className="font-material text-base">logout</span>
+          Sign Out
+        </button>
       </div>
 
     </aside>

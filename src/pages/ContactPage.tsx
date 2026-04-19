@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PageMeta from '../components/seo/PageMeta'
 import { buildWhatsAppUrl, SNAPCHAT_URL } from '../lib/tokens'
+import { saveLead } from '../lib/leads'
 import PageWrapper from '../components/layout/PageWrapper'
 import SectionLabel from '../components/ui/SectionLabel'
 
@@ -74,24 +75,57 @@ const accentStyles = {
 
 // ── Inquiry form ─────────────────────────────────────────────────────────────
 function InquiryForm() {
-  const [name, setName]       = useState('')
-  const [phone, setPhone]     = useState('')
+  const [name, setName]         = useState('')
+  const [phone, setPhone]       = useState('')
   const [interest, setInterest] = useState('')
-  const [message, setMessage] = useState('')
+  const [message, setMessage]   = useState('')
+  const [submitted, setSubmitted] = useState(false)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+
+    // Persist to Supabase — fire and forget so WhatsApp opens immediately
+    saveLead({ name, phone, interest, message, source: 'contact_form' }).catch(console.error)
+
+    // Build WhatsApp message and open
     const text = [
       `Name: ${name}`,
-      phone    ? `Phone: ${phone}`    : '',
+      phone    ? `Phone: ${phone}`       : '',
       interest ? `Interest: ${interest}` : '',
-      message  ? `Message: ${message}` : '',
+      message  ? `Message: ${message}`   : '',
     ].filter(Boolean).join('\n')
     window.open(buildWhatsAppUrl(text), '_blank', 'noopener,noreferrer')
+
+    setSubmitted(true)
+  }
+
+  function handleReset() {
+    setName(''); setPhone(''); setInterest(''); setMessage('')
+    setSubmitted(false)
   }
 
   const inputClass =
     'w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary-container py-4 px-5 font-body text-sm text-white placeholder:text-white/20 outline-none transition-all'
+
+  if (submitted) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-center">
+        <span className="font-material-filled text-5xl text-secondary mb-4">check_circle</span>
+        <h3 className="font-headline font-black italic uppercase text-white text-2xl mb-2">
+          Message Sent!
+        </h3>
+        <p className="font-body text-sm text-on-surface-variant max-w-xs leading-relaxed mb-8">
+          WhatsApp has opened with your message. We'll reply within the hour.
+        </p>
+        <button
+          onClick={handleReset}
+          className="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors border border-white/10 hover:border-white/30 px-6 py-3"
+        >
+          Send Another
+        </button>
+      </div>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">

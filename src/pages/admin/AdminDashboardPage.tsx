@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { vehicles } from '../../data/vehicles'
 import { parts } from '../../data/parts'
+import { getLeads, type Lead } from '../../lib/leads'
 import { formatPrice } from '../../lib/utils'
 
 // ── Stat card ────────────────────────────────────────────────────────────────
@@ -46,6 +48,10 @@ export default function AdminDashboardPage() {
   const hotParts   = parts.filter((p) => p.status !== null).length
   const recentVehicles = [...vehicles].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 5)
 
+  const [leads, setLeads] = useState<Lead[]>([])
+  useEffect(() => { getLeads().then(setLeads).catch(() => {}) }, [])
+  const newLeads = leads.filter((l) => l.status === 'new').length
+
   return (
     <div className="max-w-[1400px]">
 
@@ -68,7 +74,7 @@ export default function AdminDashboardPage() {
         <StatCard label="Parts Listed"     value={parts.length}     icon="settings"         to="/admin/parts"     sub={`${hotParts} active`} />
         <StatCard label="Hot Deals"        value={vehicles.filter((v) => v.isHotDeal).length} icon="local_fire_department" />
         <StatCard label="Price on Request" value={vehicles.filter((v) => !v.showPublicPrice).length} icon="visibility_off" />
-        <StatCard label="Leads"            value="—"                icon="person"           to="/admin/leads"     sub="coming soon" />
+        <StatCard label="Leads"            value={leads.length}     icon="person"           to="/admin/leads"     sub={newLeads > 0 ? `${newLeads} new` : 'all reviewed'} />
       </div>
 
       {/* Recent vehicles */}

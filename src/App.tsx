@@ -1,12 +1,14 @@
 import { Routes, Route } from 'react-router-dom'
 import PublicLayout from './layouts/PublicLayout'
 import AdminLayout from './layouts/AdminLayout'
+import RequireAuth from './components/admin/RequireAuth'
 import HomePage from './pages/HomePage'
 import InventoryPage from './pages/InventoryPage'
 import VehicleDetailPage from './pages/VehicleDetailPage'
 import PartsPage from './pages/PartsPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import AdminLoginPage from './pages/admin/AdminLoginPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import AdminInventoryPage from './pages/admin/AdminInventoryPage'
 import AdminPartsPage from './pages/admin/AdminPartsPage'
@@ -17,14 +19,21 @@ import NotFoundPage from './pages/NotFoundPage'
 export default function App() {
   return (
     <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/inventory" element={<InventoryPage />} />
-          <Route path="/inventory/:slug" element={<VehicleDetailPage />} />
-          <Route path="/parts" element={<PartsPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Route>
+      {/* Public site */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/inventory" element={<InventoryPage />} />
+        <Route path="/inventory/:slug" element={<VehicleDetailPage />} />
+        <Route path="/parts" element={<PartsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Route>
+
+      {/* Admin login — no auth required */}
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+
+      {/* Admin portal — requires authentication */}
+      <Route element={<RequireAuth />}>
         <Route element={<AdminLayout />}>
           <Route path="/admin" element={<AdminDashboardPage />} />
           <Route path="/admin/inventory" element={<AdminInventoryPage />} />
@@ -32,7 +41,10 @@ export default function App() {
           <Route path="/admin/leads" element={<AdminLeadsPage />} />
           <Route path="/admin/settings" element={<AdminSettingsPage />} />
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      </Route>
+
+      {/* 404 */}
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   )
 }
