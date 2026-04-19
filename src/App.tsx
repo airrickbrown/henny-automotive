@@ -16,6 +16,9 @@ import AdminInventoryPage from './pages/admin/AdminInventoryPage'
 import AdminPartsPage from './pages/admin/AdminPartsPage'
 import AdminLeadsPage from './pages/admin/AdminLeadsPage'
 import AdminSettingsPage from './pages/admin/AdminSettingsPage'
+import AdminNewsletterPage from './pages/admin/AdminNewsletterPage'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import TermsOfServicePage from './pages/TermsOfServicePage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -29,6 +32,8 @@ export default function App() {
         <Route path="/parts" element={<PartsPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-of-service" element={<TermsOfServicePage />} />
       </Route>
 
       {/* Admin auth pages — no auth required */}
@@ -43,6 +48,7 @@ export default function App() {
           <Route path="/admin/inventory" element={<AdminInventoryPage />} />
           <Route path="/admin/parts" element={<AdminPartsPage />} />
           <Route path="/admin/leads" element={<AdminLeadsPage />} />
+          <Route path="/admin/newsletter" element={<AdminNewsletterPage />} />
           <Route path="/admin/settings" element={<AdminSettingsPage />} />
         </Route>
       </Route>

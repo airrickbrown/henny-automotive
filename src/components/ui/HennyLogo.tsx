@@ -4,10 +4,9 @@ interface HennyLogoProps {
   width?: number
   maxHeight?: number
   className?: string
-  blend?: boolean
 }
 
-export default function HennyLogo({ width = 140, maxHeight, className = '', blend = false }: HennyLogoProps) {
+export default function HennyLogo({ width = 140, maxHeight, className = '' }: HennyLogoProps) {
   return (
     <img
       src={logo}
@@ -18,7 +17,7 @@ export default function HennyLogo({ width = 140, maxHeight, className = '', blen
         width: `${width}px`,
         height: 'auto',
         maxHeight: maxHeight ? `${maxHeight}px` : undefined,
-        ...(blend && { mixBlendMode: 'screen' as const }),
+        mixBlendMode: 'multiply' as const,
       }}
     />
   )

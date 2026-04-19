@@ -34,6 +34,8 @@ export const shadows = {
 } as const
 
 export const WHATSAPP_NUMBER = '+233000000000'
+export const GHANA_PHONE = '+233593204050'
+export const GHANA_PHONE_DISPLAY = '059 320 4050'
 export const SNAPCHAT_HANDLE = 'hennyauto'
 
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`

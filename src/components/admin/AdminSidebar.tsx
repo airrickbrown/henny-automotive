@@ -5,11 +5,12 @@ import { cn } from '../../lib/utils'
 import HennyLogo from '../ui/HennyLogo'
 
 const NAV_ITEMS = [
-  { label: 'Dashboard',            href: '/admin',            icon: 'dashboard' },
-  { label: 'Inventory Management', href: '/admin/inventory',  icon: 'directions_car' },
-  { label: 'Car Parts',            href: '/admin/parts',      icon: 'settings' },
-  { label: 'Leads',                href: '/admin/leads',      icon: 'person' },
-  { label: 'Settings',             href: '/admin/settings',   icon: 'tune' },
+  { label: 'Dashboard',            href: '/admin',               icon: 'dashboard' },
+  { label: 'Inventory Management', href: '/admin/inventory',     icon: 'directions_car' },
+  { label: 'Car Parts',            href: '/admin/parts',         icon: 'settings' },
+  { label: 'Leads',                href: '/admin/leads',         icon: 'person' },
+  { label: 'Newsletter',           href: '/admin/newsletter',    icon: 'mail' },
+  { label: 'Settings',             href: '/admin/settings',      icon: 'tune' },
 ] as const
 
 export default function AdminSidebar() {

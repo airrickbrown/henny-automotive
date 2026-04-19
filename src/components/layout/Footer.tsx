@@ -1,5 +1,7 @@
+import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { WHATSAPP_BASE_URL, SNAPCHAT_URL, WHATSAPP_NUMBER } from '../../lib/tokens'
+import { WHATSAPP_BASE_URL, SNAPCHAT_URL, GHANA_PHONE, GHANA_PHONE_DISPLAY } from '../../lib/tokens'
+import { subscribeNewsletter } from '../../lib/newsletter'
 import HennyLogo from '../ui/HennyLogo'
 
 const NAV_LINKS = [
@@ -11,11 +13,12 @@ const NAV_LINKS = [
 ]
 
 const SERVICE_LINKS = [
-  { label: 'Browse Inventory',   href: '/inventory' },
-  { label: 'Car Parts & Spares', href: '/parts' },
-  { label: 'Import Process',     href: '/about' },
-  { label: 'Get a Quote',        href: '/contact' },
-  { label: 'US Sourcing',        href: '/about' },
+  { label: 'Buy a Car',            href: '/inventory' },
+  { label: 'Car Parts & Spares',   href: '/parts' },
+  { label: 'Car Import & Shipping', href: '/about' },
+  { label: 'Get a Quote',          href: '/contact' },
+  { label: 'Car Diagnostics',      href: '/contact' },
+  { label: 'Tuning & Performance', href: '/contact' },
 ]
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
@@ -26,13 +29,12 @@ function FooterHeading({ children }: { children: React.ReactNode }) {
   )
 }
 
-function FooterLink({ href, children, external = false, color }: {
+function FooterLink({ href, children, external = false }: {
   href: string
   children: React.ReactNode
   external?: boolean
-  color?: string
 }) {
-  const cls = `font-body text-sm text-gray-400 hover:${color ?? 'text-white'} transition-all duration-150 hover:translate-x-1.5 inline-block`
+  const cls = 'font-body text-sm text-gray-400 hover:text-white transition-all duration-150 hover:translate-x-1.5 inline-block'
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -47,6 +49,79 @@ function FooterLink({ href, children, external = false, color }: {
   )
 }
 
+function NewsletterForm() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'duplicate'>('idle')
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    if (!email.trim()) return
+    setStatus('loading')
+    const { error } = await subscribeNewsletter(email)
+    if (error === 'already_subscribed') {
+      setStatus('duplicate')
+    } else if (error) {
+      setStatus('error')
+    } else {
+      setStatus('success')
+      setEmail('')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="flex items-center gap-2.5 bg-secondary/10 border border-secondary/20 px-4 py-3">
+        <span className="font-material-filled text-base text-secondary flex-shrink-0">check_circle</span>
+        <p className="font-label text-xs uppercase tracking-wider text-secondary">
+          You're subscribed. Welcome!
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="flex">
+        <input
+          type="email"
+          value={email}
+          onChange={e => { setEmail(e.target.value); setStatus('idle') }}
+          placeholder="EMAIL"
+          required
+          disabled={status === 'loading'}
+          className="bg-surface-container-high text-white text-xs p-3 w-full focus:ring-1 focus:ring-primary-container outline-none font-label uppercase tracking-widest placeholder:text-gray-600 min-w-0 disabled:opacity-60"
+        />
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          aria-label="Subscribe"
+          className="bg-primary-container text-white px-4 flex items-center justify-center hover:brightness-110 transition-all duration-150 flex-shrink-0 disabled:opacity-60"
+        >
+          {status === 'loading'
+            ? <span className="font-material text-xl animate-spin">progress_activity</span>
+            : <span className="font-material text-xl">chevron_right</span>
+          }
+        </button>
+      </div>
+      {status === 'duplicate' && (
+        <p className="font-label text-[10px] uppercase tracking-widest text-yellow-500 mt-2">
+          Already subscribed with that email.
+        </p>
+      )}
+      {status === 'error' && (
+        <p className="font-label text-[10px] uppercase tracking-widest text-red-400 mt-2">
+          Something went wrong. Please try again.
+        </p>
+      )}
+      {status === 'idle' && (
+        <p className="font-label text-[10px] uppercase tracking-widest text-gray-600 mt-3">
+          No spam. Unsubscribe any time.
+        </p>
+      )}
+    </form>
+  )
+}
+
 export default function Footer() {
   return (
     <footer className="bg-footer-bg w-full pt-16 pb-32 md:pb-16 px-8">
@@ -55,16 +130,15 @@ export default function Footer() {
         {/* Main grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
 
-          {/* Column 1 — Brand (spans 2 on mobile, 1 on lg) */}
+          {/* Column 1 — Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <div className="mb-5">
               <HennyLogo width={120} />
             </div>
             <p className="font-body text-sm leading-relaxed text-gray-400 max-w-xs">
-              The Kinetic Monolith. Elite automotive sourcing from the USA to Ghana —
+              Elite automotive sourcing from the USA to Ghana —
               built on precision, driven by trust since 2014.
             </p>
-            {/* Social */}
             <div className="flex gap-4 mt-6">
               <a
                 href={WHATSAPP_BASE_URL}
@@ -118,34 +192,47 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <span className="font-material text-sm text-primary-container flex-shrink-0 mt-0.5">location_on</span>
                 <span className="font-body text-sm text-gray-400">
-                  Tema Comm 25<br />Greater Accra, Ghana
+                  L573 Yomo Afoko St<br />
+                  Agbogbe Plaza<br />
+                  Accra, Ghana
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="font-material text-sm text-gray-500 flex-shrink-0 mt-0.5">flag</span>
+                <span className="font-body text-sm text-gray-400">
+                  Nashville, TN, USA
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-material text-sm text-gray-500 flex-shrink-0 mt-0.5">local_shipping</span>
                 <span className="font-body text-sm text-gray-400">
-                  Delivery to Accra, Tema &amp; Kumasi
+                  Delivery all over Ghana
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="font-material text-sm text-gray-500 flex-shrink-0 mt-0.5">schedule</span>
                 <span className="font-body text-sm text-gray-400">
-                  Mon – Sat · 9am – 6pm GMT
+                  Mon – Sat · 9:00 AM – 5:00 PM
                 </span>
               </li>
-              <li className="mt-1">
+              <li>
                 <a
-                  href={`tel:${WHATSAPP_NUMBER}`}
+                  href={`tel:${GHANA_PHONE}`}
                   className="font-body text-sm text-gray-400 hover:text-white transition-all duration-150 hover:translate-x-1.5 inline-flex items-center gap-2"
                 >
                   <span className="font-material text-sm">call</span>
-                  {WHATSAPP_NUMBER}
+                  {GHANA_PHONE_DISPLAY}
                 </a>
               </li>
               <li>
-                <FooterLink href={WHATSAPP_BASE_URL} external color="text-[#25D366]">
+                <a
+                  href={WHATSAPP_BASE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-sm text-gray-400 hover:text-[#25D366] transition-all duration-150 hover:translate-x-1.5 inline-block"
+                >
                   WhatsApp Us
-                </FooterLink>
+                </a>
               </li>
             </ul>
           </div>
@@ -156,22 +243,7 @@ export default function Footer() {
             <p className="font-body text-xs text-gray-400 mb-4 leading-relaxed">
               Be first to know when new containers arrive and exclusive deals drop.
             </p>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="EMAIL"
-                className="bg-surface-container-high text-white text-xs p-3 w-full focus:ring-1 focus:ring-primary-container outline-none font-label uppercase tracking-widest placeholder:text-gray-600 min-w-0"
-              />
-              <button
-                aria-label="Subscribe"
-                className="bg-primary-container text-white px-4 flex items-center justify-center hover:brightness-110 transition-all duration-150 flex-shrink-0"
-              >
-                <span className="font-material text-xl">chevron_right</span>
-              </button>
-            </div>
-            <p className="font-label text-[10px] uppercase tracking-widest text-gray-600 mt-3">
-              No spam. Unsubscribe any time.
-            </p>
+            <NewsletterForm />
           </div>
 
         </div>
@@ -179,17 +251,17 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs text-gray-500 text-center md:text-left">
-            © {new Date().getFullYear()} Henny Automotive. The Kinetic Monolith. All rights reserved.
+            © {new Date().getFullYear()} Henny Automotive. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
-              to="/about"
+              to="/privacy-policy"
               className="font-label text-[10px] uppercase font-bold text-gray-600 hover:text-white tracking-widest transition-colors duration-150"
             >
               Privacy Policy
             </Link>
             <Link
-              to="/about"
+              to="/terms-of-service"
               className="font-label text-[10px] uppercase font-bold text-gray-600 hover:text-white tracking-widest transition-colors duration-150"
             >
               Terms of Service
