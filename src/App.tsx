@@ -9,6 +9,8 @@ import PartsPage from './pages/PartsPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
+import AdminForgotPasswordPage from './pages/admin/AdminForgotPasswordPage'
+import AdminResetPasswordPage from './pages/admin/AdminResetPasswordPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import AdminInventoryPage from './pages/admin/AdminInventoryPage'
 import AdminPartsPage from './pages/admin/AdminPartsPage'
@@ -29,8 +31,10 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
       </Route>
 
-      {/* Admin login — no auth required */}
+      {/* Admin auth pages — no auth required */}
       <Route path="/admin/login" element={<AdminLoginPage />} />
+      <Route path="/admin/forgot-password" element={<AdminForgotPasswordPage />} />
+      <Route path="/admin/reset-password" element={<AdminResetPasswordPage />} />
 
       {/* Admin portal — requires authentication */}
       <Route element={<RequireAuth />}>

@@ -1,27 +1,37 @@
 import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
 
 export default function AdminLoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const passwordReset = (location.state as { passwordReset?: boolean } | null)?.passwordReset
 
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [show, setShow] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
   const [shake, setShake] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    const ok = login(password)
-    if (ok) {
+    setLoading(true)
+    setError('')
+
+    const err = await login(email, password)
+
+    if (!err) {
       navigate('/admin', { replace: true })
     } else {
-      setError(true)
+      setError('Invalid email or password.')
       setShake(true)
       setTimeout(() => setShake(false), 500)
     }
+
+    setLoading(false)
   }
 
   return (
@@ -47,9 +57,39 @@ export default function AdminLoginPage() {
           shake && 'animate-[shake_0.4s_ease]'
         )}
       >
+        {passwordReset && (
+          <div className="mb-6 flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded px-4 py-3">
+            <span className="font-material text-base text-green-400">check_circle</span>
+            <p className="font-label text-xs text-green-400 uppercase tracking-wider">Password updated — please sign in.</p>
+          </div>
+        )}
         <h1 className="font-headline text-xl font-black text-white mb-6">Sign In</h1>
 
         <form onSubmit={handleSubmit} noValidate>
+          {/* Email */}
+          <div className="mb-4">
+            <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => { setEmail(e.target.value); setError('') }}
+              autoComplete="email"
+              placeholder="admin@example.com"
+              required
+              className={cn(
+                'w-full bg-surface-container border rounded px-4 py-3',
+                'font-body text-sm text-white placeholder:text-on-surface-variant/40',
+                'outline-none transition-colors',
+                error
+                  ? 'border-red-500 focus:border-red-400'
+                  : 'border-white/10 focus:border-primary-container/60'
+              )}
+            />
+          </div>
+
+          {/* Password */}
           <div className="mb-5">
             <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant mb-2">
               Password
@@ -58,12 +98,9 @@ export default function AdminLoginPage() {
               <input
                 type={show ? 'text' : 'password'}
                 value={password}
-                onChange={e => {
-                  setPassword(e.target.value)
-                  setError(false)
-                }}
+                onChange={e => { setPassword(e.target.value); setError('') }}
                 autoComplete="current-password"
-                placeholder="Enter admin password"
+                placeholder="••••••••"
                 required
                 className={cn(
                   'w-full bg-surface-container border rounded px-4 py-3 pr-12',
@@ -84,19 +121,27 @@ export default function AdminLoginPage() {
               </button>
             </div>
             {error && (
-              <p className="mt-2 font-label text-xs text-red-400">
-                Incorrect password. Try again.
-              </p>
+              <p className="mt-2 font-label text-xs text-red-400">{error}</p>
             )}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-primary-container hover:bg-primary-container/90 text-white font-label text-sm font-bold uppercase tracking-wider py-3 rounded transition-colors"
+            disabled={loading}
+            className="w-full bg-primary-container hover:bg-primary-container/90 disabled:opacity-50 text-white font-label text-sm font-bold uppercase tracking-wider py-3 rounded transition-colors"
           >
-            Sign In
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
+
+        <div className="mt-5 text-center">
+          <Link
+            to="/admin/forgot-password"
+            className="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors"
+          >
+            Forgot password?
+          </Link>
+        </div>
       </div>
 
       {/* Back to site */}
