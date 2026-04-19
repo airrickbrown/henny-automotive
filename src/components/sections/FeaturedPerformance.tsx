@@ -1,27 +1,31 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { vehicles } from '../../data/vehicles'
+import { getFeaturedVehicles } from '../../lib/vehicles'
 import { formatPrice } from '../../lib/utils'
 import SectionLabel from '../ui/SectionLabel'
 import SectionHeading from '../ui/SectionHeading'
 import StatusBadge from '../ui/StatusBadge'
+import type { Vehicle } from '../../types/vehicle'
 import type { BadgeVariant } from '../ui/StatusBadge'
-
-const featured = vehicles.filter((v) => v.isFeatured).slice(0, 4)
 
 export default function FeaturedPerformance() {
   const navigate = useNavigate()
+  const [featured, setFeatured] = useState<Vehicle[]>([])
+
+  useEffect(() => {
+    getFeaturedVehicles(4).then(setFeatured)
+  }, [])
+
+  if (featured.length === 0) return null
 
   return (
     <section className="py-24 md:py-32 bg-surface-container-low px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
 
-        {/* Header row */}
         <div className="flex items-end justify-between mb-12 md:mb-16">
           <div>
             <SectionLabel>Stock Highlights</SectionLabel>
-            <SectionHeading size="md" className="mt-2">
-              Featured Performance
-            </SectionHeading>
+            <SectionHeading size="md" className="mt-2">Featured Performance</SectionHeading>
           </div>
           <a
             href="/inventory"
@@ -39,7 +43,6 @@ export default function FeaturedPerformance() {
           </a>
         </div>
 
-        {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 lg:gap-8">
           {featured.map((vehicle) => (
             <div
@@ -51,7 +54,6 @@ export default function FeaturedPerformance() {
               onKeyDown={(e) => e.key === 'Enter' && navigate(`/inventory/${vehicle.slug}`)}
               aria-label={`View ${vehicle.year} ${vehicle.make} ${vehicle.model}`}
             >
-              {/* Image */}
               <div className="relative aspect-[4/5] bg-surface-container-high overflow-hidden">
                 {vehicle.images[0] ? (
                   <img
@@ -62,21 +64,15 @@ export default function FeaturedPerformance() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="font-material text-5xl text-on-surface-variant/20">
-                      directions_car
-                    </span>
+                    <span className="font-material text-5xl text-on-surface-variant/20">directions_car</span>
                   </div>
                 )}
-
-                {/* Status badge */}
                 {vehicle.status && (
                   <div className="absolute top-0 left-0">
                     <StatusBadge variant={vehicle.status as BadgeVariant} />
                   </div>
                 )}
               </div>
-
-              {/* Text below image */}
               <div className="mt-6 space-y-2">
                 <h3 className="font-headline text-2xl font-bold text-white uppercase italic leading-tight tracking-tight">
                   {vehicle.make} {vehicle.model}
@@ -96,7 +92,6 @@ export default function FeaturedPerformance() {
           ))}
         </div>
 
-        {/* Mobile "View All" CTA below grid */}
         <div className="mt-10 md:hidden text-center">
           <button
             onClick={() => navigate('/inventory')}
