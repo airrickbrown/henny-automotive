@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
 import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
+import HennyLogo from '../ui/HennyLogo'
 
 const NAV_ITEMS = [
   { label: 'Dashboard',            href: '/admin',            icon: 'dashboard' },
@@ -25,14 +26,9 @@ export default function AdminSidebar() {
     <aside className="w-[280px] fixed top-0 left-0 h-screen bg-surface-container-low flex flex-col z-40">
 
       {/* Logo */}
-      <div className="px-6 py-6 border-b border-white/5">
-        <Link to="/admin" className="block">
-          <span className="font-headline text-lg font-black italic text-primary-container tracking-tighter">
-            HENNY
-          </span>
-          <span className="font-headline text-lg font-black italic text-white tracking-tighter ml-1">
-            AUTOMOTIVE
-          </span>
+      <div className="px-6 py-5 border-b border-white/5">
+        <Link to="/admin" aria-label="Henny Automotive — Admin">
+          <HennyLogo width={120} />
         </Link>
       </div>
 

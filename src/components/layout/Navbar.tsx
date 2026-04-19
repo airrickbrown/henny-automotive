@@ -6,6 +6,7 @@ import { NAV_LINKS } from '../../lib/constants'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
 import MobileNavDrawer from './MobileNavDrawer'
+import HennyLogo from '../ui/HennyLogo'
 
 export default function Navbar() {
   const isScrolled = useScrolled(50)
@@ -23,12 +24,9 @@ export default function Navbar() {
     >
       <div className="flex justify-between items-center px-6 md:px-8 py-4 max-w-[1920px] mx-auto">
 
-        {/* Brand wordmark */}
-        <Link
-          to="/"
-          className="font-headline text-xl md:text-2xl font-black italic text-white tracking-tighter hover:opacity-90 transition-opacity"
-        >
-          HENNY AUTOMOTIVE
+        {/* Brand logo */}
+        <Link to="/" className="hover:opacity-90 transition-opacity flex-shrink-0" aria-label="Henny Automotive — Home">
+          <HennyLogo width={140} />
         </Link>
 
         {/* Desktop nav links */}

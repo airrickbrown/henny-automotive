@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PageMeta from '../components/seo/PageMeta'
+import HennyLogo from '../components/ui/HennyLogo'
 import { buildWhatsAppUrl, SNAPCHAT_URL } from '../lib/tokens'
 import { saveLead } from '../lib/leads'
 import PageWrapper from '../components/layout/PageWrapper'
@@ -293,9 +294,7 @@ export default function ContactPage() {
         {/* ── Bottom strip ────────────────────────────────────── */}
         <div className="mt-20 border-t border-outline-variant/10 pt-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
-            <p className="font-headline font-black italic uppercase text-white text-lg">
-              Henny Automotive
-            </p>
+            <HennyLogo width={120} />
             <p className="font-label text-[10px] uppercase tracking-widest text-white/30 mt-1">
               Houston, TX &nbsp;·&nbsp; Accra, Ghana &nbsp;·&nbsp; Est. 2014
             </p>

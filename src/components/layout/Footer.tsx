@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { WHATSAPP_BASE_URL, SNAPCHAT_URL, WHATSAPP_NUMBER } from '../../lib/tokens'
+import HennyLogo from '../ui/HennyLogo'
 
 const NAV_LINKS = [
   { label: 'Home',      href: '/' },
@@ -56,11 +57,8 @@ export default function Footer() {
 
           {/* Column 1 — Brand (spans 2 on mobile, 1 on lg) */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <div className="font-headline text-3xl font-black text-white mb-1 uppercase tracking-tighter">
-              HENNY
-            </div>
-            <div className="font-headline text-xs font-bold text-primary-container uppercase tracking-[0.3em] mb-5">
-              AUTOMOTIVE
+            <div className="mb-5">
+              <HennyLogo width={120} />
             </div>
             <p className="font-body text-sm leading-relaxed text-gray-400 max-w-xs">
               The Kinetic Monolith. Elite automotive sourcing from the USA to Ghana —

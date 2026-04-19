@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../../lib/constants'
 import { buildWhatsAppUrl, SNAPCHAT_URL } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
+import HennyLogo from '../ui/HennyLogo'
 
 interface MobileNavDrawerProps {
   open: boolean
@@ -49,8 +50,8 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
-          <Link to="/" className="font-headline font-black italic text-white text-lg tracking-tighter">
-            HENNY <span className="text-primary-container">AUTO</span>
+          <Link to="/" aria-label="Henny Automotive — Home">
+            <HennyLogo width={110} />
           </Link>
           <button
             type="button"

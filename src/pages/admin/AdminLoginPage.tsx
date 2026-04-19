@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
+import HennyLogo from '../../components/ui/HennyLogo'
 
 export default function AdminLoginPage() {
   const { login } = useAuth()
@@ -37,15 +38,10 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-surface flex flex-col items-center justify-center px-4">
 
-      {/* Wordmark */}
+      {/* Logo */}
       <div className="mb-10 text-center">
-        <span className="font-headline text-3xl font-black italic text-primary-container tracking-tighter">
-          HENNY
-        </span>
-        <span className="font-headline text-3xl font-black italic text-white tracking-tighter ml-2">
-          AUTOMOTIVE
-        </span>
-        <p className="font-label text-xs uppercase tracking-[0.25em] text-on-surface-variant mt-2">
+        <HennyLogo width={160} className="mx-auto" />
+        <p className="font-label text-xs uppercase tracking-[0.25em] text-on-surface-variant mt-4">
           Admin Portal
         </p>
       </div>
