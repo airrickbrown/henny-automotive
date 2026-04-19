@@ -3,7 +3,7 @@ import type { PartCategory } from './part'
 
 export interface VehicleFilters {
   search: string
-  manufacturers: string[]
+  manufacturer: string          // single-select, '' = all
   minPrice: number
   maxPrice: number
   condition: 'ALL' | VehicleCondition

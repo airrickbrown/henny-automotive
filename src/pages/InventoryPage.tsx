@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import PageMeta from '../components/seo/PageMeta'
 import { useVehicleFilters } from '../hooks/useVehicleFilters'
 import { getVehicles } from '../lib/vehicles'
@@ -10,7 +10,9 @@ import InventoryCard from '../components/inventory/InventoryCard'
 import type { Vehicle } from '../types/vehicle'
 import type { VehicleFilters } from '../types/filters'
 
-// ── Mobile category chip bar ────────────────────────────────────────────────
+type ViewMode = 'grid' | 'list'
+
+// ── Mobile filter bar ────────────────────────────────────────────────────────
 function MobileCategoryBar({
   filters,
   setFilters,
@@ -29,7 +31,7 @@ function MobileCategoryBar({
           value={filters.search}
           onChange={(e) => setFilters({ ...filters, search: e.target.value })}
           placeholder="SEARCH MODEL, MAKE, YEAR..."
-          className="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-primary-container py-4 pl-12 pr-4 font-headline text-sm tracking-widest uppercase text-white placeholder:text-white/20 outline-none transition-all"
+          className="w-full bg-surface-container-low focus:ring-1 focus:ring-primary-container py-4 pl-12 pr-4 font-headline text-sm tracking-widest uppercase text-white placeholder:text-white/20 outline-none transition-all"
         />
       </div>
       <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
@@ -56,7 +58,7 @@ function MobileCategoryBar({
   )
 }
 
-// ── Empty / loading states ──────────────────────────────────────────────────
+// ── Empty / loading states ────────────────────────────────────────────────────
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center py-24 gap-6 text-center">
@@ -76,28 +78,73 @@ function EmptyState({ onReset }: { onReset: () => void }) {
   )
 }
 
-function SkeletonCard() {
+function SkeletonGrid() {
   return (
-    <div className="animate-pulse space-y-4">
-      <div className="aspect-[4/5] bg-surface-container-low" />
-      <div className="h-4 bg-surface-container-low w-3/4" />
-      <div className="h-3 bg-surface-container-low w-1/2" />
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-14 gap-x-8">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="animate-pulse space-y-4">
+          <div className="aspect-[4/3] bg-surface-container-low" />
+          <div className="h-4 bg-surface-container-low w-3/4" />
+          <div className="h-3 bg-surface-container-low w-1/2" />
+        </div>
+      ))}
     </div>
   )
 }
 
-// ── Page ────────────────────────────────────────────────────────────────────
-export default function InventoryPage() {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([])
-  const [loading, setLoading]   = useState(true)
-  const [fetchError, setFetchError] = useState(false)
+// ── View toggle button ────────────────────────────────────────────────────────
+function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode) => void }) {
+  return (
+    <div className="hidden md:flex items-center gap-1 bg-surface-container-low p-1">
+      <button
+        type="button"
+        aria-label="Grid view"
+        onClick={() => onChange('grid')}
+        className={cn(
+          'w-8 h-8 flex items-center justify-center transition-colors duration-150',
+          view === 'grid' ? 'bg-primary-container text-white' : 'text-white/30 hover:text-white'
+        )}
+      >
+        <span className="font-material text-lg">grid_view</span>
+      </button>
+      <button
+        type="button"
+        aria-label="List view"
+        onClick={() => onChange('list')}
+        className={cn(
+          'w-8 h-8 flex items-center justify-center transition-colors duration-150',
+          view === 'list' ? 'bg-primary-container text-white' : 'text-white/30 hover:text-white'
+        )}
+      >
+        <span className="font-material text-lg">view_list</span>
+      </button>
+    </div>
+  )
+}
 
-  useEffect(() => {
+// ── Page ──────────────────────────────────────────────────────────────────────
+export default function InventoryPage() {
+  const [vehicles, setVehicles]     = useState<Vehicle[]>([])
+  const [loading, setLoading]       = useState(true)
+  const [fetchError, setFetchError] = useState(false)
+  const [viewMode, setViewMode]     = useState<ViewMode>('grid')
+
+  function load() {
+    setFetchError(false)
+    setLoading(true)
     getVehicles()
       .then(setVehicles)
       .catch(() => setFetchError(true))
       .finally(() => setLoading(false))
-  }, [])
+  }
+
+  useEffect(() => { load() }, [])
+
+  // Derive manufacturers alphabetically from live vehicle data
+  const manufacturers = useMemo(
+    () => [...new Set(vehicles.map(v => v.make))].sort(),
+    [vehicles]
+  )
 
   const { filters, setFilters, filtered, total, resetFilters } = useVehicleFilters(vehicles)
 
@@ -122,9 +169,18 @@ export default function InventoryPage() {
         <MobileCategoryBar filters={filters} setFilters={setFilters} />
 
         <div className="flex flex-col md:flex-row gap-10 md:gap-12">
-          <FilterSidebar filters={filters} onChange={setFilters} className="hidden md:block" />
 
+          {/* Desktop sidebar */}
+          <FilterSidebar
+            filters={filters}
+            onChange={setFilters}
+            manufacturers={manufacturers}
+            className="hidden md:block"
+          />
+
+          {/* Results column */}
           <div className="flex-grow min-w-0">
+            {/* Results bar */}
             <div className="flex justify-between items-center mb-8 border-b border-outline-variant/10 pb-4">
               <span className="font-label text-xs uppercase tracking-[0.2em] text-white/40">
                 {loading ? 'Loading…' : (
@@ -135,38 +191,32 @@ export default function InventoryPage() {
                   </>
                 )}
               </span>
-              <div className="hidden md:flex gap-4">
-                <button type="button" aria-label="Grid view" className="text-white hover:text-primary-container transition-colors">
-                  <span className="font-material text-xl">grid_view</span>
-                </button>
-                <button type="button" aria-label="List view" className="text-white/20 hover:text-white transition-colors">
-                  <span className="font-material text-xl">view_list</span>
-                </button>
-              </div>
+              <ViewToggle view={viewMode} onChange={setViewMode} />
             </div>
 
+            {/* Content */}
             {fetchError ? (
               <div className="py-24 text-center">
                 <span className="font-material text-5xl text-white/10 block mb-4">cloud_off</span>
                 <p className="font-headline font-bold uppercase text-white/40">Failed to load inventory</p>
-                <button
-                  type="button"
-                  onClick={() => { setFetchError(false); setLoading(true); getVehicles().then(setVehicles).catch(() => setFetchError(true)).finally(() => setLoading(false)) }}
-                  className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary-container border-b border-primary-container pb-0.5"
-                >
+                <button type="button" onClick={load} className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary-container border-b border-primary-container pb-0.5">
                   Retry
                 </button>
               </div>
             ) : loading ? (
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-14 gap-x-8">
-                {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
-              </div>
+              <SkeletonGrid />
             ) : filtered.length === 0 ? (
               <EmptyState onReset={resetFilters} />
+            ) : viewMode === 'list' ? (
+              <div className="space-y-6">
+                {filtered.map((vehicle) => (
+                  <InventoryCard key={vehicle.id} vehicle={vehicle} view="list" />
+                ))}
+              </div>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-14 gap-x-8">
                 {filtered.map((vehicle) => (
-                  <InventoryCard key={vehicle.id} vehicle={vehicle} />
+                  <InventoryCard key={vehicle.id} vehicle={vehicle} view="grid" />
                 ))}
               </div>
             )}
