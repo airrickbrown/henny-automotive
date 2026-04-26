@@ -13,7 +13,12 @@ const NAV_ITEMS = [
   { label: 'Settings',             href: '/admin/settings',      icon: 'tune' },
 ] as const
 
-export default function AdminSidebar() {
+interface Props {
+  open: boolean
+  onClose: () => void
+}
+
+export default function AdminSidebar({ open, onClose }: Props) {
   const isActive = useActiveRoute()
   const { logout } = useAuth()
   const navigate = useNavigate()
@@ -24,13 +29,25 @@ export default function AdminSidebar() {
   }
 
   return (
-    <aside className="w-[280px] fixed top-0 left-0 h-screen bg-surface-container-low flex flex-col z-40">
-
-      {/* Logo */}
-      <div className="px-6 py-5 border-b border-white/5">
-        <Link to="/admin" aria-label="Henny Automotive — Admin">
+    <aside
+      className={cn(
+        'w-[280px] fixed top-0 left-0 h-screen bg-surface-container-low flex flex-col z-40',
+        'transition-transform duration-300 ease-in-out',
+        open ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+      )}
+    >
+      {/* Logo + mobile close */}
+      <div className="px-6 py-5 border-b border-white/5 flex items-center justify-between">
+        <Link to="/admin" onClick={onClose} aria-label="Henny Automotive — Admin">
           <HennyLogo width={120} />
         </Link>
+        <button
+          onClick={onClose}
+          className="md:hidden w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-white transition-colors"
+          aria-label="Close navigation"
+        >
+          <span className="font-material text-xl">close</span>
+        </button>
       </div>
 
       {/* Nav items */}
@@ -41,6 +58,7 @@ export default function AdminSidebar() {
             <Link
               key={item.href}
               to={item.href}
+              onClick={onClose}
               className={cn(
                 'flex items-center gap-3 px-4 py-3 rounded font-label text-sm font-bold uppercase tracking-wider transition-all duration-150',
                 active
@@ -74,7 +92,6 @@ export default function AdminSidebar() {
           Sign Out
         </button>
       </div>
-
     </aside>
   )
 }

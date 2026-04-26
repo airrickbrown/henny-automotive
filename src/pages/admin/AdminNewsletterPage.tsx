@@ -6,6 +6,7 @@ import {
   sendNewsletter,
   type Subscriber,
 } from '../../lib/newsletter'
+import { supabase } from '../../lib/supabase'
 import { cn } from '../../lib/utils'
 
 function StatCard({ label, value, icon }: { label: string; value: number | string; icon: string }) {
@@ -43,7 +44,14 @@ export default function AdminNewsletterPage() {
     setLoading(false)
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => {
+    load()
+    const ch = supabase
+      .channel('newsletter-subs')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'newsletter_subscribers' }, load)
+      .subscribe()
+    return () => { supabase.removeChannel(ch) }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleToggle(sub: Subscriber) {
     setBusyId(sub.id)

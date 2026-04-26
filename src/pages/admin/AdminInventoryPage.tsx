@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllVehicles, updateVehicle, deleteVehicle } from '../../lib/vehicles'
+import { supabase } from '../../lib/supabase'
 import { cn, formatPrice } from '../../lib/utils'
 import type { Vehicle } from '../../types/vehicle'
 import VehicleDrawer, {
@@ -57,7 +58,14 @@ export default function AdminInventoryPage() {
       .finally(() => setLoading(false))
   }
 
-  useEffect(() => { loadVehicles() }, [])
+  useEffect(() => {
+    loadVehicles()
+    const ch = supabase
+      .channel('inventory-vehicles')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'vehicles' }, loadVehicles)
+      .subscribe()
+    return () => { supabase.removeChannel(ch) }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase()

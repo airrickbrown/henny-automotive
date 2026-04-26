@@ -7,6 +7,7 @@ import {
   type Lead,
   type LeadStatus,
 } from '../../lib/leads'
+import { supabase } from '../../lib/supabase'
 import { cn } from '../../lib/utils'
 
 // ── Status config ─────────────────────────────────────────────────────────────
@@ -165,7 +166,14 @@ export default function AdminLeadsPage() {
     }
   }
 
-  useEffect(() => { fetchLeads() }, [])
+  useEffect(() => {
+    fetchLeads()
+    const ch = supabase
+      .channel('leads-rt')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leads' }, fetchLeads)
+      .subscribe()
+    return () => { supabase.removeChannel(ch) }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Stats
   const total     = leads.length
