@@ -20,12 +20,12 @@ export async function subscribeNewsletter(email: string): Promise<{ error: strin
       .from('newsletter_subscribers')
       .update({ is_active: true, subscribed_at: new Date().toISOString() })
       .eq('id', existing.id)
-    if (error) return { error: error.message }
+    if (error) return { error: 'Subscription failed. Please try again.' }
   } else {
     const { error } = await supabase
       .from('newsletter_subscribers')
       .insert({ email: email.toLowerCase().trim(), is_active: true })
-    if (error) return { error: error.message }
+    if (error) return { error: 'Subscription failed. Please try again.' }
   }
 
   // Fire-and-forget welcome email via Edge Function

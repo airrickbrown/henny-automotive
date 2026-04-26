@@ -88,6 +88,7 @@ function NewsletterForm() {
           onChange={e => { setEmail(e.target.value); setStatus('idle') }}
           placeholder="EMAIL"
           required
+          maxLength={254}
           disabled={status === 'loading'}
           className="bg-surface-container-high text-white text-xs p-3 w-full focus:ring-1 focus:ring-primary-container outline-none font-label uppercase tracking-widest placeholder:text-gray-600 min-w-0 disabled:opacity-60"
         />

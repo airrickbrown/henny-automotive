@@ -160,7 +160,7 @@ export default function AdminLeadsPage() {
       const data = await getLeads()
       setLeads(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load leads.')
+      setError('Failed to load leads. Check your connection and try again.')
     } finally {
       setLoading(false)
     }

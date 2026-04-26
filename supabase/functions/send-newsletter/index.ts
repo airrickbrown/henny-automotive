@@ -1,33 +1,44 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? ''
-const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? ''
+const RESEND_API_KEY            = Deno.env.get('RESEND_API_KEY') ?? ''
+const SUPABASE_URL              = Deno.env.get('SUPABASE_URL') ?? ''
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 const FROM = 'Henny Automotive <hello@hennyautomotive.com>'
 
+const ALLOWED_ORIGINS = ['https://hennyautomotive.com', 'http://localhost:5173', 'http://localhost:4173']
+
 serve(async (req) => {
+  const origin = req.headers.get('origin') ?? ''
+  const headers = corsHeaders(origin)
+
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders() })
+    return new Response('ok', { headers })
   }
 
   // Require authenticated admin user
   const authHeader = req.headers.get('Authorization')
   if (!authHeader) {
-    return new Response('Unauthorized', { status: 401, headers: corsHeaders() })
+    return new Response('Unauthorized', { status: 401, headers })
   }
 
   const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
   const token = authHeader.replace('Bearer ', '')
   const { data: { user }, error: authErr } = await supabaseAdmin.auth.getUser(token)
   if (authErr || !user) {
-    return new Response('Unauthorized', { status: 401, headers: corsHeaders() })
+    return new Response('Unauthorized', { status: 401, headers })
   }
 
   try {
-    const { subject, message } = await req.json()
+    const body = await req.json()
+    const subject = typeof body?.subject === 'string' ? body.subject.trim() : ''
+    const message = typeof body?.message === 'string' ? body.message.trim() : ''
+
     if (!subject || !message) {
-      return new Response('Missing subject or message', { status: 400, headers: corsHeaders() })
+      return new Response('Missing subject or message', { status: 400, headers })
+    }
+    if (subject.length > 200 || message.length > 50000) {
+      return new Response('Input too long', { status: 400, headers })
     }
 
     // Fetch all active subscribers
@@ -36,10 +47,10 @@ serve(async (req) => {
       .select('email')
       .eq('is_active', true)
 
-    if (dbErr) throw new Error(dbErr.message)
+    if (dbErr) throw new Error('DB error')
     if (!subscribers || subscribers.length === 0) {
       return new Response(JSON.stringify({ sent: 0 }), {
-        headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+        headers: { 'Content-Type': 'application/json', ...headers },
       })
     }
 
@@ -51,7 +62,6 @@ serve(async (req) => {
       html: newsletterHtml(subject, message),
     }))
 
-    // Send in chunks of 100
     const CHUNK = 100
     let sent = 0
     for (let i = 0; i < emails.length; i += CHUNK) {
@@ -64,33 +74,30 @@ serve(async (req) => {
         },
         body: JSON.stringify(chunk),
       })
-      if (!res.ok) {
-        const err = await res.text()
-        throw new Error(`Resend batch error: ${err}`)
-      }
+      if (!res.ok) throw new Error('Email delivery error')
       sent += chunk.length
     }
 
     return new Response(JSON.stringify({ sent }), {
-      headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+      headers: { 'Content-Type': 'application/json', ...headers },
     })
-  } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
+  } catch {
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+      headers: { 'Content-Type': 'application/json', ...headers },
     })
   }
 })
 
-function corsHeaders() {
+function corsHeaders(origin: string) {
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
   return {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Headers': 'authorization, content-type',
   }
 }
 
 function newsletterHtml(subject: string, message: string): string {
-  // Convert plain newlines to <br> for readability
   const body = message
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')

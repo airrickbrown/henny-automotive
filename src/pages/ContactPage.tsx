@@ -150,6 +150,7 @@ function InquiryForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Full name"
+            maxLength={100}
             className={inputClass}
           />
         </div>
@@ -162,6 +163,7 @@ function InquiryForm() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+233 ..."
+            maxLength={30}
             className={inputClass}
           />
         </div>
@@ -193,6 +195,7 @@ function InquiryForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tell us more — year, make, model, budget, timeline..."
+          maxLength={2000}
           className={inputClass + ' resize-none'}
         />
       </div>

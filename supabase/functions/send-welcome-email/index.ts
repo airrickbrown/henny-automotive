@@ -1,17 +1,43 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? ''
+const RESEND_API_KEY          = Deno.env.get('RESEND_API_KEY') ?? ''
+const SUPABASE_URL            = Deno.env.get('SUPABASE_URL') ?? ''
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 const FROM = 'Henny Automotive <hello@hennyautomotive.com>'
 
+const ALLOWED_ORIGINS = ['https://hennyautomotive.com', 'http://localhost:5173', 'http://localhost:4173']
+
 serve(async (req) => {
-  // Allow CORS from Supabase functions invocations
+  const origin = req.headers.get('origin') ?? ''
+  const headers = corsHeaders(origin)
+
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders() })
+    return new Response('ok', { headers })
   }
 
   try {
-    const { email } = await req.json()
-    if (!email) return new Response('Missing email', { status: 400 })
+    const body = await req.json()
+    const email = typeof body?.email === 'string' ? body.email.toLowerCase().trim() : ''
+
+    // Basic format + length guard
+    if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email' }), { status: 400, headers })
+    }
+
+    // Verify the email is an active subscriber — prevents using this as a spam relay
+    const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+    const { data: subscriber } = await supabaseAdmin
+      .from('newsletter_subscribers')
+      .select('id')
+      .eq('email', email)
+      .eq('is_active', true)
+      .maybeSingle()
+
+    if (!subscriber) {
+      // Return 200 to avoid leaking whether an email is subscribed
+      return new Response(JSON.stringify({ ok: true }), { status: 200, headers })
+    }
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -27,22 +53,22 @@ serve(async (req) => {
       }),
     })
 
-    const body = await res.json()
-    return new Response(JSON.stringify(body), {
+    return new Response(JSON.stringify({ ok: res.ok }), {
       status: res.ok ? 200 : 400,
-      headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+      headers: { 'Content-Type': 'application/json', ...headers },
     })
-  } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
+  } catch {
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+      headers: { 'Content-Type': 'application/json', ...headers },
     })
   }
 })
 
-function corsHeaders() {
+function corsHeaders(origin: string) {
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
   return {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Headers': 'authorization, content-type',
   }
 }
