@@ -3,6 +3,11 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+  },
   // Don't copy public/ into the SSR output — only the JS bundle is needed
   publicDir: isSsrBuild ? false : 'public',
   build: {

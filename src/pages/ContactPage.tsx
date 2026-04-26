@@ -81,14 +81,13 @@ function InquiryForm() {
   const [interest, setInterest] = useState('')
   const [message, setMessage]   = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [leadError, setLeadError] = useState(false)
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    setLeadError(false)
 
-    // Persist to Supabase — fire and forget so WhatsApp opens immediately
-    saveLead({ name, phone, interest, message, source: 'contact_form' }).catch(console.error)
-
-    // Build WhatsApp message and open
+    // Build WhatsApp message and open immediately for fast UX
     const text = [
       `Name: ${name}`,
       phone    ? `Phone: ${phone}`       : '',
@@ -97,12 +96,17 @@ function InquiryForm() {
     ].filter(Boolean).join('\n')
     window.open(buildWhatsAppUrl(text), '_blank', 'noopener,noreferrer')
 
+    // Persist to Supabase in parallel — show a non-blocking warning if it fails
+    saveLead({ name, phone, interest, message, source: 'contact_form' }).catch(() => {
+      setLeadError(true)
+    })
+
     setSubmitted(true)
   }
 
   function handleReset() {
     setName(''); setPhone(''); setInterest(''); setMessage('')
-    setSubmitted(false)
+    setSubmitted(false); setLeadError(false)
   }
 
   const inputClass =
@@ -118,6 +122,11 @@ function InquiryForm() {
         <p className="font-body text-sm text-on-surface-variant max-w-xs leading-relaxed mb-8">
           WhatsApp has opened with your message. We'll reply within the hour.
         </p>
+        {leadError && (
+          <p className="font-body text-xs text-red-400/70 max-w-xs leading-relaxed mb-6">
+            Note: your inquiry couldn't be saved to our system. Please make sure to send the WhatsApp message so we receive it.
+          </p>
+        )}
         <button
           onClick={handleReset}
           className="font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors border border-white/10 hover:border-white/30 px-6 py-3"

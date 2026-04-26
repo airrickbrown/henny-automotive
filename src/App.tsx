@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import PublicLayout from './layouts/PublicLayout'
 import AdminLayout from './layouts/AdminLayout'
 import RequireAuth from './components/admin/RequireAuth'
+import ErrorBoundary from './components/ErrorBoundary'
 import HomePage from './pages/HomePage'
 import InventoryPage from './pages/InventoryPage'
 import VehicleDetailPage from './pages/VehicleDetailPage'
@@ -25,7 +26,7 @@ export default function App() {
   return (
     <Routes>
       {/* Public site */}
-      <Route element={<PublicLayout />}>
+      <Route element={<ErrorBoundary><PublicLayout /></ErrorBoundary>}>
         <Route path="/" element={<HomePage />} />
         <Route path="/inventory" element={<InventoryPage />} />
         <Route path="/inventory/:slug" element={<VehicleDetailPage />} />
@@ -43,7 +44,7 @@ export default function App() {
 
       {/* Admin portal — requires authentication */}
       <Route element={<RequireAuth />}>
-        <Route element={<AdminLayout />}>
+        <Route element={<ErrorBoundary><AdminLayout /></ErrorBoundary>}>
           <Route path="/admin" element={<AdminDashboardPage />} />
           <Route path="/admin/inventory" element={<AdminInventoryPage />} />
           <Route path="/admin/parts" element={<AdminPartsPage />} />
