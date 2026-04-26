@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PageMeta from '../components/seo/PageMeta'
-import { parts } from '../data/parts'
+import { getParts } from '../lib/parts'
 import { cn } from '../lib/utils'
 import { buildWhatsAppUrl } from '../lib/tokens'
 import { PART_CATEGORIES } from '../lib/constants'
 import PageWrapper from '../components/layout/PageWrapper'
 import SectionLabel from '../components/ui/SectionLabel'
-import type { PartCategory } from '../types/part'
+import type { Part, PartCategory } from '../types/part'
 
 // ── Category display helpers ─────────────────────────────────────────────────
 const CATEGORY_LABEL: Record<PartCategory | 'ALL', string> = {
@@ -39,7 +39,16 @@ const CATEGORY_ICON: Record<PartCategory, string> = {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function PartsPage() {
+  const [parts, setParts]           = useState<Part[]>([])
+  const [loading, setLoading]       = useState(true)
   const [activeCategory, setActiveCategory] = useState<'ALL' | PartCategory>('ALL')
+
+  useEffect(() => {
+    getParts()
+      .then(setParts)
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
 
   const filtered = activeCategory === 'ALL'
     ? parts
@@ -95,6 +104,21 @@ export default function PartsPage() {
         </section>
 
         {/* ── Parts grid ──────────────────────────────────────── */}
+        {loading ? (
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-surface-container-low p-6 animate-pulse">
+                <div className="aspect-square mb-8 bg-surface-container" />
+                <div className="space-y-3">
+                  <div className="h-5 bg-surface-container rounded w-3/4" />
+                  <div className="h-3 bg-surface-container rounded w-full" />
+                  <div className="h-3 bg-surface-container rounded w-2/3" />
+                  <div className="h-12 bg-surface-container rounded mt-4" />
+                </div>
+              </div>
+            ))}
+          </section>
+        ) : (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map((part) => {
             const isHot = part.status === 'HOT PICK' || part.status === 'LIMITED'
@@ -193,8 +217,10 @@ export default function PartsPage() {
           })}
         </section>
 
+        )}
+
         {/* Empty state */}
-        {filtered.length === 0 && (
+        {!loading && filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
             <span className="font-material text-5xl text-on-surface-variant/30">
               build_circle

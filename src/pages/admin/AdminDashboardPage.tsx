@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllVehicles } from '../../lib/vehicles'
 import { getLeads, type Lead } from '../../lib/leads'
-import { parts } from '../../data/parts'
+import { getAllParts } from '../../lib/parts'
 import { supabase } from '../../lib/supabase'
 import { formatPrice } from '../../lib/utils'
 import type { Vehicle } from '../../types/vehicle'
+import type { Part } from '../../types/part'
 
 // ── Stat card ────────────────────────────────────────────────────────────────
 function StatCard({
@@ -49,8 +50,10 @@ function StatCard({
 export default function AdminDashboardPage() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
   const [leads, setLeads]       = useState<Lead[]>([])
+  const [parts, setParts]       = useState<Part[]>([])
   const [vLoading, setVLoading] = useState(true)
   const [lLoading, setLLoading] = useState(true)
+  const [pLoading, setPLoading] = useState(true)
 
   function loadVehicles() {
     getAllVehicles()
@@ -64,9 +67,16 @@ export default function AdminDashboardPage() {
       .catch(() => setLLoading(false))
   }
 
+  function loadParts() {
+    getAllParts()
+      .then(data => { setParts(data); setPLoading(false) })
+      .catch(() => setPLoading(false))
+  }
+
   useEffect(() => {
     loadVehicles()
     loadLeads()
+    loadParts()
 
     const vChannel = supabase
       .channel('dashboard-vehicles')
@@ -78,18 +88,24 @@ export default function AdminDashboardPage() {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, loadLeads)
       .subscribe()
 
+    const pChannel = supabase
+      .channel('dashboard-parts')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'parts' }, loadParts)
+      .subscribe()
+
     return () => {
       supabase.removeChannel(vChannel)
       supabase.removeChannel(lChannel)
+      supabase.removeChannel(pChannel)
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const featured      = vehicles.filter(v => v.isFeatured).length
-  const inTransit     = vehicles.filter(v => v.location === 'IN TRANSIT').length
-  const usa           = vehicles.filter(v => v.location === 'USA').length
-  const ghana         = vehicles.filter(v => v.location === 'GHANA').length
-  const hotParts      = parts.filter(p => p.status !== null).length
-  const newLeads      = leads.filter(l => l.status === 'new').length
+  const featured       = vehicles.filter(v => v.isFeatured).length
+  const inTransit      = vehicles.filter(v => v.location === 'IN TRANSIT').length
+  const usa            = vehicles.filter(v => v.location === 'USA').length
+  const ghana          = vehicles.filter(v => v.location === 'GHANA').length
+  const hotParts       = parts.filter(p => p.status !== null).length
+  const newLeads       = leads.filter(l => l.status === 'new').length
   const recentVehicles = [...vehicles].slice(0, 5)
 
   return (
@@ -111,7 +127,7 @@ export default function AdminDashboardPage() {
         <StatCard label="USA Stock"         value={usa}                                               icon="flag"                  to="/admin/inventory"                                            loading={vLoading} />
         <StatCard label="Ghana Showroom"    value={ghana}                                             icon="storefront"            to="/admin/inventory"                                            loading={vLoading} />
         <StatCard label="In Transit"        value={inTransit}                                         icon="local_shipping"        to="/admin/inventory"                                            loading={vLoading} />
-        <StatCard label="Parts Listed"      value={parts.length}                                      icon="settings"              to="/admin/parts"     sub={`${hotParts} active`} />
+        <StatCard label="Parts Listed"      value={parts.length}                                      icon="settings"              to="/admin/parts"     sub={`${hotParts} active`}                                                                            loading={pLoading} />
         <StatCard label="Hot Deals"         value={vehicles.filter(v => v.isHotDeal).length}          icon="local_fire_department"                                                                  loading={vLoading} />
         <StatCard label="Price on Request"  value={vehicles.filter(v => !v.showPublicPrice).length}   icon="visibility_off"                                                                         loading={vLoading} />
         <StatCard label="Leads"             value={leads.length}                                      icon="person"                to="/admin/leads"     sub={newLeads > 0 ? `${newLeads} new` : 'all reviewed'} loading={lLoading} />

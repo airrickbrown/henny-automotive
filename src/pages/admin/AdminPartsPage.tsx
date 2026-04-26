@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
-import { parts as initialParts } from '../../data/parts'
-import { slugify, cn } from '../../lib/utils'
+import { getAllParts, createPart, updatePart, deletePart, type PartInput } from '../../lib/parts'
+import { supabase } from '../../lib/supabase'
+import { cn } from '../../lib/utils'
 import type { Part, PartCategory, PartStatus } from '../../types/part'
 
 const CATEGORY_OPTIONS: PartCategory[] = ['ENGINES', 'BRAKES', 'WHEELS', 'EXHAUST', 'INTERIOR', 'SUSPENSION']
@@ -11,7 +12,7 @@ const STATUS_COLORS: Record<string, string> = {
   'LIMITED':  'bg-primary-container/10 text-primary-container border-primary-container/30',
 }
 
-// ── Draft type ────────────────────────────────────────────────────────────────
+// ── Draft type (strings for easy form binding) ────────────────────────────────
 interface PartDraft {
   name: string
   category: PartCategory
@@ -23,13 +24,8 @@ interface PartDraft {
 }
 
 const EMPTY_DRAFT: PartDraft = {
-  name: '',
-  category: 'ENGINES',
-  description: '',
-  imageUrl: '',
-  status: '',
-  compatibleMakesText: '',
-  whatsappMessage: '',
+  name: '', category: 'ENGINES', description: '', imageUrl: '',
+  status: '', compatibleMakesText: '', whatsappMessage: '',
 }
 
 function partToDraft(p: Part): PartDraft {
@@ -44,10 +40,8 @@ function partToDraft(p: Part): PartDraft {
   }
 }
 
-function draftToPart(d: PartDraft, existingId?: string): Part {
+function draftToInput(d: PartDraft): PartInput {
   return {
-    id:              existingId ?? Date.now().toString(),
-    slug:            slugify(d.name),
     name:            d.name.trim(),
     category:        d.category,
     description:     d.description.trim(),
@@ -64,11 +58,12 @@ interface DrawerProps {
   part: Part | null
   open: boolean
   onClose: () => void
-  onSave: (p: Part) => void
+  onSave: (draft: PartDraft, existingId?: string) => Promise<string | null>
 }
 
 function PartDrawer({ mode, part, open, onClose, onSave }: DrawerProps) {
-  const [draft, setDraft]       = useState<PartDraft>(EMPTY_DRAFT)
+  const [draft, setDraft]   = useState<PartDraft>(EMPTY_DRAFT)
+  const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
 
   useEffect(() => {
@@ -81,10 +76,12 @@ function PartDrawer({ mode, part, open, onClose, onSave }: DrawerProps) {
     setDraft(d => ({ ...d, [key]: value }))
   }
 
-  function handleSave() {
+  async function handleSave() {
     if (!draft.name.trim()) { setSaveError('Name is required.'); return }
-    onSave(draftToPart(draft, mode === 'edit' ? part?.id : undefined))
-    onClose()
+    setSaving(true)
+    const err = await onSave(draft, mode === 'edit' ? part?.id : undefined)
+    setSaving(false)
+    if (err) { setSaveError(err) } else { onClose() }
   }
 
   const inputClass =
@@ -176,9 +173,10 @@ function PartDrawer({ mode, part, open, onClose, onSave }: DrawerProps) {
             <button
               type="button"
               onClick={handleSave}
-              className="flex-1 bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs py-4 ignition-glow hover:brightness-110 active:scale-[0.99] transition-all duration-150"
+              disabled={saving}
+              className="flex-1 bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs py-4 ignition-glow hover:brightness-110 active:scale-[0.99] disabled:opacity-50 transition-all duration-150"
             >
-              {mode === 'add' ? 'Add Part' : 'Save Changes'}
+              {saving ? 'Saving…' : mode === 'add' ? 'Add Part' : 'Save Changes'}
             </button>
             <button
               type="button"
@@ -196,24 +194,32 @@ function PartDrawer({ mode, part, open, onClose, onSave }: DrawerProps) {
 
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function AdminPartsPage() {
-  const [rows, setRows]             = useState<Part[]>(initialParts)
+  const [rows, setRows]             = useState<Part[]>([])
+  const [loading, setLoading]       = useState(true)
+  const [fetchError, setFetchError] = useState(false)
   const [search, setSearch]         = useState('')
   const [catFilter, setCatFilter]   = useState('')
   const [drawerMode, setDrawerMode] = useState<'add' | 'edit'>('add')
   const [editPart, setEditPart]     = useState<Part | null>(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null)
+  const [deleting, setDeleting]     = useState<string | null>(null)
 
-  // Seed WhatsApp messages on mount if they're still the default placeholder
+  function loadParts() {
+    getAllParts()
+      .then(data => { setRows(data); setFetchError(false) })
+      .catch(() => setFetchError(true))
+      .finally(() => setLoading(false))
+  }
+
   useEffect(() => {
-    setRows(prev =>
-      prev.map(p =>
-        p.whatsappMessage
-          ? p
-          : { ...p, whatsappMessage: `Hi Henny Automotive, I'm interested in the ${p.name}. Please send availability and pricing details.` }
-      )
-    )
-  }, [])
+    loadParts()
+    const ch = supabase
+      .channel('admin-parts')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'parts' }, loadParts)
+      .subscribe()
+    return () => { supabase.removeChannel(ch) }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase()
@@ -236,17 +242,60 @@ export default function AdminPartsPage() {
     setDrawerOpen(true)
   }
 
-  function handleSave(saved: Part) {
-    setRows(prev => {
-      const exists = prev.some(p => p.id === saved.id)
-      if (exists) return prev.map(p => p.id === saved.id ? saved : p)
-      return [saved, ...prev]
-    })
+  async function handleSave(draft: PartDraft, existingId?: string): Promise<string | null> {
+    const input = draftToInput(draft)
+    try {
+      if (existingId) {
+        await updatePart(existingId, input)
+        setRows(prev => prev.map(p => p.id === existingId
+          ? { ...p, ...input, id: existingId, slug: p.slug }
+          : p
+        ))
+      } else {
+        const created = await createPart(input)
+        setRows(prev => [created, ...prev])
+      }
+      return null
+    } catch (err) {
+      return err instanceof Error ? err.message : 'Save failed. Please try again.'
+    }
   }
 
-  function handleDelete(id: string) {
-    setRows(prev => prev.filter(p => p.id !== id))
-    setDeleteConfirmId(null)
+  async function handleDelete(id: string) {
+    setDeleting(id)
+    try {
+      await deletePart(id)
+      setRows(prev => prev.filter(p => p.id !== id))
+    } catch {
+      // Real-time will keep state consistent
+    } finally {
+      setDeleting(null)
+      setDeleteConfirmId(null)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="max-w-[1200px] flex items-center justify-center py-40">
+        <span className="font-material text-4xl text-white/20 animate-spin">progress_activity</span>
+      </div>
+    )
+  }
+
+  if (fetchError) {
+    return (
+      <div className="max-w-[1200px] py-40 text-center">
+        <span className="font-material text-5xl text-white/10 block mb-4">cloud_off</span>
+        <p className="font-headline font-bold uppercase text-white/40">Failed to load parts</p>
+        <button
+          type="button"
+          onClick={loadParts}
+          className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary-container border-b border-primary-container pb-0.5"
+        >
+          Retry
+        </button>
+      </div>
+    )
   }
 
   return (
@@ -259,7 +308,7 @@ export default function AdminPartsPage() {
             Parts <span className="text-primary-container">Management</span>
           </h1>
           <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-2">
-            {rows.length} parts listed
+            {rows.length} parts · live from Supabase
           </p>
         </div>
 
@@ -364,9 +413,10 @@ export default function AdminPartsPage() {
                           <button
                             type="button"
                             onClick={() => handleDelete(p.id)}
+                            disabled={deleting === p.id}
                             className="px-2 py-1 bg-red-500/10 text-red-400 font-label text-[10px] uppercase tracking-wider hover:bg-red-500/20 transition-colors"
                           >
-                            Confirm
+                            {deleting === p.id ? '…' : 'Confirm'}
                           </button>
                           <button
                             type="button"
