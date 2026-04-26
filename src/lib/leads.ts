@@ -55,22 +55,19 @@ export async function getLeads(): Promise<Lead[]> {
 // ── Write ─────────────────────────────────────────────────────────────────────
 
 export async function saveLead(
-  data: Omit<Lead, 'id' | 'status' | 'createdAt'>
-): Promise<Lead> {
-  const { data: row, error } = await supabase
-    .from('leads')
-    .insert({
-      name:     data.name,
-      phone:    data.phone    || null,
-      interest: data.interest || null,
-      message:  data.message  || null,
-      source:   data.source,
-    })
-    .select()
-    .single()
-
+  data: Omit<Lead, 'id' | 'status' | 'createdAt'>,
+  captchaToken = '',
+): Promise<void> {
+  const { error } = await supabase.functions.invoke('submit-contact', {
+    body: {
+      name:         data.name,
+      phone:        data.phone    || '',
+      interest:     data.interest || '',
+      message:      data.message  || '',
+      captchaToken,
+    },
+  })
   if (error) throw error
-  return rowToLead(row as DbRow)
 }
 
 export async function updateLeadStatus(id: string, status: LeadStatus): Promise<void> {

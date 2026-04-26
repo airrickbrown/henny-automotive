@@ -1,8 +1,9 @@
-import { useState, type FormEvent } from 'react'
+import { useState, useCallback, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { WHATSAPP_BASE_URL, SNAPCHAT_URL, GHANA_PHONE, GHANA_PHONE_DISPLAY } from '../../lib/tokens'
 import { subscribeNewsletter } from '../../lib/newsletter'
 import HennyLogo from '../ui/HennyLogo'
+import Turnstile from '../ui/Turnstile'
 
 const NAV_LINKS = [
   { label: 'Home',      href: '/' },
@@ -52,12 +53,16 @@ function FooterLink({ href, children, external = false }: {
 function NewsletterForm() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'duplicate'>('idle')
+  const [captchaToken, setCaptchaToken] = useState('')
+
+  const handleToken = useCallback((token: string) => setCaptchaToken(token), [])
+  const handleExpire = useCallback(() => setCaptchaToken(''), [])
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (!email.trim()) return
     setStatus('loading')
-    const { error } = await subscribeNewsletter(email)
+    const { error } = await subscribeNewsletter(email, captchaToken)
     if (error === 'already_subscribed') {
       setStatus('duplicate')
     } else if (error) {
@@ -119,6 +124,7 @@ function NewsletterForm() {
           No spam. Unsubscribe any time.
         </p>
       )}
+      <Turnstile onToken={handleToken} onExpire={handleExpire} />
     </form>
   )
 }

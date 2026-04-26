@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import PageMeta from '../components/seo/PageMeta'
 import HennyLogo from '../components/ui/HennyLogo'
 import { buildWhatsAppUrl, SNAPCHAT_URL } from '../lib/tokens'
 import { saveLead } from '../lib/leads'
 import PageWrapper from '../components/layout/PageWrapper'
 import SectionLabel from '../components/ui/SectionLabel'
+import Turnstile from '../components/ui/Turnstile'
 
 // ── Channel card data ────────────────────────────────────────────────────────
 const CHANNELS = [
@@ -82,6 +83,10 @@ function InquiryForm() {
   const [message, setMessage]   = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [leadError, setLeadError] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState('')
+
+  const handleToken  = useCallback((token: string) => setCaptchaToken(token), [])
+  const handleExpire = useCallback(() => setCaptchaToken(''), [])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -96,8 +101,8 @@ function InquiryForm() {
     ].filter(Boolean).join('\n')
     window.open(buildWhatsAppUrl(text), '_blank', 'noopener,noreferrer')
 
-    // Persist to Supabase in parallel — show a non-blocking warning if it fails
-    saveLead({ name, phone, interest, message, source: 'contact_form' }).catch(() => {
+    // Persist via Edge Function (includes CAPTCHA verification + rate limiting)
+    saveLead({ name, phone, interest, message, source: 'contact_form' }, captchaToken).catch(() => {
       setLeadError(true)
     })
 
@@ -106,7 +111,7 @@ function InquiryForm() {
 
   function handleReset() {
     setName(''); setPhone(''); setInterest(''); setMessage('')
-    setSubmitted(false); setLeadError(false)
+    setSubmitted(false); setLeadError(false); setCaptchaToken('')
   }
 
   const inputClass =
@@ -199,6 +204,8 @@ function InquiryForm() {
           className={inputClass + ' resize-none'}
         />
       </div>
+
+      <Turnstile onToken={handleToken} onExpire={handleExpire} />
 
       <button
         type="submit"
