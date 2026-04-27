@@ -89,9 +89,8 @@ export function HubGhana() {
           <div className="relative h-56 w-full">
             <iframe
               title="Tema Port, Ghana"
-              src="https://maps.google.com/maps?q=Tema+Port,+Tema,+Ghana&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.01%2C5.58%2C0.05%2C5.64&layer=mapnik&marker=5.608%2C0.016"
               className="absolute inset-0 w-full h-full border-0"
-              style={{ filter: 'none' }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
