@@ -11,9 +11,8 @@ interface MobileNavDrawerProps {
 }
 
 export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps) {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
 
-  // Lock body scroll while open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
@@ -23,10 +22,10 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  // Close on route change
+  // Close on any navigation — route or hash anchor
   useEffect(() => {
     onClose()
-  }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [pathname, hash]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

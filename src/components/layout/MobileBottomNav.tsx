@@ -52,15 +52,15 @@ export default function MobileBottomNav() {
           <TabItem icon="chat" label="WhatsApp" className="active:bg-secondary/20" />
         </a>
 
-        {/* USA Hub — homepage anchor */}
-        <a href="/#usa-hub" aria-label="USA Hub">
+        {/* USA Hub — homepage anchor (client-side navigation) */}
+        <Link to={{ pathname: '/', hash: '#usa-hub' }} aria-label="USA Hub">
           <TabItem icon="flag" label="USA Hub" />
-        </a>
+        </Link>
 
-        {/* Ghana Hub — homepage anchor */}
-        <a href="/#ghana-hub" aria-label="Ghana Hub">
+        {/* Ghana Hub — homepage anchor (client-side navigation) */}
+        <Link to={{ pathname: '/', hash: '#ghana-hub' }} aria-label="Ghana Hub">
           <TabItem icon="location_on" label="Ghana Hub" />
-        </a>
+        </Link>
 
       </div>
     </nav>

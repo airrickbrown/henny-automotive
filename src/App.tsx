@@ -4,6 +4,7 @@ import PublicLayout from './layouts/PublicLayout'
 import AdminLayout from './layouts/AdminLayout'
 import RequireAuth from './components/admin/RequireAuth'
 import ErrorBoundary from './components/ErrorBoundary'
+import ScrollToTop from './components/ScrollToTop'
 
 const HomePage               = lazy(() => import('./pages/HomePage'))
 const InventoryPage          = lazy(() => import('./pages/InventoryPage'))
@@ -26,6 +27,8 @@ const AdminNewsletterPage    = lazy(() => import('./pages/admin/AdminNewsletterP
 
 export default function App() {
   return (
+    <>
+    <ScrollToTop />
     <Suspense fallback={null}>
       <Routes>
         {/* Public site */}
@@ -61,5 +64,6 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
+    </>
   )
 }
