@@ -20,7 +20,7 @@ export default function PartsPreview() {
   const navigate = useNavigate()
 
   return (
-    <section className="py-24 md:py-32 px-6 md:px-8 bg-surface-container-low">
+    <section id="parts-preview" className="py-24 md:py-32 px-6 md:px-8 bg-surface-container-low">
       <div className="max-w-7xl mx-auto">
 
         {/* Header row */}

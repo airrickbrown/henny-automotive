@@ -13,7 +13,7 @@ const BULLETS = [
 
 export default function GlobalLogistics() {
   return (
-    <section className="py-24 md:py-32 bg-surface-container-lowest overflow-hidden">
+    <section id="logistics" className="py-24 md:py-32 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 
         {/* ── Left: photo collage ─────────────────────────────────── */}

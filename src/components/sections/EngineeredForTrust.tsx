@@ -36,7 +36,7 @@ const CARDS = [
 
 export default function EngineeredForTrust() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-8 bg-surface">
+    <section id="trust" className="py-24 md:py-32 px-6 md:px-8 bg-surface">
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}

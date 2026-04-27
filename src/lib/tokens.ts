@@ -36,10 +36,11 @@ export const shadows = {
 export const WHATSAPP_NUMBER = '+233000000000'
 export const GHANA_PHONE = '+233593204050'
 export const GHANA_PHONE_DISPLAY = '059 320 4050'
-export const SNAPCHAT_HANDLE = 'hennyauto'
 
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
-export const SNAPCHAT_URL = `https://www.snapchat.com/add/${SNAPCHAT_HANDLE}`
+export const SNAPCHAT_URL     = 'https://snapchat.com/t/tcqCyWuD'
+export const INSTAGRAM_URL    = 'https://www.instagram.com/hennyautomotive'
+export const TIKTOK_URL       = 'https://www.tiktok.com/@hennyautomotive'
 
 export function buildWhatsAppUrl(message?: string): string {
   if (!message) return WHATSAPP_BASE_URL

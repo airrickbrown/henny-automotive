@@ -2,7 +2,7 @@ import { buildWhatsAppUrl } from '../../lib/tokens'
 
 export default function CTABanner() {
   return (
-    <section className="py-16 md:py-20 px-6 md:px-8">
+    <section id="contact-cta" className="py-16 md:py-20 px-6 md:px-8">
       <div className="max-w-7xl mx-auto bg-primary-container p-10 md:p-20 relative overflow-hidden">
 
         {/* Subtle background image — right edge, 10% opacity */}

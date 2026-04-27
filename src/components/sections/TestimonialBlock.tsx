@@ -5,7 +5,7 @@ export default function TestimonialBlock() {
   if (!t) return null
 
   return (
-    <section className="py-24 md:py-32 bg-surface">
+    <section id="testimonials" className="py-24 md:py-32 bg-surface">
       <div className="max-w-5xl mx-auto px-6 md:px-8 text-center">
 
         {/* Quote icon — filled */}

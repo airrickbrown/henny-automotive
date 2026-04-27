@@ -19,7 +19,7 @@ export default function FeaturedPerformance() {
   if (featured.length === 0) return null
 
   return (
-    <section className="py-24 md:py-32 bg-surface-container-low px-6 md:px-8">
+    <section id="featured" className="py-24 md:py-32 bg-surface-container-low px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
 
         <div className="flex items-end justify-between mb-12 md:mb-16">
