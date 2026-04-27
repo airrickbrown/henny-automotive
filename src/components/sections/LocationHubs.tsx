@@ -91,7 +91,7 @@ export function HubGhana() {
               title="Tema Port, Ghana"
               src="https://maps.google.com/maps?q=Tema+Port,+Tema,+Ghana&t=&z=13&ie=UTF8&iwloc=&output=embed"
               className="absolute inset-0 w-full h-full border-0"
-              style={{ filter: 'grayscale(0.85) brightness(0.5) contrast(1.15)' }}
+              style={{ filter: 'none' }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
