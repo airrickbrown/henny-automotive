@@ -3,9 +3,11 @@ import IgnitionButton from '../ui/IgnitionButton'
 import GhostButton from '../ui/GhostButton'
 import SectionLabel from '../ui/SectionLabel'
 import { buildWhatsAppUrl } from '../../lib/tokens'
+import { useSettings } from '../../contexts/SettingsContext'
 
 export default function HeroSection() {
-  const navigate = useNavigate()
+  const navigate  = useNavigate()
+  const { tagline } = useSettings()
 
   return (
     <header className="relative overflow-hidden">
@@ -71,14 +73,12 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent" />
         </div>
 
-        {/* Content pinned to bottom */}
-        <div className="relative z-10 px-6 pb-12">
+        {/* Content pinned to bottom — pb accounts for fixed bottom nav (~64px) + breathing room */}
+        <div className="relative z-10 px-6 pb-28">
           <SectionLabel className="mb-4">Engineered for Prestige</SectionLabel>
 
-          <h1 className="font-headline font-black italic uppercase leading-[0.9] tracking-tighter text-[clamp(3rem,14vw,5rem)] mb-8">
-            The <br />
-            Kinetic<br />
-            <span className="text-stroke-white">Monolith</span>
+          <h1 className="font-headline font-black italic uppercase leading-[0.9] tracking-tighter text-[clamp(2.75rem,13vw,5rem)] mb-8">
+            {tagline}
           </h1>
 
           <div className="flex flex-col gap-3">

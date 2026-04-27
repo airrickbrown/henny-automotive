@@ -5,6 +5,7 @@ import AdminLayout from './layouts/AdminLayout'
 import RequireAuth from './components/admin/RequireAuth'
 import ErrorBoundary from './components/ErrorBoundary'
 import ScrollToTop from './components/ScrollToTop'
+import { SettingsProvider } from './contexts/SettingsContext'
 
 const HomePage               = lazy(() => import('./pages/HomePage'))
 const InventoryPage          = lazy(() => import('./pages/InventoryPage'))
@@ -27,6 +28,7 @@ const AdminNewsletterPage    = lazy(() => import('./pages/admin/AdminNewsletterP
 
 export default function App() {
   return (
+    <SettingsProvider>
     <>
     <ScrollToTop />
     <Suspense fallback={null}>
@@ -65,5 +67,6 @@ export default function App() {
       </Routes>
     </Suspense>
     </>
+    </SettingsProvider>
   )
 }

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { Loader2, CheckCircle2 } from 'lucide-react'
-import { WHATSAPP_NUMBER, SNAPCHAT_URL } from '../../lib/tokens'
+import { useState, useEffect, useCallback } from 'react'
+import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 import { getAllVehicles } from '../../lib/vehicles'
+import { getSettings, saveAllSettings, type SiteSettings } from '../../lib/settings'
 import { cn } from '../../lib/utils'
 
 function SettingsSection({ title, description, children }: {
@@ -68,21 +68,21 @@ function Toggle({ value, onChange }: { value: boolean; onChange: (v: boolean) =>
 const CONDITIONS = ['NEW (LOW KM)', 'PRE-OWNED USA', 'LOCAL STOCK']
 
 export default function AdminSettingsPage() {
-  const [whatsapp, setWhatsapp]     = useState(WHATSAPP_NUMBER)
-  const [snapchat, setSnapchat]     = useState(SNAPCHAT_URL)
-  const [siteName, setSiteName]     = useState('Henny Automotive')
-  const [tagline, setTagline]       = useState('The Kinetic Monolith')
-  const [showPrices, setShowPrices] = useState(true)
-  const [maintenanceMode, setMaintenanceMode] = useState(false)
-  const [saved, setSaved]           = useState(false)
+  const [settings, setSettings] = useState<SiteSettings | null>(null)
+  const [loading, setLoading]   = useState(true)
+  const [saving, setSaving]     = useState(false)
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saved' | 'error'>('idle')
 
-  // Inventory filter data — derived from live vehicles
-  const [manufacturers, setManufacturers] = useState<string[]>([])
-  const [filtersLoading, setFiltersLoading] = useState(true)
+  const [manufacturers, setManufacturers]     = useState<string[]>([])
+  const [filtersLoading, setFiltersLoading]   = useState(true)
 
   useEffect(() => {
+    getSettings()
+      .then(s => { setSettings(s); setLoading(false) })
+      .catch(() => setLoading(false))
+
     getAllVehicles()
-      .then((vehicles) => {
+      .then(vehicles => {
         const makes = [...new Set(vehicles.map(v => v.make))].sort()
         setManufacturers(makes)
       })
@@ -90,9 +90,33 @@ export default function AdminSettingsPage() {
       .finally(() => setFiltersLoading(false))
   }, [])
 
-  function handleSave() {
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2500)
+  const update = useCallback(<K extends keyof SiteSettings>(key: K, value: SiteSettings[K]) => {
+    setSettings(prev => prev ? { ...prev, [key]: value } : prev)
+    setSaveStatus('idle')
+  }, [])
+
+  async function handleSave() {
+    if (!settings) return
+    setSaving(true)
+    setSaveStatus('idle')
+    try {
+      await saveAllSettings(settings)
+      setSaveStatus('saved')
+      setTimeout(() => setSaveStatus('idle'), 3000)
+    } catch {
+      setSaveStatus('error')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  if (loading || !settings) {
+    return (
+      <div className="flex items-center gap-3 text-on-surface-variant py-16">
+        <Loader2 size={18} className="animate-spin" />
+        <span className="font-label text-xs uppercase tracking-widest">Loading settings…</span>
+      </div>
+    )
   }
 
   return (
@@ -103,51 +127,54 @@ export default function AdminSettingsPage() {
           Settings
         </h1>
         <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-2">
-          Site configuration &amp; contact details
+          Site configuration — changes save to the database and reflect live
         </p>
       </div>
 
       <div className="space-y-4">
 
-        {/* Contact */}
-        <SettingsSection title="Contact Channels">
-          <FieldRow label="WhatsApp Number" description="International format. Used for all inquiry CTAs.">
-            <input type="text" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} className={inputClass} placeholder="+233000000000" />
-          </FieldRow>
-          <FieldRow label="Snapchat URL" description="Full Snapchat share link (e.g. snapchat.com/t/...).">
-            <input type="text" value={snapchat} onChange={(e) => setSnapchat(e.target.value)} className={inputClass} placeholder="https://snapchat.com/t/..." />
-          </FieldRow>
-        </SettingsSection>
-
         {/* Brand */}
         <SettingsSection title="Brand">
           <FieldRow label="Site Name">
-            <input type="text" value={siteName} onChange={(e) => setSiteName(e.target.value)} className={inputClass} />
+            <input
+              type="text"
+              value={settings.site_name}
+              onChange={e => update('site_name', e.target.value)}
+              className={inputClass}
+            />
           </FieldRow>
-          <FieldRow label="Tagline">
-            <input type="text" value={tagline} onChange={(e) => setTagline(e.target.value)} className={inputClass} />
+          <FieldRow
+            label="Tagline"
+            description="Shown on the homepage hero and meta title. Keep it short and punchy."
+          >
+            <input
+              type="text"
+              value={settings.tagline}
+              onChange={e => update('tagline', e.target.value)}
+              className={inputClass}
+              placeholder="The Kinetic Monolith"
+            />
           </FieldRow>
         </SettingsSection>
 
         {/* Display */}
         <SettingsSection title="Display Options">
-          <FieldRow label="Show Public Prices" description="Master toggle. Overrides per-vehicle price display when off.">
-            <Toggle value={showPrices} onChange={setShowPrices} />
+          <FieldRow label="Show Public Prices" description="Master toggle. When off, all prices show as 'Price on Request'.">
+            <Toggle value={settings.show_prices} onChange={v => update('show_prices', v)} />
           </FieldRow>
           <FieldRow label="Maintenance Mode" description="Replaces the site with a coming-soon screen for visitors.">
-            <Toggle value={maintenanceMode} onChange={setMaintenanceMode} />
+            <Toggle value={settings.maintenance_mode} onChange={v => update('maintenance_mode', v)} />
           </FieldRow>
         </SettingsSection>
 
         {/* Inventory Filters */}
         <SettingsSection
           title="Inventory Filters"
-          description="These are the filter values visible to customers on the inventory page. They update automatically as you add or edit vehicles."
+          description="These update automatically as you add or edit vehicles."
         >
-          {/* Manufacturers */}
           <FieldRow
             label="Manufacturers"
-            description="Auto-generated from your vehicle listings. Add a vehicle with a new make to add it here."
+            description="Auto-generated from your vehicle listings."
           >
             {filtersLoading ? (
               <div className="flex items-center gap-2 text-on-surface-variant">
@@ -171,11 +198,7 @@ export default function AdminSettingsPage() {
             )}
           </FieldRow>
 
-          {/* Conditions */}
-          <FieldRow
-            label="Conditions"
-            description="These are the fixed condition options available when adding or editing vehicles."
-          >
+          <FieldRow label="Conditions" description="Fixed condition options for vehicle listings.">
             <div className="flex flex-wrap gap-2">
               {CONDITIONS.map(c => (
                 <span
@@ -188,15 +211,6 @@ export default function AdminSettingsPage() {
               ))}
             </div>
           </FieldRow>
-
-          <div className="bg-surface-container border-l-2 border-primary-container/40 px-4 py-3">
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">
-              <span className="text-primary-container font-bold">Tip:</span>{' '}
-              To add a new manufacturer, go to{' '}
-              <span className="text-white">Inventory Management</span>{' '}
-              and add a vehicle with that make. It will appear automatically in the filter.
-            </p>
-          </div>
         </SettingsSection>
 
         {/* Save */}
@@ -204,21 +218,46 @@ export default function AdminSettingsPage() {
           <button
             type="button"
             onClick={handleSave}
-            className="bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-8 py-4 ignition-glow hover:brightness-110 active:scale-[0.99] transition-all duration-150"
+            disabled={saving}
+            className="bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-8 py-4 ignition-glow hover:brightness-110 active:scale-[0.99] transition-all duration-150 disabled:opacity-60 flex items-center gap-2"
           >
-            Save Settings
+            {saving && <Loader2 size={14} className="animate-spin" />}
+            {saving ? 'Saving…' : 'Save Settings'}
           </button>
-          {saved && (
+
+          {saveStatus === 'saved' && (
             <span className="flex items-center gap-1.5 font-label text-xs uppercase tracking-widest text-secondary">
               <CheckCircle2 size={16} />
-              Saved
+              Saved — live on site
+            </span>
+          )}
+          {saveStatus === 'error' && (
+            <span className="flex items-center gap-1.5 font-label text-xs uppercase tracking-widest text-red-400">
+              <AlertCircle size={16} />
+              Save failed — check Supabase connection
             </span>
           )}
         </div>
 
-        <p className="font-label text-[10px] text-white/20 uppercase tracking-widest">
-          Note: settings are stored in session only — backend persistence requires API integration.
-        </p>
+        {/* SQL migration hint */}
+        <div className="bg-surface-container-low border-l-2 border-white/10 px-4 py-3">
+          <p className="font-label text-[10px] uppercase tracking-widest text-white/30">
+            <span className="text-white/50 font-bold">Setup:</span>{' '}
+            Run this SQL in your Supabase dashboard if the settings table does not exist yet:
+          </p>
+          <pre className="font-mono text-[10px] text-white/30 mt-2 whitespace-pre-wrap leading-relaxed">
+{`CREATE TABLE IF NOT EXISTS site_settings (
+  key   TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
+INSERT INTO site_settings (key, value) VALUES
+  ('tagline',          'The Kinetic Monolith'),
+  ('site_name',        'Henny Automotive'),
+  ('show_prices',      'true'),
+  ('maintenance_mode', 'false')
+ON CONFLICT (key) DO NOTHING;`}
+          </pre>
+        </div>
 
       </div>
     </div>

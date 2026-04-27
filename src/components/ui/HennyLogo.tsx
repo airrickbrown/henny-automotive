@@ -5,13 +5,13 @@ interface HennyLogoProps {
 }
 
 export default function HennyLogo({ width = 140, maxHeight, className = '' }: HennyLogoProps) {
-  const naturalHeight = Math.round(width * 72 / 200)
+  const naturalHeight = Math.round(width * 82 / 200)
   const height = maxHeight ? Math.min(naturalHeight, maxHeight) : naturalHeight
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 200 72"
+      viewBox="0 0 200 82"
       width={width}
       height={height}
       aria-label="Henny Automotive"
@@ -23,43 +23,53 @@ export default function HennyLogo({ width = 140, maxHeight, className = '' }: He
       {/* Red top arch */}
       <path d="M3 32 Q29 7 55 32" stroke="#e11d2e" strokeWidth="4.5" strokeLinecap="round" />
 
-      {/* Ghost shield outline */}
+      {/* Shield outline */}
       <path
         d="M3 32 L3 50 L29 65 L55 50 L55 32"
-        stroke="white" strokeWidth="1.5" strokeOpacity="0.18" strokeLinejoin="round"
+        stroke="white" strokeWidth="1.5" strokeOpacity="0.22" strokeLinejoin="round"
       />
 
-      {/* Accent hairline */}
-      <line x1="1" y1="37" x2="57" y2="37" stroke="white" strokeWidth="1" strokeOpacity="0.1" />
-
-      {/* Car body */}
+      {/* Shield bottom point */}
       <path
-        d="M9 50 L9 43 L14 36 L21 31 L26 29 L37 29 L42 31 L48 37 L50 43 L50 50 Z"
-        fill="white" fillOpacity="0.88"
+        d="M18 55 L29 63 L40 55"
+        stroke="white" strokeWidth="1" strokeOpacity="0.12" strokeLinejoin="round"
       />
 
-      {/* Windshield dark area */}
-      <path d="M20 35 L21 31 L26 29 L30 29 L31 31 L27 35 Z" fill="black" fillOpacity="0.22" />
+      {/* Horizontal accent lines */}
+      <line x1="1" y1="37" x2="57" y2="37" stroke="white" strokeWidth="0.75" strokeOpacity="0.14" />
+      <line x1="1" y1="44" x2="57" y2="44" stroke="white" strokeWidth="0.5"  strokeOpacity="0.08" />
 
-      {/* Rear window dark area */}
-      <path d="M32 29 L37 29 L42 31 L41 35 L35 35 Z" fill="black" fillOpacity="0.16" />
+      {/* Car outline — line-art style */}
+      <path
+        d="M10 48 L10 42 L15 35 L22 30 L28 28 L36 28 L42 30 L48 36 L50 42 L50 48 Z"
+        stroke="white" strokeWidth="1.4" strokeOpacity="0.75" strokeLinejoin="round"
+        fill="white" fillOpacity="0.06"
+      />
+      {/* Windshield */}
+      <path d="M20 34 L22 30 L28 28 L31 28 L30 34 Z"
+        stroke="white" strokeWidth="1" strokeOpacity="0.4" fill="none" />
+      {/* Rear window */}
+      <path d="M33 28 L36 28 L42 30 L41 34 L34 34 Z"
+        stroke="white" strokeWidth="1" strokeOpacity="0.3" fill="none" />
+      {/* Roofline */}
+      <line x1="30" y1="34" x2="34" y2="34" stroke="white" strokeWidth="1" strokeOpacity="0.3" />
 
       {/* Front wheel */}
-      <circle cx="18" cy="51" r="7" fill="#0e0e0e" stroke="white" strokeWidth="1.5" strokeOpacity="0.55" />
-      <circle cx="18" cy="51" r="2.5" fill="white" fillOpacity="0.25" />
+      <circle cx="18" cy="49" r="6.5" stroke="white" strokeWidth="1.4" strokeOpacity="0.6" fill="#0e0e0e" />
+      <circle cx="18" cy="49" r="2.2" stroke="white" strokeWidth="0.8" strokeOpacity="0.25" fill="none" />
 
       {/* Rear wheel */}
-      <circle cx="41" cy="51" r="7" fill="#0e0e0e" stroke="white" strokeWidth="1.5" strokeOpacity="0.55" />
-      <circle cx="41" cy="51" r="2.5" fill="white" fillOpacity="0.25" />
+      <circle cx="41" cy="49" r="6.5" stroke="white" strokeWidth="1.4" strokeOpacity="0.6" fill="#0e0e0e" />
+      <circle cx="41" cy="49" r="2.2" stroke="white" strokeWidth="0.8" strokeOpacity="0.25" fill="none" />
 
       {/* ── DIVIDER ──────────────────────────── */}
-      <line x1="66" y1="14" x2="66" y2="58" stroke="white" strokeWidth="0.75" strokeOpacity="0.15" />
+      <line x1="66" y1="10" x2="66" y2="72" stroke="white" strokeWidth="0.75" strokeOpacity="0.12" />
 
       {/* ── WORDMARK ─────────────────────────── */}
 
       {/* HENNY */}
       <text
-        x="76" y="36"
+        x="76" y="34"
         fontFamily="'Space Grotesk', Inter, system-ui, sans-serif"
         fontWeight="900"
         fontSize="22"
@@ -72,7 +82,7 @@ export default function HennyLogo({ width = 140, maxHeight, className = '' }: He
 
       {/* AUTOMOTIVE */}
       <text
-        x="76" y="54"
+        x="76" y="52"
         fontFamily="'Space Grotesk', Inter, system-ui, sans-serif"
         fontWeight="700"
         fontSize="10"
@@ -81,6 +91,20 @@ export default function HennyLogo({ width = 140, maxHeight, className = '' }: He
         dominantBaseline="middle"
       >
         <tspan fill="#e11d2e" fillOpacity="0.8">A</tspan>UTOMOTIVE
+      </text>
+
+      {/* you ask, we deliver. */}
+      <text
+        x="77" y="67"
+        fontFamily="Georgia, 'Times New Roman', serif"
+        fontStyle="italic"
+        fontWeight="400"
+        fontSize="7.5"
+        letterSpacing="0.8"
+        fill="rgba(255,255,255,0.28)"
+        dominantBaseline="middle"
+      >
+        you ask, we deliver.
       </text>
     </svg>
   )
