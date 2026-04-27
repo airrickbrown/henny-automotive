@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { X, ChevronRight, MessageCircle, MapPin } from 'lucide-react'
 import { NAV_LINKS } from '../../lib/constants'
 import { buildWhatsAppUrl, SNAPCHAT_URL } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
@@ -57,7 +58,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
             aria-label="Close menu"
             className="w-11 h-11 flex items-center justify-center text-white/40 hover:text-white transition-colors duration-150"
           >
-            <span className="font-material text-[28px]">close</span>
+            <X size={28} />
           </button>
         </div>
 
@@ -84,7 +85,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
                   >
                     {link.label}
                     {active && (
-                      <span className="font-material text-base text-primary-container">chevron_right</span>
+                      <ChevronRight size={16} className="text-primary-container" />
                     )}
                   </Link>
                 </li>
@@ -102,7 +103,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2.5 bg-secondary text-on-secondary font-headline font-bold uppercase tracking-widest text-xs py-4 hover:brightness-105 active:scale-[0.98] transition-all duration-150"
             >
-              <span className="font-material-filled text-lg">chat</span>
+              <MessageCircle size={18} />
               WhatsApp Us
             </a>
             <a
@@ -129,7 +130,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
         <div className="mx-6 h-px bg-white/[0.06]" />
         <div className="px-8 py-5">
           <div className="flex items-start gap-3">
-            <span className="font-material text-sm text-primary-container mt-0.5">location_on</span>
+            <MapPin size={14} className="text-primary-container mt-0.5" />
             <div>
               <p className="font-label text-[10px] uppercase tracking-widest text-white/40">
                 Houston, TX &nbsp;·&nbsp; Accra, Ghana

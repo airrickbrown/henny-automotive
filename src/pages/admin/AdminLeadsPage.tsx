@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { X, MessageCircle, Trash2, Search, Inbox, AlertCircle, Users, CheckCheck, type LucideIcon } from 'lucide-react'
 import {
   getLeads,
   updateLeadStatus,
@@ -67,7 +68,7 @@ function LeadDrawer({
             Lead Detail
           </h2>
           <button onClick={onClose} className="text-on-surface-variant hover:text-white transition-colors">
-            <span className="font-material text-2xl">close</span>
+            <X size={24} />
           </button>
         </div>
 
@@ -122,7 +123,7 @@ function LeadDrawer({
               rel="noopener noreferrer"
               className="flex items-center gap-2 w-full bg-secondary/10 hover:bg-secondary/20 text-secondary border border-secondary/20 font-label text-xs font-bold uppercase tracking-wider px-4 py-3 transition-all duration-150"
             >
-              <span className="font-material-filled text-lg">chat</span>
+              <MessageCircle size={18} />
               Reply on WhatsApp
             </a>
           )}
@@ -135,7 +136,7 @@ function LeadDrawer({
             disabled={busy}
             className="flex items-center gap-2 font-label text-xs uppercase tracking-wider text-red-400/60 hover:text-red-400 disabled:opacity-40 transition-colors"
           >
-            <span className="font-material text-base">delete</span>
+            <Trash2 size={16} />
             Delete Lead
           </button>
         </div>
@@ -234,13 +235,13 @@ export default function AdminLeadsPage() {
       {/* Stats row */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'Total Leads', value: loading ? '—' : total,     icon: 'person' },
-          { label: 'New',         value: loading ? '—' : newCount,  icon: 'mark_unread_chat_alt' },
-          { label: 'Contacted',   value: loading ? '—' : contacted, icon: 'done_all' },
+          { label: 'Total Leads', value: loading ? '—' : total,     icon: Users },
+          { label: 'New',         value: loading ? '—' : newCount,  icon: MessageCircle },
+          { label: 'Contacted',   value: loading ? '—' : contacted, icon: CheckCheck },
         ].map((s) => (
           <div key={s.label} className="bg-surface-container-low border border-white/5 p-5">
             <div className="flex items-center gap-3 mb-2">
-              <span className="font-material text-lg text-on-surface-variant">{s.icon}</span>
+              {(() => { const Icon = s.icon as LucideIcon; return <Icon size={18} className="text-on-surface-variant" /> })()}
               <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{s.label}</p>
             </div>
             <p className="font-headline font-black text-3xl text-white">{s.value}</p>
@@ -251,7 +252,7 @@ export default function AdminLeadsPage() {
       {/* Error state */}
       {error && (
         <div className="bg-red-500/10 border border-red-500/20 px-5 py-4 mb-5 flex items-center gap-3">
-          <span className="font-material text-lg text-red-400">error</span>
+          <AlertCircle size={18} className="text-red-400" />
           <p className="font-body text-sm text-red-400 flex-1">{error}</p>
           <button
             onClick={fetchLeads}
@@ -265,9 +266,7 @@ export default function AdminLeadsPage() {
       {/* Toolbar */}
       <div className="flex flex-col sm:flex-row gap-3 mb-5">
         <div className="relative flex-1">
-          <span className="font-material absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg pointer-events-none">
-            search
-          </span>
+          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" />
           <input
             type="text"
             placeholder="Search by name, phone, interest..."
@@ -312,7 +311,7 @@ export default function AdminLeadsPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="bg-surface-container-low border border-white/5 flex flex-col items-center justify-center py-24 text-center px-6">
-          <span className="font-material text-5xl text-white/10 block mb-4">inbox</span>
+          <Inbox size={48} className="text-white/10 block mb-4" />
           <p className="font-headline font-black italic uppercase text-white/30 text-xl mb-2">
             {leads.length === 0 ? 'No leads yet' : 'No results'}
           </p>
@@ -388,7 +387,7 @@ export default function AdminLeadsPage() {
                         className="opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant hover:text-red-400"
                         title="Delete lead"
                       >
-                        <span className="font-material text-base">delete</span>
+                        <Trash2 size={16} />
                       </button>
                     </td>
                   </tr>

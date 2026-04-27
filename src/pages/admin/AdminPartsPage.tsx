@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
+import { X, Search, Plus, Loader2, CloudOff, SearchX, Pencil, Trash2, Settings } from 'lucide-react'
 import { getAllParts, createPart, updatePart, deletePart, type PartInput } from '../../lib/parts'
 import { supabase } from '../../lib/supabase'
 import { cn } from '../../lib/utils'
@@ -113,7 +114,7 @@ function PartDrawer({ mode, part, open, onClose, onSave }: DrawerProps) {
             </p>
           </div>
           <button type="button" onClick={onClose} className="w-9 h-9 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/5 transition-colors">
-            <span className="font-material text-xl">close</span>
+            <X size={20} />
           </button>
         </div>
 
@@ -277,7 +278,7 @@ export default function AdminPartsPage() {
   if (loading) {
     return (
       <div className="max-w-[1200px] flex items-center justify-center py-40">
-        <span className="font-material text-4xl text-white/20 animate-spin">progress_activity</span>
+        <Loader2 size={36} className="text-white/20 animate-spin" />
       </div>
     )
   }
@@ -285,7 +286,7 @@ export default function AdminPartsPage() {
   if (fetchError) {
     return (
       <div className="max-w-[1200px] py-40 text-center">
-        <span className="font-material text-5xl text-white/10 block mb-4">cloud_off</span>
+        <CloudOff size={48} className="text-white/10 block mb-4" />
         <p className="font-headline font-bold uppercase text-white/40">Failed to load parts</p>
         <button
           type="button"
@@ -315,7 +316,7 @@ export default function AdminPartsPage() {
         {/* Toolbar */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="relative flex-1">
-            <span className="font-material absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none text-lg">search</span>
+            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
             <input
               type="text"
               value={search}
@@ -337,7 +338,7 @@ export default function AdminPartsPage() {
             onClick={openAdd}
             className="bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-6 py-3 ignition-glow hover:brightness-110 active:scale-[0.99] transition-all duration-150 flex items-center gap-2 whitespace-nowrap"
           >
-            <span className="font-material text-lg">add</span>
+            <Plus size={18} />
             Add Part
           </button>
         </div>
@@ -369,7 +370,7 @@ export default function AdminPartsPage() {
                           <img src={p.image} alt={p.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
-                            <span className="font-material text-sm text-white/20">settings</span>
+                            <Settings size={14} className="text-white/20" />
                           </div>
                         )}
                       </div>
@@ -434,7 +435,7 @@ export default function AdminPartsPage() {
                             className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white hover:bg-surface-container transition-all"
                             aria-label="Edit part"
                           >
-                            <span className="font-material text-lg">edit</span>
+                            <Pencil size={18} />
                           </button>
                           <button
                             type="button"
@@ -442,7 +443,7 @@ export default function AdminPartsPage() {
                             className="w-8 h-8 flex items-center justify-center text-white/20 hover:text-red-400 hover:bg-surface-container transition-all"
                             aria-label="Delete part"
                           >
-                            <span className="font-material text-lg">delete</span>
+                            <Trash2 size={18} />
                           </button>
                         </>
                       )}
@@ -455,7 +456,7 @@ export default function AdminPartsPage() {
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={5} className="py-20 text-center">
-                    <span className="font-material text-4xl text-white/10 block mb-3">search_off</span>
+                    <SearchX size={36} className="text-white/10 block mb-3" />
                     <p className="font-headline font-bold uppercase text-white/30 text-sm">No parts match</p>
                     <button
                       type="button"

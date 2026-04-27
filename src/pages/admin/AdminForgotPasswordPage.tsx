@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { MailCheck } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { cn } from '../../lib/utils'
 import HennyLogo from '../../components/ui/HennyLogo'
@@ -42,7 +43,7 @@ export default function AdminForgotPasswordPage() {
       <div className="w-full max-w-sm bg-surface-container-low border border-white/5 rounded-lg p-8">
         {sent ? (
           <div className="text-center">
-            <span className="font-material text-4xl text-primary-container block mb-4">mark_email_read</span>
+            <MailCheck size={36} className="text-primary-container block mb-4" />
             <h1 className="font-headline text-xl font-black text-white mb-3">Check your email</h1>
             <p className="font-body text-sm text-on-surface-variant mb-6">
               We sent a password reset link to <span className="text-white">{email}</span>.

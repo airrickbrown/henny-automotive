@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Plus, Search, Loader2, CloudOff, MapPin, Star, Flame, Pencil, ExternalLink, Trash2, SearchX, Car, Flag, Store, Truck, type LucideIcon } from 'lucide-react'
 import { getAllVehicles, updateVehicle, deleteVehicle } from '../../lib/vehicles'
 import { supabase } from '../../lib/supabase'
 import { cn, formatPrice } from '../../lib/utils'
@@ -22,10 +23,10 @@ const STATUS_COLORS: Record<string, string> = {
   'LIMITED':           'bg-primary-container/10 text-primary-container border-primary-container/30',
 }
 
-function StatCard({ label, value, icon }: { label: string; value: number; icon: string }) {
+function StatCard({ label, value, icon: Icon }: { label: string; value: number; icon: LucideIcon }) {
   return (
     <div className="bg-surface-container-low p-5 flex items-center gap-4">
-      <span className="font-material text-2xl text-primary-container">{icon}</span>
+      <Icon size={24} className="text-primary-container" />
       <div>
         <p className="font-headline font-black text-2xl text-white">{value}</p>
         <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{label}</p>
@@ -140,7 +141,7 @@ export default function AdminInventoryPage() {
   if (loading) {
     return (
       <div className="max-w-[1400px] flex items-center justify-center py-40">
-        <span className="font-material text-4xl text-white/20 animate-spin">progress_activity</span>
+        <Loader2 size={36} className="text-white/20 animate-spin" />
       </div>
     )
   }
@@ -148,7 +149,7 @@ export default function AdminInventoryPage() {
   if (fetchError) {
     return (
       <div className="max-w-[1400px] py-40 text-center">
-        <span className="font-material text-5xl text-white/10 block mb-4">cloud_off</span>
+        <CloudOff size={48} className="text-white/10 block mb-4" />
         <p className="font-headline font-bold uppercase text-white/40">Failed to load inventory</p>
         <button
           type="button"
@@ -177,17 +178,17 @@ export default function AdminInventoryPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
-          <StatCard label="Total Units"    value={stats.total}    icon="inventory_2" />
-          <StatCard label="USA Stock"      value={stats.usa}      icon="flag" />
-          <StatCard label="Ghana Showroom" value={stats.ghana}    icon="storefront" />
-          <StatCard label="In Transit"     value={stats.transit}  icon="local_shipping" />
-          <StatCard label="Featured"       value={stats.featured} icon="star" />
+          <StatCard label="Total Units"    value={stats.total}    icon={Car} />
+          <StatCard label="USA Stock"      value={stats.usa}      icon={Flag} />
+          <StatCard label="Ghana Showroom" value={stats.ghana}    icon={Store} />
+          <StatCard label="In Transit"     value={stats.transit}  icon={Truck} />
+          <StatCard label="Featured"       value={stats.featured} icon={Star} />
         </div>
 
         {/* Toolbar */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="relative flex-1">
-            <span className="font-material absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none text-lg">search</span>
+            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
             <input
               type="text"
               value={search}
@@ -209,7 +210,7 @@ export default function AdminInventoryPage() {
             onClick={openAdd}
             className="bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-6 py-3 ignition-glow hover:brightness-110 active:scale-[0.99] transition-all duration-150 flex items-center gap-2 whitespace-nowrap"
           >
-            <span className="font-material text-lg">add</span>
+            <Plus size={18} />
             Add Vehicle
           </button>
         </div>
@@ -239,7 +240,7 @@ export default function AdminInventoryPage() {
                           <img src={v.images[0]} alt={v.model} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
-                            <span className="font-material text-sm text-white/20">directions_car</span>
+                            <Car size={14} className="text-white/20" />
                           </div>
                         )}
                       </div>
@@ -278,7 +279,7 @@ export default function AdminInventoryPage() {
 
                   <td className="py-4 pr-6">
                     <div className="flex items-center gap-1.5">
-                      <span className="font-material text-sm text-white/30">location_on</span>
+                      <MapPin size={14} className="text-white/30" />
                       <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{v.location}</span>
                     </div>
                   </td>
@@ -291,7 +292,7 @@ export default function AdminInventoryPage() {
                       className={cn('w-8 h-8 flex items-center justify-center transition-colors duration-150', v.isFeatured ? 'text-primary-container' : 'text-white/20 hover:text-white/50')}
                       aria-label={v.isFeatured ? 'Remove from featured' : 'Mark as featured'}
                     >
-                      <span className={v.isFeatured ? 'font-material-filled text-xl' : 'font-material text-xl'}>star</span>
+                      <Star size={20} className={v.isFeatured ? 'fill-current' : ''} />
                     </button>
                   </td>
 
@@ -303,7 +304,7 @@ export default function AdminInventoryPage() {
                       className={cn('w-8 h-8 flex items-center justify-center transition-colors duration-150', v.isHotDeal ? 'text-primary-container' : 'text-white/20 hover:text-white/50')}
                       aria-label={v.isHotDeal ? 'Remove hot deal' : 'Mark as hot deal'}
                     >
-                      <span className={v.isHotDeal ? 'font-material-filled text-xl' : 'font-material text-xl'}>local_fire_department</span>
+                      <Flame size={20} className={v.isHotDeal ? 'fill-current' : ''} />
                     </button>
                   </td>
 
@@ -335,7 +336,7 @@ export default function AdminInventoryPage() {
                             className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white hover:bg-surface-container transition-all"
                             aria-label="Edit"
                           >
-                            <span className="font-material text-lg">edit</span>
+                            <Pencil size={18} />
                           </button>
                           <Link
                             to={`/inventory/${v.slug}`}
@@ -344,7 +345,7 @@ export default function AdminInventoryPage() {
                             className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white hover:bg-surface-container transition-all"
                             aria-label="View on site"
                           >
-                            <span className="font-material text-lg">open_in_new</span>
+                            <ExternalLink size={18} />
                           </Link>
                           <button
                             type="button"
@@ -352,7 +353,7 @@ export default function AdminInventoryPage() {
                             className="w-8 h-8 flex items-center justify-center text-white/20 hover:text-red-400 hover:bg-surface-container transition-all"
                             aria-label="Delete"
                           >
-                            <span className="font-material text-lg">delete</span>
+                            <Trash2 size={18} />
                           </button>
                         </>
                       )}
@@ -364,7 +365,7 @@ export default function AdminInventoryPage() {
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={9} className="py-20 text-center">
-                    <span className="font-material text-4xl text-white/10 block mb-3">search_off</span>
+                    <SearchX size={36} className="text-white/10 block mb-3" />
                     <p className="font-headline font-bold uppercase text-white/30 text-sm">No vehicles match</p>
                     <button
                       type="button"

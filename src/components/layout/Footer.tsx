@@ -1,5 +1,6 @@
 import { useState, useCallback, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { Loader2, ArrowRight } from 'lucide-react'
 import {
   SNAPCHAT_URL,
   INSTAGRAM_URL,
@@ -54,9 +55,7 @@ function NewsletterForm() {
           aria-label="Subscribe"
           className="bg-primary-container text-white px-4 flex items-center justify-center hover:brightness-110 transition-all disabled:opacity-50 flex-shrink-0"
         >
-          <span className="font-material text-base">
-            {status === 'loading' ? 'progress_activity' : 'arrow_forward'}
-          </span>
+          {status === 'loading' ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={16} />}
         </button>
       </div>
       {status === 'duplicate' && <p className="font-label text-[10px] uppercase tracking-widest text-yellow-500">Already subscribed.</p>}

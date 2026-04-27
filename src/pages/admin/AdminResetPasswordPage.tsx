@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Eye, EyeOff } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { cn } from '../../lib/utils'
 import HennyLogo from '../../components/ui/HennyLogo'
@@ -103,7 +104,7 @@ export default function AdminResetPasswordPage() {
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
-                    <span className="font-material text-lg">{showPassword ? 'visibility_off' : 'visibility'}</span>
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
               </div>
@@ -136,7 +137,7 @@ export default function AdminResetPasswordPage() {
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
                     aria-label={showConfirm ? 'Hide password' : 'Show password'}
                   >
-                    <span className="font-material text-lg">{showConfirm ? 'visibility_off' : 'visibility'}</span>
+                    {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
                 {error && (

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Car, Gauge, Settings, MapPin, Tag, ArrowRight } from 'lucide-react'
 import type { Vehicle } from '../../types/vehicle'
 import { cn, formatPrice } from '../../lib/utils'
 import StatusBadge from '../ui/StatusBadge'
@@ -43,7 +44,7 @@ export default function InventoryCard({ vehicle, view = 'grid', className }: Inv
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="font-material text-4xl text-on-surface-variant/20">directions_car</span>
+              <Car size={36} className="text-on-surface-variant/20" />
             </div>
           )}
           {vehicle.status && (
@@ -62,19 +63,19 @@ export default function InventoryCard({ vehicle, view = 'grid', className }: Inv
             </h3>
             <div className="flex flex-wrap gap-x-5 gap-y-1.5 mb-3">
               <div className="flex items-center gap-1.5 text-white/40">
-                <span className="font-material text-sm">speed</span>
+                <Gauge size={14} />
                 <span className="font-label text-[10px] uppercase tracking-widest">{vehicle.spec.mileage}</span>
               </div>
               <div className="flex items-center gap-1.5 text-white/40">
-                <span className="font-material text-sm">settings</span>
+                <Settings size={14} />
                 <span className="font-label text-[10px] uppercase tracking-widest">{vehicle.spec.engine}</span>
               </div>
               <div className="flex items-center gap-1.5 text-white/40">
-                <span className="font-material text-sm">location_on</span>
+                <MapPin size={14} />
                 <span className="font-label text-[10px] uppercase tracking-widest">{vehicle.location}</span>
               </div>
               <div className="flex items-center gap-1.5 text-white/40">
-                <span className="font-material text-sm">category</span>
+                <Tag size={14} />
                 <span className="font-label text-[10px] uppercase tracking-widest">{vehicle.condition}</span>
               </div>
             </div>
@@ -83,7 +84,7 @@ export default function InventoryCard({ vehicle, view = 'grid', className }: Inv
           <div className="flex items-center justify-between">
             <span className="font-headline font-black text-xl text-primary-container">{displayPrice}</span>
             <span className="font-label text-[10px] uppercase tracking-widest text-white/30 group-hover:text-white transition-colors flex items-center gap-1">
-              Details <span className="font-material text-sm">arrow_forward</span>
+              Details <ArrowRight size={14} />
             </span>
           </div>
         </div>
@@ -112,7 +113,7 @@ export default function InventoryCard({ vehicle, view = 'grid', className }: Inv
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-surface-container">
-            <span className="font-material text-5xl text-on-surface-variant/20">directions_car</span>
+            <Car size={48} className="text-on-surface-variant/20" />
           </div>
         )}
         {vehicle.status && (
@@ -139,11 +140,11 @@ export default function InventoryCard({ vehicle, view = 'grid', className }: Inv
         </div>
         <div className="flex gap-6">
           <div className="flex items-center gap-1.5 text-white/40">
-            <span className="font-material text-sm">speed</span>
+            <Gauge size={14} />
             <span className="font-label text-[10px] uppercase tracking-widest">{vehicle.spec.mileage}</span>
           </div>
           <div className="flex items-center gap-1.5 text-white/40">
-            <span className="font-material text-sm">settings</span>
+            <Settings size={14} />
             <span className="font-label text-[10px] uppercase tracking-widest">{vehicle.spec.engine}</span>
           </div>
         </div>

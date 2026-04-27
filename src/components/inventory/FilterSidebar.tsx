@@ -1,3 +1,4 @@
+import { X, Search, FilterX } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import type { VehicleFilters } from '../../types/filters'
 import type { VehicleCondition } from '../../types/vehicle'
@@ -47,12 +48,10 @@ export default function FilterSidebar({ filters, onChange, manufacturers, classN
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
               aria-label="Clear search"
             >
-              <span className="font-material text-lg">close</span>
+              <X size={18} />
             </button>
           ) : (
-            <span className="font-material absolute right-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary-container transition-colors pointer-events-none">
-              search
-            </span>
+            <Search size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary-container transition-colors pointer-events-none" />
           )}
         </div>
       </section>
@@ -130,7 +129,7 @@ export default function FilterSidebar({ filters, onChange, manufacturers, classN
             onClick={() => onChange({ ...filters, search: '', manufacturer: '', condition: 'ALL', category: 'ALL CARS' })}
             className="flex items-center gap-2 font-label text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-white transition-colors"
           >
-            <span className="font-material text-sm">filter_alt_off</span>
+            <FilterX size={14} />
             Clear all filters
           </button>
         </section>

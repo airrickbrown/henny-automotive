@@ -1,38 +1,48 @@
+import { ShieldCheck, Gauge, Truck } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import BentoCard from '../cards/BentoCard'
 
-const CARDS = [
+const CARDS: Array<{
+  icon?: LucideIcon
+  iconColor?: 'red' | 'green' | 'white'
+  title: string
+  body: string
+  variant: 'default' | 'dim' | 'accent' | 'border-red' | 'border-green'
+  watermark?: string
+  className: string
+}> = [
   {
-    icon: 'verified_user',
-    iconColor: 'red' as const,
+    icon: ShieldCheck,
+    iconColor: 'red',
     title: 'Absolute Trust',
     body: 'Every vehicle undergoes a rigorous 150-point inspection in the USA before it ever touches Ghana soil. Transparency is our engine.',
-    variant: 'default' as const,
+    variant: 'default',
     className: 'md:col-span-2',
   },
   {
-    icon: 'speed',
-    iconColor: 'white' as const,
+    icon: Gauge,
+    iconColor: 'white',
     title: 'Unmatched Speed',
     body: 'Fast-track shipping from Houston/NJ to Tema Harbor.',
-    variant: 'accent' as const,
+    variant: 'accent',
     className: '',
   },
   {
-    icon: 'local_shipping',
-    iconColor: 'green' as const,
+    icon: Truck,
+    iconColor: 'green',
     title: 'Secure Delivery',
     body: 'Real-time GPS tracking and dedicated clearing agents ensure your car arrives safely at your doorstep.',
-    variant: 'border-green' as const,
+    variant: 'border-green',
     className: '',
   },
   {
     title: 'Elite Sourcing',
     body: 'Direct access to dealer-only auctions across America. We find the gems others miss.',
-    variant: 'dim' as const,
+    variant: 'dim',
     watermark: 'USA',
     className: 'md:col-span-2',
   },
-] as const
+]
 
 export default function EngineeredForTrust() {
   return (
@@ -52,12 +62,12 @@ export default function EngineeredForTrust() {
           {CARDS.map((card) => (
             <BentoCard
               key={card.title}
-              icon={'icon' in card ? card.icon : undefined}
-              iconColor={'iconColor' in card ? card.iconColor : undefined}
+              icon={card.icon}
+              iconColor={card.iconColor}
               title={card.title}
               body={card.body}
               variant={card.variant}
-              watermark={'watermark' in card ? card.watermark : undefined}
+              watermark={card.watermark}
               className={card.className}
             />
           ))}

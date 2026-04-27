@@ -1,4 +1,9 @@
+import { ArrowRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
+
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  arrow_forward: ArrowRight,
+}
 
 interface IgnitionButtonProps {
   label: string
@@ -43,9 +48,10 @@ export default function IgnitionButton({
   const content = (
     <>
       {label}
-      {trailingIcon && (
-        <span className="font-material text-xl">{trailingIcon}</span>
-      )}
+      {trailingIcon && (() => {
+        const Icon = ICON_MAP[trailingIcon]
+        return Icon ? <Icon size={20} /> : null
+      })()}
     </>
   )
 

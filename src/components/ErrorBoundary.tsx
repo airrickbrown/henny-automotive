@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
+import { AlertCircle } from 'lucide-react'
 
 interface Props {
   children: ReactNode
@@ -29,7 +30,7 @@ export default class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-background">
-          <span className="font-material text-6xl text-white/10 block mb-6">error</span>
+          <AlertCircle size={60} className="text-white/10 block mb-6" />
           <h1 className="font-headline font-black italic uppercase tracking-tighter text-3xl text-white mb-3">
             Something went wrong
           </h1>

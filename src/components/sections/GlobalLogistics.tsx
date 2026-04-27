@@ -1,17 +1,22 @@
-const BULLETS = [
+import { Network, Anchor, type LucideIcon } from 'lucide-react'
+
+const BULLETS: { icon: LucideIcon; title: string; body: string }[] = [
   {
-    icon: 'hub',
+    icon: Network,
     title: 'USA Export License',
     body: 'Authorized bidding on all major insurance and clean title auctions.',
   },
   {
-    icon: 'anchor',
+    icon: Anchor,
     title: 'Direct Port Clearance',
     body: 'In-house clearing agents in Tema to avoid unnecessary delays and costs.',
   },
 ]
 
+
+
 export default function GlobalLogistics() {
+
   return (
     <section id="logistics" className="py-24 md:py-32 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
@@ -78,9 +83,7 @@ export default function GlobalLogistics() {
           <ul className="space-y-6">
             {BULLETS.map((item) => (
               <li key={item.title} className="flex items-start gap-4">
-                <span className="font-material text-2xl text-primary-container mt-0.5 flex-shrink-0">
-                  {item.icon}
-                </span>
+                <item.icon size={24} className="text-primary-container mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-headline font-bold text-white uppercase tracking-wider text-sm mb-1">
                     {item.title}

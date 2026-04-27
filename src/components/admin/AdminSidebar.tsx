@@ -1,8 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { Car, Settings, X, LogOut, LayoutDashboard, User, Mail, SlidersHorizontal } from 'lucide-react'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
 import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
 import HennyLogo from '../ui/HennyLogo'
+
+const NAV_ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  dashboard:      LayoutDashboard,
+  directions_car: Car,
+  settings:       Settings,
+  person:         User,
+  mail:           Mail,
+  tune:           SlidersHorizontal,
+}
 
 const NAV_ITEMS = [
   { label: 'Dashboard',            href: '/admin',               icon: 'dashboard' },
@@ -46,7 +56,7 @@ export default function AdminSidebar({ open, onClose }: Props) {
           className="md:hidden w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-white transition-colors"
           aria-label="Close navigation"
         >
-          <span className="font-material text-xl">close</span>
+          <X size={20} />
         </button>
       </div>
 
@@ -66,7 +76,7 @@ export default function AdminSidebar({ open, onClose }: Props) {
                   : 'text-on-surface-variant hover:text-white hover:bg-white/5'
               )}
             >
-              <span className="font-material text-xl">{item.icon}</span>
+              {(() => { const Icon = NAV_ICON_MAP[item.icon]; return Icon ? <Icon size={20} /> : null })()}
               {item.label}
             </Link>
           )
@@ -88,7 +98,7 @@ export default function AdminSidebar({ open, onClose }: Props) {
           onClick={handleLogout}
           className="flex items-center gap-2 w-full px-3 py-2 rounded text-on-surface-variant hover:text-white hover:bg-white/5 transition-all duration-150 font-label text-xs uppercase tracking-wider"
         >
-          <span className="font-material text-base">logout</span>
+          <LogOut size={16} />
           Sign Out
         </button>
       </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Car, Flag, Store, Truck, Settings, Flame, EyeOff, Users, ArrowRight, type LucideIcon } from 'lucide-react'
 import { getAllVehicles } from '../../lib/vehicles'
 import { getLeads, type Lead } from '../../lib/leads'
 import { getAllParts } from '../../lib/parts'
@@ -12,14 +13,14 @@ import type { Part } from '../../types/part'
 function StatCard({
   label,
   value,
-  icon,
+  icon: Icon,
   sub,
   to,
   loading,
 }: {
   label: string
   value: string | number
-  icon: string
+  icon: LucideIcon
   sub?: string
   to?: string
   loading?: boolean
@@ -27,8 +28,8 @@ function StatCard({
   const inner = (
     <div className="bg-surface-container-low p-6 flex flex-col gap-4 hover:bg-surface-container-high transition-colors duration-150 h-full">
       <div className="flex items-start justify-between">
-        <span className="font-material text-2xl text-primary-container">{icon}</span>
-        {to && <span className="font-material text-base text-white/20">arrow_forward</span>}
+        <Icon size={24} className="text-primary-container" />
+        {to && <ArrowRight size={16} className="text-white/20" />}
       </div>
       <div>
         {loading ? (
@@ -123,14 +124,14 @@ export default function AdminDashboardPage() {
 
       {/* Stats grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
-        <StatCard label="Total Vehicles"    value={vehicles.length}                                   icon="inventory_2"           to="/admin/inventory" sub={`${featured} featured`}               loading={vLoading} />
-        <StatCard label="USA Stock"         value={usa}                                               icon="flag"                  to="/admin/inventory"                                            loading={vLoading} />
-        <StatCard label="Ghana Showroom"    value={ghana}                                             icon="storefront"            to="/admin/inventory"                                            loading={vLoading} />
-        <StatCard label="In Transit"        value={inTransit}                                         icon="local_shipping"        to="/admin/inventory"                                            loading={vLoading} />
-        <StatCard label="Parts Listed"      value={parts.length}                                      icon="settings"              to="/admin/parts"     sub={`${hotParts} active`}                                                                            loading={pLoading} />
-        <StatCard label="Hot Deals"         value={vehicles.filter(v => v.isHotDeal).length}          icon="local_fire_department"                                                                  loading={vLoading} />
-        <StatCard label="Price on Request"  value={vehicles.filter(v => !v.showPublicPrice).length}   icon="visibility_off"                                                                         loading={vLoading} />
-        <StatCard label="Leads"             value={leads.length}                                      icon="person"                to="/admin/leads"     sub={newLeads > 0 ? `${newLeads} new` : 'all reviewed'} loading={lLoading} />
+        <StatCard label="Total Vehicles"    value={vehicles.length}                                   icon={Car}      to="/admin/inventory" sub={`${featured} featured`}               loading={vLoading} />
+        <StatCard label="USA Stock"         value={usa}                                               icon={Flag}     to="/admin/inventory"                                            loading={vLoading} />
+        <StatCard label="Ghana Showroom"    value={ghana}                                             icon={Store}    to="/admin/inventory"                                            loading={vLoading} />
+        <StatCard label="In Transit"        value={inTransit}                                         icon={Truck}    to="/admin/inventory"                                            loading={vLoading} />
+        <StatCard label="Parts Listed"      value={parts.length}                                      icon={Settings} to="/admin/parts"     sub={`${hotParts} active`}                loading={pLoading} />
+        <StatCard label="Hot Deals"         value={vehicles.filter(v => v.isHotDeal).length}          icon={Flame}                                                                     loading={vLoading} />
+        <StatCard label="Price on Request"  value={vehicles.filter(v => !v.showPublicPrice).length}   icon={EyeOff}                                                                    loading={vLoading} />
+        <StatCard label="Leads"             value={leads.length}                                      icon={Users}    to="/admin/leads"     sub={newLeads > 0 ? `${newLeads} new` : 'all reviewed'} loading={lLoading} />
       </div>
 
       {/* Recent vehicles */}

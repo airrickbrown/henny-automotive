@@ -1,4 +1,9 @@
+import { ArrowRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
+
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  arrow_forward: ArrowRight,
+}
 
 interface GhostButtonProps {
   label: string
@@ -44,13 +49,15 @@ export default function GhostButton({
 
   const content = (
     <>
-      {leadingIcon && (
-        <span className="font-material text-xl">{leadingIcon}</span>
-      )}
+      {leadingIcon && (() => {
+        const Icon = ICON_MAP[leadingIcon]
+        return Icon ? <Icon size={20} /> : null
+      })()}
       {label}
-      {trailingIcon && (
-        <span className="font-material text-xl">{trailingIcon}</span>
-      )}
+      {trailingIcon && (() => {
+        const Icon = ICON_MAP[trailingIcon]
+        return Icon ? <Icon size={20} /> : null
+      })()}
     </>
   )
 

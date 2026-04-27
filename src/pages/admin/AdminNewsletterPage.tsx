@@ -1,3 +1,5 @@
+import { ExternalLink, ArrowRight, Users, Megaphone, Zap, UserPlus, BadgeCheck, RefreshCw, MailCheck } from 'lucide-react'
+
 const LOOPS_DASHBOARD = 'https://app.loops.so'
 
 interface SetupStep {
@@ -49,7 +51,7 @@ export default function AdminNewsletterPage() {
         className="group flex items-center justify-between bg-surface-container-low p-6 hover:bg-surface-container-high transition-colors duration-150 mb-3"
       >
         <div className="flex items-center gap-4">
-          <span className="font-material text-2xl text-primary-container">open_in_new</span>
+          <ExternalLink size={24} className="text-primary-container" />
           <div>
             <p className="font-headline font-bold uppercase text-white tracking-tight">
               Open Loops Dashboard
@@ -59,18 +61,16 @@ export default function AdminNewsletterPage() {
             </p>
           </div>
         </div>
-        <span className="font-material text-xl text-white/20 group-hover:text-white/60 transition-colors">
-          arrow_forward
-        </span>
+        <ArrowRight size={20} className="text-white/20 group-hover:text-white/60 transition-colors" />
       </a>
 
       {/* Quick links */}
       <div className="grid grid-cols-3 gap-3 mb-10">
         {[
-          { label: 'Contacts',    path: '/contacts',    icon: 'group' },
-          { label: 'Campaigns',   path: '/campaigns',   icon: 'campaign' },
-          { label: 'Automations', path: '/automations', icon: 'bolt' },
-        ].map(({ label, path, icon }) => (
+          { label: 'Contacts',    path: '/contacts',    icon: Users },
+          { label: 'Campaigns',   path: '/campaigns',   icon: Megaphone },
+          { label: 'Automations', path: '/automations', icon: Zap },
+        ].map(({ label, path, icon: Icon }) => (
           <a
             key={label}
             href={`${LOOPS_DASHBOARD}${path}`}
@@ -78,7 +78,7 @@ export default function AdminNewsletterPage() {
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 bg-surface-container-low p-4 hover:bg-surface-container-high transition-colors duration-150 text-center"
           >
-            <span className="font-material text-xl text-primary-container">{icon}</span>
+            <Icon size={20} className="text-primary-container" />
             <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{label}</p>
           </a>
         ))}
@@ -118,14 +118,14 @@ export default function AdminNewsletterPage() {
         </h2>
         <div className="space-y-3">
           {[
-            { icon: 'person_add',      text: 'Visitor enters email in the footer form on the site' },
-            { icon: 'verified',        text: 'Cloudflare Turnstile verifies human; rate limiter blocks floods' },
-            { icon: 'sync',            text: 'subscribe Edge Function adds them to Loops as a contact' },
-            { icon: 'mark_email_read', text: 'Loops automation fires the welcome email automatically' },
-            { icon: 'campaign',        text: 'You compose and send campaigns directly in Loops' },
-          ].map(({ icon, text }, i) => (
+            { icon: UserPlus,   text: 'Visitor enters email in the footer form on the site' },
+            { icon: BadgeCheck, text: 'Cloudflare Turnstile verifies human; rate limiter blocks floods' },
+            { icon: RefreshCw,  text: 'subscribe Edge Function adds them to Loops as a contact' },
+            { icon: MailCheck,  text: 'Loops automation fires the welcome email automatically' },
+            { icon: Megaphone,  text: 'You compose and send campaigns directly in Loops' },
+          ].map(({ icon: Icon, text }, i) => (
             <div key={i} className="flex items-start gap-3">
-              <span className="font-material text-base text-primary-container flex-shrink-0 mt-0.5">{icon}</span>
+              <Icon size={16} className="text-primary-container flex-shrink-0 mt-0.5" />
               <p className="font-body text-sm text-on-surface-variant">{text}</p>
             </div>
           ))}

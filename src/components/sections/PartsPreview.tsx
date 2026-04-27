@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Settings2 } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 
 const IMAGE_PANELS = [
@@ -72,9 +73,7 @@ export default function PartsPreview() {
           {/* Request a Part CTA panel */}
           <div className="group relative overflow-hidden h-[400px] flex items-center justify-center bg-surface-bright">
             <div className="text-center p-8">
-              <span className="font-material text-6xl text-primary-container mb-6 block">
-                settings_suggest
-              </span>
+              <Settings2 size={60} className="text-primary-container mb-6 block" />
               <h4 className="font-headline text-2xl font-black text-white uppercase mb-6">
                 Request a Part
               </h4>

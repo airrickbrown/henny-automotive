@@ -1,9 +1,10 @@
+import { Gavel, ShieldCheck, Truck, MessageCircle, Anchor, CheckSquare, Handshake, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 
-function Detail({ icon, text }: { icon: string; text: string }) {
+function Detail({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
   return (
     <li className="flex items-start gap-3">
-      <span className="font-material text-lg text-primary-container flex-shrink-0 mt-0.5">{icon}</span>
+      <Icon size={18} className="text-primary-container flex-shrink-0 mt-0.5" />
       <span className="font-body text-sm text-on-surface-variant leading-relaxed">{text}</span>
     </li>
   )
@@ -29,9 +30,9 @@ export function HubUSA() {
             loading at the port.
           </p>
           <ul className="space-y-4">
-            <Detail icon="gavel"           text="Direct bidding access to insurance, salvage, and clean-title auctions across the USA" />
-            <Detail icon="verified_user"   text="Licensed exporter with full documentation handled in-house — no third-party agents" />
-            <Detail icon="local_shipping"  text="Container booking and port logistics coordinated from our Houston office" />
+            <Detail icon={Gavel}        text="Direct bidding access to insurance, salvage, and clean-title auctions across the USA" />
+            <Detail icon={ShieldCheck}  text="Licensed exporter with full documentation handled in-house — no third-party agents" />
+            <Detail icon={Truck}        text="Container booking and port logistics coordinated from our Houston office" />
           </ul>
         </div>
 
@@ -65,7 +66,7 @@ export function HubUSA() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-6 py-4 ignition-glow hover:brightness-110 active:scale-[0.98] transition-all duration-150"
             >
-              <span className="font-material-filled text-base">chat</span>
+              <MessageCircle size={16} />
               WhatsApp USA Team
             </a>
           </div>
@@ -111,7 +112,7 @@ export function HubGhana() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 bg-secondary text-on-secondary font-headline font-bold uppercase tracking-widest text-xs px-6 py-4 hover:brightness-105 active:scale-[0.98] transition-all duration-150"
             >
-              <span className="font-material-filled text-base">chat</span>
+              <MessageCircle size={16} />
               WhatsApp Ghana Team
             </a>
           </div>
@@ -133,9 +134,9 @@ export function HubGhana() {
             dedicated handover team ensure a smooth final mile.
           </p>
           <ul className="space-y-4">
-            <Detail icon="anchor"          text="In-house clearing agents at Tema port — no delays, no hidden charges" />
-            <Detail icon="task_alt"        text="Full customs documentation and DVLA processing managed end-to-end" />
-            <Detail icon="handshake"       text="Personal delivery and handover inspection at your location in Ghana" />
+            <Detail icon={Anchor}       text="In-house clearing agents at Tema port — no delays, no hidden charges" />
+            <Detail icon={CheckSquare}  text="Full customs documentation and DVLA processing managed end-to-end" />
+            <Detail icon={Handshake}    text="Personal delivery and handover inspection at your location in Ghana" />
           </ul>
         </div>
 

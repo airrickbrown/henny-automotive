@@ -1,3 +1,4 @@
+import { Quote } from 'lucide-react'
 import { testimonials } from '../../data/testimonials'
 
 export default function TestimonialBlock() {
@@ -9,12 +10,7 @@ export default function TestimonialBlock() {
       <div className="max-w-5xl mx-auto px-6 md:px-8 text-center">
 
         {/* Quote icon — filled */}
-        <span
-          className="font-material-filled text-5xl text-primary-container mb-8 block"
-          aria-hidden="true"
-        >
-          format_quote
-        </span>
+        <Quote size={48} className="text-primary-container mb-8 block" aria-hidden="true" />
 
         {/* Quote */}
         <blockquote>

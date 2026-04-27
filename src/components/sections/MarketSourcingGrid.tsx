@@ -1,8 +1,9 @@
+import { Globe, Network } from 'lucide-react'
 import BentoCard from '../cards/BentoCard'
 
 const CARDS = [
   {
-    icon: 'public',
+    icon: Globe,
     iconFill: true,
     iconColor: 'red' as const,
     flag: '🇺🇸',
@@ -12,7 +13,7 @@ const CARDS = [
     variant: 'border-red' as const,
   },
   {
-    icon: 'hub',
+    icon: Network,
     iconFill: true,
     iconColor: 'green' as const,
     flag: '🇬🇭',
@@ -21,7 +22,7 @@ const CARDS = [
     chips: ['Local Stock', 'VIP Delivery'],
     variant: 'border-green' as const,
   },
-] as const
+]
 
 export default function MarketSourcingGrid() {
   return (
@@ -36,7 +37,7 @@ export default function MarketSourcingGrid() {
             flag={card.flag}
             title={card.title}
             body={card.body}
-            chips={card.chips as unknown as string[]}
+            chips={card.chips as string[]}
             variant={card.variant}
             className="min-h-[240px]"
           />

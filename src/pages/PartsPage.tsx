@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Settings, Disc, Circle, Wind, Armchair, Sliders, MessageCircle, type LucideIcon } from 'lucide-react'
 import PageMeta from '../components/seo/PageMeta'
 import { getParts } from '../lib/parts'
 import { cn } from '../lib/utils'
@@ -28,13 +29,13 @@ const CATEGORY_BADGE: Record<PartCategory, string> = {
   SUSPENSION: 'Suspension',
 }
 
-const CATEGORY_ICON: Record<PartCategory, string> = {
-  ENGINES:    'settings_input_component',
-  BRAKES:     'precision_manufacturing',
-  WHEELS:     'tire_repair',
-  EXHAUST:    'air',
-  INTERIOR:   'airline_seat_recline_extra',
-  SUSPENSION: 'car_repair',
+const CATEGORY_ICON: Record<PartCategory, LucideIcon> = {
+  ENGINES:    Settings,
+  BRAKES:     Disc,
+  WHEELS:     Circle,
+  EXHAUST:    Wind,
+  INTERIOR:   Armchair,
+  SUSPENSION: Sliders,
 }
 
 // ── Page ────────────────────────────────────────────────────────────────────
@@ -140,9 +141,7 @@ export default function PartsPage() {
                     />
                   ) : (
                     <div className="w-full h-full bg-surface-container flex items-center justify-center">
-                      <span className="font-material text-5xl text-on-surface-variant/20">
-                        {CATEGORY_ICON[part.category]}
-                      </span>
+                      {(() => { const Icon = CATEGORY_ICON[part.category]; return <Icon size={48} className="text-on-surface-variant/20" /> })()}
                     </div>
                   )}
 
@@ -170,9 +169,7 @@ export default function PartsPage() {
                     <h3 className="font-headline text-xl font-bold uppercase tracking-tight leading-tight text-white">
                       {part.name}
                     </h3>
-                    <span className="font-material text-2xl text-primary-container flex-shrink-0">
-                      {CATEGORY_ICON[part.category]}
-                    </span>
+                    {(() => { const Icon = CATEGORY_ICON[part.category]; return <Icon size={24} className="text-primary-container flex-shrink-0" /> })()}
                   </div>
 
                   {/* Description */}
@@ -209,7 +206,7 @@ export default function PartsPage() {
                     )}
                   >
                     Inquire on WhatsApp
-                    <span className="font-material-filled text-lg">chat</span>
+                    <MessageCircle size={18} />
                   </a>
                 </div>
               </article>
@@ -222,9 +219,7 @@ export default function PartsPage() {
         {/* Empty state */}
         {!loading && filtered.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
-            <span className="font-material text-5xl text-on-surface-variant/30">
-              build_circle
-            </span>
+            <Settings size={48} className="text-on-surface-variant/30" />
             <p className="font-headline text-xl font-black uppercase text-white/40">
               No Parts in This Category
             </p>

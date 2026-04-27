@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
+import { Home, Car } from 'lucide-react'
 import { buildWhatsAppUrl } from '../lib/tokens'
 import PageMeta from '../components/seo/PageMeta'
 
@@ -36,14 +37,14 @@ export default function NotFoundPage() {
             to="/"
             className="bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-8 py-4 ignition-glow hover:brightness-110 active:scale-[0.98] transition-all duration-150 inline-flex items-center gap-2"
           >
-            <span className="font-material text-lg">home</span>
+            <Home size={18} />
             Back to Home
           </Link>
           <Link
             to="/inventory"
             className="border border-outline-variant/30 text-white/60 font-headline font-bold uppercase tracking-widest text-xs px-8 py-4 hover:text-white hover:border-outline-variant/60 active:scale-[0.98] transition-all duration-150 inline-flex items-center gap-2"
           >
-            <span className="font-material text-lg">directions_car</span>
+            <Car size={18} />
             Browse Inventory
           </Link>
         </div>

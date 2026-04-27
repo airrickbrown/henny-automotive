@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Car } from 'lucide-react'
 import { getFeaturedVehicles } from '../../lib/vehicles'
 import { formatPrice } from '../../lib/utils'
 import SectionLabel from '../ui/SectionLabel'
@@ -64,7 +65,7 @@ export default function FeaturedPerformance() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="font-material text-5xl text-on-surface-variant/20">directions_car</span>
+                    <Car size={48} className="text-on-surface-variant/20" />
                   </div>
                 )}
                 {vehicle.status && (

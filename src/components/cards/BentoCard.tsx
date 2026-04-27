@@ -1,9 +1,10 @@
+import type { LucideIcon } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 interface BentoCardProps {
-  /** Material Symbols icon name */
-  icon?: string
-  /** Use filled variant of the icon */
+  /** Lucide icon component */
+  icon?: LucideIcon
+  /** Use filled variant of the icon (kept for API compat, unused with Lucide) */
   iconFill?: boolean
   /** Color of the icon */
   iconColor?: 'red' | 'green' | 'white'
@@ -42,7 +43,7 @@ const iconColorMap = {
 
 export default function BentoCard({
   icon,
-  iconFill = false,
+  iconFill: _iconFill = false,
   iconColor = 'red',
   flag,
   title,
@@ -75,17 +76,15 @@ export default function BentoCard({
       {/* Icon + Flag row */}
       {(icon || flag) && (
         <div className="flex items-start justify-between mb-6">
-          {icon && (
-            <span
-              className={cn(
-                iconFill ? 'font-material-filled' : 'font-material',
-                'text-4xl',
-                isAccent ? 'text-white' : iconColorMap[iconColor]
-              )}
-            >
-              {icon}
-            </span>
-          )}
+          {icon && (() => {
+            const Icon = icon
+            return (
+              <Icon
+                size={36}
+                className={cn(isAccent ? 'text-white' : iconColorMap[iconColor])}
+              />
+            )
+          })()}
           {!icon && <span />}
           {flag && (
             <span className="text-3xl leading-none select-none">{flag}</span>

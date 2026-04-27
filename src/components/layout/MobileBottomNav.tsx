@@ -1,14 +1,15 @@
 import { Link, useLocation } from 'react-router-dom'
+import { Car, MessageCircle, Flag, MapPin, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
 
 function TabItem({
-  icon,
+  icon: Icon,
   label,
   active = false,
   className,
 }: {
-  icon: string
+  icon: LucideIcon
   label: string
   active?: boolean
   className?: string
@@ -21,7 +22,7 @@ function TabItem({
         className,
       )}
     >
-      <span className="font-material text-2xl">{icon}</span>
+      <Icon size={24} />
       <span className="font-label text-[10px] uppercase font-bold tracking-tighter mt-1 leading-none">
         {label}
       </span>
@@ -39,7 +40,7 @@ export default function MobileBottomNav() {
 
         {/* Inventory — internal route */}
         <Link to="/inventory" aria-label="Inventory">
-          <TabItem icon="directions_car" label="Inventory" active={inventoryActive} />
+          <TabItem icon={Car} label="Inventory" active={inventoryActive} />
         </Link>
 
         {/* WhatsApp — external */}
@@ -49,17 +50,17 @@ export default function MobileBottomNav() {
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
         >
-          <TabItem icon="chat" label="WhatsApp" className="active:bg-secondary/20" />
+          <TabItem icon={MessageCircle} label="WhatsApp" className="active:bg-secondary/20" />
         </a>
 
         {/* USA Hub — homepage anchor (client-side navigation) */}
         <Link to={{ pathname: '/', hash: '#usa-hub' }} aria-label="USA Hub">
-          <TabItem icon="flag" label="USA Hub" />
+          <TabItem icon={Flag} label="USA Hub" />
         </Link>
 
         {/* Ghana Hub — homepage anchor (client-side navigation) */}
         <Link to={{ pathname: '/', hash: '#ghana-hub' }} aria-label="Ghana Hub">
-          <TabItem icon="location_on" label="Ghana Hub" />
+          <TabItem icon={MapPin} label="Ghana Hub" />
         </Link>
 
       </div>

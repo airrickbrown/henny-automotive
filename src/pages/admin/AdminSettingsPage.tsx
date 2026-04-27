@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Loader2, CheckCircle2 } from 'lucide-react'
 import { WHATSAPP_NUMBER, SNAPCHAT_URL } from '../../lib/tokens'
 import { getAllVehicles } from '../../lib/vehicles'
 import { cn } from '../../lib/utils'
@@ -150,7 +151,7 @@ export default function AdminSettingsPage() {
           >
             {filtersLoading ? (
               <div className="flex items-center gap-2 text-on-surface-variant">
-                <span className="font-material text-sm animate-spin">progress_activity</span>
+                <Loader2 size={14} className="animate-spin" />
                 <span className="font-label text-xs uppercase tracking-wider">Loading…</span>
               </div>
             ) : manufacturers.length === 0 ? (
@@ -162,7 +163,7 @@ export default function AdminSettingsPage() {
                     key={make}
                     className="px-3 py-1.5 bg-surface-container border border-outline-variant/20 font-label text-[10px] uppercase tracking-widest text-white flex items-center gap-1.5"
                   >
-                    <span className="font-material text-xs text-primary-container">check_circle</span>
+                    <CheckCircle2 size={12} className="text-primary-container" />
                     {make}
                   </span>
                 ))}
@@ -181,7 +182,7 @@ export default function AdminSettingsPage() {
                   key={c}
                   className="px-3 py-1.5 bg-surface-container border border-outline-variant/20 font-label text-[10px] uppercase tracking-widest text-white flex items-center gap-1.5"
                 >
-                  <span className="font-material text-xs text-primary-container">check_circle</span>
+                  <CheckCircle2 size={12} className="text-primary-container" />
                   {c}
                 </span>
               ))}
@@ -209,7 +210,7 @@ export default function AdminSettingsPage() {
           </button>
           {saved && (
             <span className="flex items-center gap-1.5 font-label text-xs uppercase tracking-widest text-secondary">
-              <span className="font-material-filled text-base">check_circle</span>
+              <CheckCircle2 size={16} />
               Saved
             </span>
           )}

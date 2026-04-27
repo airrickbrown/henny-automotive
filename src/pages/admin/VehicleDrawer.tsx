@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, type ChangeEvent } from 'react'
+import { X, CheckCircle2, Circle, ImagePlus, Loader2 } from 'lucide-react'
 import {
   createVehicle,
   updateVehicle,
@@ -138,9 +139,7 @@ function Toggle({ value, onChange, label }: { value: boolean; onChange: (v: bool
           : 'bg-transparent text-white/30 border-outline-variant/20 hover:text-white/60'
       )}
     >
-      <span className={cn('font-material text-sm', value ? 'text-primary-container' : 'text-white/30')}>
-        {value ? 'check_circle' : 'radio_button_unchecked'}
-      </span>
+      {value ? <CheckCircle2 size={14} className="text-primary-container" /> : <Circle size={14} className="text-white/30" />}
       {label}
     </button>
   )
@@ -244,7 +243,7 @@ export default function VehicleDrawer({ mode, vehicleId, initialDraft, open, onC
             </p>
           </div>
           <button type="button" onClick={onClose} className="w-9 h-9 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/5 transition-colors">
-            <span className="font-material text-xl">close</span>
+            <X size={20} />
           </button>
         </div>
 
@@ -343,7 +342,7 @@ export default function VehicleDrawer({ mode, vehicleId, initialDraft, open, onC
                 Photos <span className="text-white/30">({draft.images.length})</span>
               </p>
               <label className="flex items-center gap-1.5 cursor-pointer px-3 py-1.5 bg-surface-container hover:bg-surface-container-high transition-colors">
-                <span className="font-material text-sm text-primary-container">add_photo_alternate</span>
+                <ImagePlus size={14} className="text-primary-container" />
                 <span className="font-label text-[10px] uppercase tracking-wider text-primary-container">Add Photos</span>
                 <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleImageFiles} />
               </label>
@@ -351,7 +350,7 @@ export default function VehicleDrawer({ mode, vehicleId, initialDraft, open, onC
 
             {uploadCount > 0 && (
               <div className="flex items-center gap-2 mb-3">
-                <span className="font-material text-sm text-primary-container animate-spin">progress_activity</span>
+                <Loader2 size={14} className="text-primary-container animate-spin" />
                 <span className="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">
                   Uploading {uploadCount} {uploadCount === 1 ? 'image' : 'images'}…
                 </span>
@@ -369,7 +368,7 @@ export default function VehicleDrawer({ mode, vehicleId, initialDraft, open, onC
                       className="absolute top-1 right-1 w-6 h-6 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       aria-label="Remove photo"
                     >
-                      <span className="font-material text-xs text-white">close</span>
+                      <X size={12} className="text-white" />
                     </button>
                     {i === 0 && (
                       <div className="absolute bottom-0 left-0 right-0 bg-primary-container/90 py-0.5 text-center">
@@ -381,7 +380,7 @@ export default function VehicleDrawer({ mode, vehicleId, initialDraft, open, onC
               </div>
             ) : (
               <div className="border border-dashed border-outline-variant/30 py-10 text-center">
-                <span className="font-material text-3xl text-white/20 block mb-2">add_photo_alternate</span>
+                <ImagePlus size={30} className="text-white/20 block mb-2" />
                 <p className="font-label text-[10px] uppercase tracking-widest text-white/30">No photos yet</p>
               </div>
             )}

@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { Search, Menu } from 'lucide-react'
 import { useScrolled } from '../../hooks/useScrolled'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
 import { NAV_LINKS } from '../../lib/constants'
@@ -69,14 +70,14 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
             onClick={() => navigate('/inventory')}
             className="w-11 h-11 flex items-center justify-center text-white hover:text-primary-container transition-colors duration-150"
           >
-            <span className="font-material text-[28px]">search</span>
+            <Search size={28} />
           </button>
           <button
             aria-label="Open menu"
             onClick={() => onDrawerChange(true)}
             className="w-11 h-11 flex items-center justify-center text-white hover:text-primary-container transition-colors duration-150"
           >
-            <span className="font-material text-[32px]">menu</span>
+            <Menu size={32} />
           </button>
         </div>
 

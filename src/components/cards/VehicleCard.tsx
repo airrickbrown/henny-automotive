@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Car } from 'lucide-react'
 import type { Vehicle } from '../../types/vehicle'
 import { cn, formatPrice } from '../../lib/utils'
 import StatusBadge from '../ui/StatusBadge'
@@ -56,7 +57,7 @@ export default function VehicleCard({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="font-material text-5xl text-on-surface-variant/20">directions_car</span>
+            <Car size={48} className="text-on-surface-variant/20" />
           </div>
         )}
 

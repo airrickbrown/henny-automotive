@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Building2, Store, BadgeCheck, Anchor, Quote, ArrowRight, MessageCircle } from 'lucide-react'
 import PageMeta from '../components/seo/PageMeta'
 import { buildWhatsAppUrl } from '../lib/tokens'
 import PageWrapper from '../components/layout/PageWrapper'
@@ -68,7 +69,7 @@ export default function AboutPage() {
               />
               <div className="relative z-10 p-7 h-full flex flex-col justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="font-material text-2xl text-primary-container">location_city</span>
+                  <Building2 size={24} className="text-primary-container" />
                   <span className="font-label text-xs font-bold uppercase tracking-widest text-white/60">
                     Headquarters
                   </span>
@@ -92,7 +93,7 @@ export default function AboutPage() {
               />
               <div className="relative z-10 p-7 h-full flex flex-col justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="font-material text-2xl text-primary-container">storefront</span>
+                  <Store size={24} className="text-primary-container" />
                   <span className="font-label text-xs font-bold uppercase tracking-widest text-white/60">
                     Showroom
                   </span>
@@ -110,7 +111,7 @@ export default function AboutPage() {
 
             {/* 150-Point Inspection */}
             <div className="bg-surface-container-high p-7 flex flex-col justify-between">
-              <span className="font-material-filled text-3xl text-secondary">verified</span>
+              <BadgeCheck size={30} className="text-secondary" />
               <div>
                 <p className="font-headline font-black italic uppercase text-xl text-white leading-tight mb-1">
                   150-Point Inspection
@@ -123,7 +124,7 @@ export default function AboutPage() {
 
             {/* Direct Port Clearance */}
             <div className="bg-surface-container-high p-7 flex flex-col justify-between">
-              <span className="font-material-filled text-3xl text-secondary">sailing</span>
+              <Anchor size={30} className="text-secondary" />
               <div>
                 <p className="font-headline font-black italic uppercase text-xl text-white leading-tight mb-1">
                   Direct Port Clearance
@@ -142,9 +143,7 @@ export default function AboutPage() {
               <p className="font-headline font-black italic uppercase text-2xl md:text-3xl text-white leading-tight">
                 View Current Inventory
               </p>
-              <span className="font-material text-4xl text-white/60 group-hover:translate-x-2 transition-transform duration-300">
-                arrow_forward
-              </span>
+              <ArrowRight size={36} className="text-white/60 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
 
           </div>
@@ -168,7 +167,7 @@ export default function AboutPage() {
               </div>
               {/* Quote overlay */}
               <div className="absolute -bottom-8 -right-4 md:-bottom-12 md:-right-8 bg-primary-container p-6 max-w-[260px] z-10">
-                <span className="font-material-filled text-2xl text-white/40 block mb-2">format_quote</span>
+                <Quote size={24} className="text-white/40 block mb-2" />
                 <p className="font-headline font-bold italic text-white text-sm leading-snug">
                   "Not just cars — a statement of arrival."
                 </p>
@@ -252,7 +251,7 @@ export default function AboutPage() {
             className="bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-8 py-4 ignition-glow hover:brightness-110 transition-all duration-150 active:scale-[0.98] inline-flex items-center gap-3"
           >
             Ask About Shipping
-            <span className="font-material-filled text-lg">chat</span>
+            <MessageCircle size={18} />
           </a>
         </div>
       </section>

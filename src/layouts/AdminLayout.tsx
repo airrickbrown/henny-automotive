@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { Menu } from 'lucide-react'
 import AdminSidebar from '../components/admin/AdminSidebar'
 import HennyLogo from '../components/ui/HennyLogo'
 
@@ -26,7 +27,7 @@ export default function AdminLayout() {
             className="w-9 h-9 flex items-center justify-center text-on-surface-variant hover:text-white transition-colors"
             aria-label="Open navigation"
           >
-            <span className="font-material text-2xl">menu</span>
+            <Menu size={24} />
           </button>
           <Link to="/admin">
             <HennyLogo width={100} />

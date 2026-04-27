@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { CheckCircle2, Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
 import HennyLogo from '../../components/ui/HennyLogo'
@@ -55,7 +56,7 @@ export default function AdminLoginPage() {
       >
         {passwordReset && (
           <div className="mb-6 flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded px-4 py-3">
-            <span className="font-material text-base text-green-400">check_circle</span>
+            <CheckCircle2 size={16} className="text-green-400" />
             <p className="font-label text-xs text-green-400 uppercase tracking-wider">Password updated — please sign in.</p>
           </div>
         )}
@@ -113,7 +114,7 @@ export default function AdminLoginPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors"
                 aria-label={show ? 'Hide password' : 'Show password'}
               >
-                <span className="font-material text-lg">{show ? 'visibility_off' : 'visibility'}</span>
+                {show ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
             {error && (

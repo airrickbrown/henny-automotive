@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { CheckCircle2, Send, MessageCircle, ExternalLink, Camera, MapPin, Store, type LucideIcon } from 'lucide-react'
 import PageMeta from '../components/seo/PageMeta'
 import HennyLogo from '../components/ui/HennyLogo'
 import { buildWhatsAppUrl, SNAPCHAT_URL } from '../lib/tokens'
@@ -8,50 +9,56 @@ import SectionLabel from '../components/ui/SectionLabel'
 import Turnstile from '../components/ui/Turnstile'
 
 // ── Channel card data ────────────────────────────────────────────────────────
-const CHANNELS = [
+
+const CHANNELS: Array<{
+  id: string
+  icon: LucideIcon
+  label: string
+  description: string
+  cta: string | null
+  href: string | null
+  accent: 'secondary' | 'snapchat' | 'default'
+  detail?: string
+}> = [
   {
     id: 'whatsapp',
-    icon: 'chat',
-    iconFill: true,
+    icon: MessageCircle,
     label: 'WhatsApp',
     description: 'Fastest response. Send us a message and we\'ll get back to you within the hour.',
     cta: 'Open WhatsApp',
     href: buildWhatsAppUrl('Hello, I\'d like to get in touch with Henny Automotive.'),
-    accent: 'secondary' as const,
+    accent: 'secondary',
   },
   {
     id: 'snapchat',
-    icon: 'photo_camera',
-    iconFill: true,
+    icon: Camera,
     label: 'Snapchat',
     description: 'Follow us for live walk-arounds, auction finds, and behind-the-scenes footage.',
     cta: 'Add on Snapchat',
     href: SNAPCHAT_URL,
-    accent: 'snapchat' as const,
+    accent: 'snapchat',
   },
   {
     id: 'houston',
-    icon: 'location_on',
-    iconFill: true,
+    icon: MapPin,
     label: 'Houston Office',
     description: 'Our US sourcing headquarters. Viewing by appointment.',
     cta: null,
     href: null,
-    accent: 'default' as const,
+    accent: 'default',
     detail: 'Houston, TX — United States 🇺🇸',
   },
   {
     id: 'accra',
-    icon: 'storefront',
-    iconFill: true,
+    icon: Store,
     label: 'Accra Showroom',
     description: 'Visit our West Africa showroom to see current stock in person.',
     cta: null,
     href: null,
-    accent: 'default' as const,
+    accent: 'default',
     detail: 'Accra, Ghana 🇬🇭',
   },
-] as const
+]
 
 // ── Accent styles ────────────────────────────────────────────────────────────
 const accentStyles = {
@@ -120,7 +127,7 @@ function InquiryForm() {
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <span className="font-material-filled text-5xl text-secondary mb-4">check_circle</span>
+        <CheckCircle2 size={48} className="text-secondary mb-4" />
         <h3 className="font-headline font-black italic uppercase text-white text-2xl mb-2">
           Message Sent!
         </h3>
@@ -212,7 +219,7 @@ function InquiryForm() {
         className="w-full bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs py-5 ignition-glow hover:brightness-110 active:scale-[0.99] transition-all duration-150 flex items-center justify-center gap-3"
       >
         Send via WhatsApp
-        <span className="font-material-filled text-lg">send</span>
+        <Send size={18} />
       </button>
 
       <p className="font-label text-[10px] text-white/20 text-center uppercase tracking-widest">
@@ -262,9 +269,7 @@ export default function ContactPage() {
                   className={`bg-surface-container-low border ${style.border} ${style.glow} p-6 transition-all duration-300`}
                 >
                   <div className="flex items-start gap-4">
-                    <span className={`font-material-filled text-2xl flex-shrink-0 mt-0.5 ${style.icon}`}>
-                      {ch.icon}
-                    </span>
+                    {(() => { const Icon = ch.icon; return <Icon size={24} className={`flex-shrink-0 mt-0.5 ${style.icon}`} /> })()}
                     <div className="flex-1 min-w-0">
                       <p className="font-headline font-bold uppercase tracking-tight text-white mb-1">
                         {ch.label}
@@ -285,7 +290,7 @@ export default function ContactPage() {
                           className={`mt-4 inline-flex items-center gap-2 ${style.cta} font-headline font-bold uppercase tracking-widest text-xs px-5 py-2.5 transition-all duration-150 hover:brightness-105 active:scale-95`}
                         >
                           {ch.cta}
-                          <span className="font-material text-base">open_in_new</span>
+                          <ExternalLink size={16} />
                         </a>
                       )}
                     </div>
@@ -326,7 +331,7 @@ export default function ContactPage() {
               className="w-10 h-10 flex items-center justify-center bg-surface-container-high border border-outline-variant/20 text-secondary hover:bg-secondary hover:text-on-secondary hover:border-secondary transition-all duration-150"
               aria-label="WhatsApp"
             >
-              <span className="font-material-filled text-xl">chat</span>
+              <MessageCircle size={20} />
             </a>
             <a
               href={SNAPCHAT_URL}

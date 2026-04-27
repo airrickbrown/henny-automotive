@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { Search, SearchX, CloudOff, LayoutGrid, List, ChevronLeft, ChevronRight } from 'lucide-react'
 import PageMeta from '../components/seo/PageMeta'
 import { useVehicleFilters } from '../hooks/useVehicleFilters'
 import { getVehicles } from '../lib/vehicles'
@@ -23,9 +24,7 @@ function MobileCategoryBar({
   return (
     <div className="space-y-4 mb-8 md:hidden">
       <div className="relative">
-        <span className="font-material absolute left-4 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none">
-          search
-        </span>
+        <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
         <input
           type="text"
           value={filters.search}
@@ -62,7 +61,7 @@ function MobileCategoryBar({
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center py-24 gap-6 text-center">
-      <span className="font-material text-5xl text-on-surface-variant/30">search_off</span>
+      <SearchX size={48} className="text-on-surface-variant/30" />
       <p className="font-headline text-xl font-black uppercase text-white/40">No Vehicles Found</p>
       <p className="font-body text-sm text-on-surface-variant max-w-xs">
         Try adjusting your filters or clearing your search.
@@ -105,7 +104,7 @@ function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode
           view === 'grid' ? 'bg-primary-container text-white' : 'text-white/30 hover:text-white'
         )}
       >
-        <span className="font-material text-lg">grid_view</span>
+        <LayoutGrid size={18} />
       </button>
       <button
         type="button"
@@ -116,7 +115,7 @@ function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode
           view === 'list' ? 'bg-primary-container text-white' : 'text-white/30 hover:text-white'
         )}
       >
-        <span className="font-material text-lg">view_list</span>
+        <List size={18} />
       </button>
     </div>
   )
@@ -197,7 +196,7 @@ export default function InventoryPage() {
             {/* Content */}
             {fetchError ? (
               <div className="py-24 text-center">
-                <span className="font-material text-5xl text-white/10 block mb-4">cloud_off</span>
+                <CloudOff size={48} className="text-white/10 block mb-4" />
                 <p className="font-headline font-bold uppercase text-white/40">Failed to load inventory</p>
                 <button type="button" onClick={load} className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary-container border-b border-primary-container pb-0.5">
                   Retry
@@ -224,11 +223,11 @@ export default function InventoryPage() {
             {!loading && filtered.length > 0 && (
               <div className="mt-20 flex justify-center items-center gap-3">
                 <button type="button" aria-label="Previous page" className="w-12 h-12 flex items-center justify-center border border-outline-variant/30 text-white hover:bg-primary-container hover:border-primary-container transition-all duration-150">
-                  <span className="font-material text-xl">chevron_left</span>
+                  <ChevronLeft size={20} />
                 </button>
                 <button type="button" className="w-12 h-12 flex items-center justify-center bg-primary-container text-white font-headline font-bold">1</button>
                 <button type="button" aria-label="Next page" className="w-12 h-12 flex items-center justify-center border border-outline-variant/30 text-white hover:bg-primary-container hover:border-primary-container transition-all duration-150">
-                  <span className="font-material text-xl">chevron_right</span>
+                  <ChevronRight size={20} />
                 </button>
               </div>
             )}

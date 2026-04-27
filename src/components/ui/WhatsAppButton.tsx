@@ -1,3 +1,4 @@
+import { MessageCircle } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 
@@ -33,7 +34,7 @@ export default function WhatsAppButton({
         className
       )}
     >
-      <span className="font-material-filled text-xl">chat</span>
+      <MessageCircle size={20} />
       {label}
     </a>
   )

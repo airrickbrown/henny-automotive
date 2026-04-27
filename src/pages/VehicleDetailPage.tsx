@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { Loader2, Car, Globe, MapPin, MousePointer2, Phone } from 'lucide-react'
 import PageMeta from '../components/seo/PageMeta'
 import { getVehicleBySlug, getRelatedVehicles } from '../lib/vehicles'
 import { formatPrice } from '../lib/utils'
@@ -52,7 +53,7 @@ export default function VehicleDetailPage() {
     return (
       <PageWrapper>
         <div className="flex items-center justify-center min-h-[60vh]">
-          <span className="font-material text-4xl text-white/20 animate-spin">progress_activity</span>
+          <Loader2 size={36} className="text-white/20 animate-spin" />
         </div>
       </PageWrapper>
     )
@@ -62,7 +63,7 @@ export default function VehicleDetailPage() {
     return (
       <PageWrapper>
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center px-6">
-          <span className="font-material text-6xl text-on-surface-variant/30">directions_car</span>
+          <Car size={60} className="text-on-surface-variant/30" />
           <h1 className="font-headline text-3xl font-black uppercase text-white">Vehicle Not Found</h1>
           <p className="font-body text-on-surface-variant">This vehicle may have been sold or removed.</p>
           <button
@@ -103,7 +104,7 @@ export default function VehicleDetailPage() {
             />
           ) : (
             <div className="w-full h-full bg-surface-container flex items-center justify-center">
-              <span className="font-material text-8xl text-on-surface-variant/20">directions_car</span>
+              <Car size={80} className="text-on-surface-variant/20" />
             </div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
@@ -125,7 +126,7 @@ export default function VehicleDetailPage() {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="font-material text-4xl text-on-surface-variant/20">directions_car</span>
+                  <Car size={36} className="text-on-surface-variant/20" />
                 </div>
               )}
             </div>
@@ -142,7 +143,7 @@ export default function VehicleDetailPage() {
                 <img src={img} alt={`${vehicle.make} ${vehicle.model}`} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full bg-surface-container flex items-center justify-center">
-                  <span className="font-material text-5xl text-on-surface-variant/20">directions_car</span>
+                  <Car size={48} className="text-on-surface-variant/20" />
                 </div>
               )}
             </div>
@@ -227,7 +228,7 @@ export default function VehicleDetailPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-surface-container-high p-6 md:p-8 flex items-start gap-4">
-                <span className="font-material text-3xl text-primary-container flex-shrink-0">public</span>
+                <Globe size={30} className="text-primary-container flex-shrink-0" />
                 <div>
                   <p className="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Origin</p>
                   <p className="font-body text-white font-medium">
@@ -236,7 +237,7 @@ export default function VehicleDetailPage() {
                 </div>
               </div>
               <div className="bg-surface-container-high p-6 md:p-8 flex items-start gap-4">
-                <span className="font-material text-3xl text-secondary flex-shrink-0">location_on</span>
+                <MapPin size={30} className="text-secondary flex-shrink-0" />
                 <div>
                   <p className="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Status</p>
                   <p className="font-body text-white font-medium">
@@ -248,11 +249,11 @@ export default function VehicleDetailPage() {
 
             <div className="md:hidden grid grid-cols-2 gap-4">
               <a href={SNAPCHAT_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-4 bg-surface-container-high active:scale-95 transition-transform">
-                <span className="font-material text-xl text-[#FFFC00]">swipe</span>
+                <MousePointer2 size={20} className="text-[#FFFC00]" />
                 <span className="font-headline font-bold uppercase text-[10px] tracking-widest text-white">Snapchat</span>
               </a>
               <a href="tel:+233000000000" className="flex items-center justify-center gap-2 py-4 bg-surface-container-high active:scale-95 transition-transform">
-                <span className="font-material text-xl text-white">call</span>
+                <Phone size={20} className="text-white" />
                 <span className="font-headline font-bold uppercase text-[10px] tracking-widest text-white">Call Office</span>
               </a>
             </div>
@@ -270,7 +271,7 @@ export default function VehicleDetailPage() {
               <WhatsAppButton label="Chat on WhatsApp" message={waMessage} fullWidth size="lg" />
               <SnapchatButton fullWidth size="lg" />
               <a href="tel:+233000000000" className="w-full border-2 border-outline-variant/30 hover:border-white text-white font-headline font-black text-base py-5 flex items-center justify-center gap-3 transition-colors duration-150">
-                <span className="font-material text-xl">call</span>
+                <Phone size={20} />
                 Call Now
               </a>
               <div className="pt-4 border-t border-outline-variant/10">
@@ -313,7 +314,7 @@ export default function VehicleDetailPage() {
                       <img src={v.images[0]} alt={`${v.make} ${v.model}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <span className="font-material text-4xl text-on-surface-variant/20">directions_car</span>
+                        <Car size={36} className="text-on-surface-variant/20" />
                       </div>
                     )}
                   </div>
@@ -342,7 +343,7 @@ export default function VehicleDetailPage() {
                         <img src={v.images[0]} alt={`${v.make} ${v.model}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                       ) : (
                         <div className="w-full h-full bg-surface-container flex items-center justify-center">
-                          <span className="font-material text-3xl text-on-surface-variant/20">directions_car</span>
+                          <Car size={30} className="text-on-surface-variant/20" />
                         </div>
                       )}
                     </div>

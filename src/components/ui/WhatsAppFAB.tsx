@@ -1,3 +1,4 @@
+import { MessageCircle } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 
 interface WhatsAppFABProps {
@@ -17,7 +18,7 @@ export default function WhatsAppFAB({ message, hidden }: WhatsAppFABProps) {
         md:bottom-8 md:right-8 md:rounded-full
         ${hidden ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100 hover:scale-110 active:scale-90'}`}
     >
-      <span className="font-material-filled text-3xl text-on-secondary">chat</span>
+      <MessageCircle size={30} className="text-on-secondary" />
     </a>
   )
 }
