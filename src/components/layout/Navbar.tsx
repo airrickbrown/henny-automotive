@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useScrolled } from '../../hooks/useScrolled'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
@@ -8,11 +7,15 @@ import { cn } from '../../lib/utils'
 import MobileNavDrawer from './MobileNavDrawer'
 import HennyLogo from '../ui/HennyLogo'
 
-export default function Navbar() {
+interface NavbarProps {
+  drawerOpen: boolean
+  onDrawerChange: (open: boolean) => void
+}
+
+export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
   const isScrolled = useScrolled(50)
   const isActive = useActiveRoute()
   const navigate = useNavigate()
-  const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
     <>
@@ -60,27 +63,27 @@ export default function Navbar() {
         </div>
 
         {/* Mobile right — search + hamburger */}
-        <div className="flex md:hidden items-center gap-4">
+        <div className="flex md:hidden items-center gap-1">
           <button
             aria-label="Search inventory"
             onClick={() => navigate('/inventory')}
-            className="text-white hover:text-primary-container transition-colors duration-150"
+            className="w-11 h-11 flex items-center justify-center text-white hover:text-primary-container transition-colors duration-150"
           >
-            <span className="font-material text-2xl">search</span>
+            <span className="font-material text-[28px]">search</span>
           </button>
           <button
             aria-label="Open menu"
-            onClick={() => setDrawerOpen(true)}
-            className="text-white hover:text-primary-container transition-colors duration-150"
+            onClick={() => onDrawerChange(true)}
+            className="w-11 h-11 flex items-center justify-center text-white hover:text-primary-container transition-colors duration-150"
           >
-            <span className="font-material text-3xl">menu</span>
+            <span className="font-material text-[32px]">menu</span>
           </button>
         </div>
 
       </div>
     </nav>
 
-    <MobileNavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+    <MobileNavDrawer open={drawerOpen} onClose={() => onDrawerChange(false)} />
     </>
   )
 }

@@ -14,15 +14,11 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  // Close on any navigation — route or hash anchor
+  // Close on any navigation — route change or hash anchor
   useEffect(() => {
     onClose()
   }, [pathname, hash]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -32,7 +28,8 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
       {/* Backdrop */}
       <div
         className={cn(
-          'fixed inset-0 bg-background/80 z-[60] transition-opacity duration-300 md:hidden',
+          'fixed inset-0 z-[60] transition-opacity duration-300 md:hidden',
+          'bg-black/70 backdrop-blur-sm',
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
@@ -42,13 +39,15 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
       {/* Drawer panel */}
       <aside
         className={cn(
-          'fixed top-0 right-0 h-screen w-[300px] bg-surface-container-low z-[70] flex flex-col transition-transform duration-300 ease-in-out md:hidden',
+          'fixed top-0 right-0 h-screen w-[300px] z-[70] flex flex-col md:hidden',
+          'transition-transform duration-300 ease-out',
+          'glass-drawer',
           open ? 'translate-x-0' : 'translate-x-full'
         )}
         aria-label="Navigation menu"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
+        <div className="flex items-center justify-between px-6 py-5">
           <Link to="/" aria-label="Henny Automotive — Home">
             <HennyLogo width={110} />
           </Link>
@@ -56,15 +55,18 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="w-9 h-9 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/5 transition-colors"
+            className="w-11 h-11 flex items-center justify-center text-white/40 hover:text-white transition-colors duration-150"
           >
-            <span className="font-material text-2xl">close</span>
+            <span className="font-material text-[28px]">close</span>
           </button>
         </div>
 
+        {/* Subtle divider */}
+        <div className="mx-6 h-px bg-white/[0.06]" />
+
         {/* Nav links */}
-        <nav className="flex-1 px-4 py-6 overflow-y-auto">
-          <ul className="space-y-1">
+        <nav className="flex-1 px-3 py-4 overflow-y-auto">
+          <ul className="space-y-0.5">
             {NAV_LINKS.map((link) => {
               const active = link.href === '/'
                 ? pathname === '/'
@@ -74,10 +76,10 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
                   <Link
                     to={link.href}
                     className={cn(
-                      'flex items-center justify-between px-4 py-4 font-headline font-bold uppercase tracking-widest text-sm transition-all duration-150',
+                      'flex items-center justify-between px-4 py-4 font-headline font-bold uppercase tracking-widest text-sm transition-all duration-150 rounded-sm',
                       active
-                        ? 'text-primary-container bg-primary-container/5 border-l-2 border-primary-container pl-[14px]'
-                        : 'text-white/70 hover:text-white hover:bg-white/5'
+                        ? 'text-primary-container font-black bg-primary-container/[0.07] border-l-2 border-primary-container pl-[14px]'
+                        : 'text-white/40 hover:text-white/80 hover:bg-white/[0.04]'
                     )}
                   >
                     {link.label}
@@ -90,11 +92,10 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
             })}
           </ul>
 
-          {/* Divider */}
-          <div className="my-6 border-t border-white/5" />
+          <div className="my-6 h-px bg-white/[0.06] mx-3" />
 
           {/* Social CTAs */}
-          <div className="space-y-3 px-4">
+          <div className="space-y-2.5 px-3">
             <a
               href={buildWhatsAppUrl('Hello, I found you on the Henny Automotive website.')}
               target="_blank"
@@ -124,8 +125,9 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
           </div>
         </nav>
 
-        {/* Footer — location */}
-        <div className="px-8 py-5 border-t border-white/5">
+        {/* Footer */}
+        <div className="mx-6 h-px bg-white/[0.06]" />
+        <div className="px-8 py-5">
           <div className="flex items-start gap-3">
             <span className="font-material text-sm text-primary-container mt-0.5">location_on</span>
             <div>

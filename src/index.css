@@ -77,6 +77,13 @@
     -webkit-backdrop-filter: blur(16px);
   }
 
+  /* Glassmorphism — mobile nav drawer */
+  .glass-drawer {
+    background: rgba(20, 19, 19, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
   /* Glassmorphism — ghost CTA button (hero secondary) */
   .glass-btn {
     background: rgba(255, 255, 255, 0.05);
