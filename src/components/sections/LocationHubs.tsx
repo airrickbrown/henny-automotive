@@ -1,4 +1,4 @@
-import { Gavel, ShieldCheck, Truck, MessageCircle, Anchor, CheckSquare, Handshake, type LucideIcon } from 'lucide-react'
+import { Gavel, ShieldCheck, Truck, MessageCircle, Anchor, CheckSquare, Handshake, ExternalLink, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 
 function Detail({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
@@ -83,40 +83,71 @@ export function HubGhana() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
 
         {/* Info panel — left on desktop */}
-        <div className="bg-surface-container p-8 md:p-10 space-y-8 order-2 md:order-1">
+        <div className="bg-surface-container order-2 md:order-1 overflow-hidden">
 
-          <div>
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Base</p>
-            <p className="font-headline font-black text-white text-2xl">Tema / Accra, GH</p>
-          </div>
-
-          <div className="border-t border-white/[0.06] pt-8">
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-3">Operations</p>
-            <div className="flex flex-wrap gap-2">
-              {['Port Clearing', 'Customs Processing', 'Vehicle Delivery', 'Customer Handover'].map(tag => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 bg-surface-container-high font-label text-[10px] uppercase tracking-widest text-white/60"
-                >
-                  {tag}
-                </span>
-              ))}
+          {/* Interactive map — edge to edge */}
+          <div className="relative h-56 w-full">
+            <iframe
+              title="Tema Port, Ghana"
+              src="https://maps.google.com/maps?q=Tema+Port,+Tema,+Ghana&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              className="absolute inset-0 w-full h-full border-0"
+              style={{ filter: 'grayscale(0.85) brightness(0.5) contrast(1.15)' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            {/* Pin label */}
+            <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-surface-container/95 backdrop-blur-sm px-3 py-1.5 border border-white/[0.08] pointer-events-none">
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary">🇬🇭 Tema Port</span>
             </div>
-          </div>
-
-          <div className="border-t border-white/[0.06] pt-8">
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Track your vehicle</p>
+            {/* Open in Maps link */}
             <a
-              href={buildWhatsAppUrl('Hi, I want to check the status of my vehicle delivery in Ghana.')}
+              href="https://maps.google.com/maps?q=Tema+Port,+Tema,+Ghana"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-secondary text-on-secondary font-headline font-bold uppercase tracking-widest text-xs px-6 py-4 hover:brightness-105 active:scale-[0.98] transition-all duration-150"
+              className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-surface-container/95 backdrop-blur-sm px-3 py-1.5 border border-white/[0.08] font-label text-[10px] uppercase tracking-widest text-white/50 hover:text-secondary transition-colors duration-150"
             >
-              <MessageCircle size={16} />
-              WhatsApp Ghana Team
+              <ExternalLink size={10} />
+              Open in Maps
             </a>
           </div>
 
+          {/* Panel content */}
+          <div className="p-8 md:p-10 space-y-8">
+
+            <div>
+              <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Base</p>
+              <p className="font-headline font-black text-white text-2xl">Tema / Accra, GH</p>
+            </div>
+
+            <div className="border-t border-white/[0.06] pt-8">
+              <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-3">Operations</p>
+              <div className="flex flex-wrap gap-2">
+                {['Port Clearing', 'Customs Processing', 'Vehicle Delivery', 'Customer Handover'].map(tag => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 bg-surface-container-high font-label text-[10px] uppercase tracking-widest text-white/60"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-white/[0.06] pt-8">
+              <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Track your vehicle</p>
+              <a
+                href={buildWhatsAppUrl('Hi, I want to check the status of my vehicle delivery in Ghana.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-secondary text-on-secondary font-headline font-bold uppercase tracking-widest text-xs px-6 py-4 hover:brightness-105 active:scale-[0.98] transition-all duration-150"
+              >
+                <MessageCircle size={16} />
+                WhatsApp Ghana Team
+              </a>
+            </div>
+
+          </div>
         </div>
 
         {/* Content — right on desktop */}
