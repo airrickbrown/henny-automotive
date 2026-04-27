@@ -90,11 +90,11 @@ export default function HeroSection() {
               onClick={() => navigate('/inventory')}
             />
             <GhostButton
-              label="USA Logistics"
+              label="Source a Car"
               size="lg"
               glass
               fullWidth
-              href="/about"
+              href="/#usa-sourcing"
             />
           </div>
         </div>

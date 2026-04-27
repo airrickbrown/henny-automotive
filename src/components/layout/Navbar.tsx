@@ -51,15 +51,15 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
           ))}
         </div>
 
-        {/* Desktop right — WhatsApp CTA */}
+        {/* Desktop right — CTA */}
         <div className="hidden md:flex items-center">
           <a
-            href={buildWhatsAppUrl()}
+            href={buildWhatsAppUrl('Hi, I\'d like to get a quote for a vehicle.')}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-ignition font-headline font-black uppercase text-xs tracking-widest text-white px-6 py-2 rounded ignition-glow hover:-translate-y-0.5 active:scale-95 transition-all duration-150"
           >
-            WhatsApp
+            Get a Quote
           </a>
         </div>
 

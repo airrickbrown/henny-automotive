@@ -39,7 +39,7 @@ export default function AboutPage() {
               <span className="text-primary-container">Legacy.</span>
             </h1>
             <p className="font-body text-on-surface-variant text-lg leading-relaxed max-w-md">
-              Born in Houston, built for Accra. Henny Automotive has been
+              Built for Accra. Powered by the U.S. market. Henny Automotive has been
               redefining premium vehicle sourcing between the United States
               and West Africa for over a decade — one flawless delivery at a time.
             </p>
@@ -71,15 +71,15 @@ export default function AboutPage() {
                 <div className="flex items-center gap-2">
                   <Building2 size={24} className="text-primary-container" />
                   <span className="font-label text-xs font-bold uppercase tracking-widest text-white/60">
-                    Headquarters
+                    USA Sourcing
                   </span>
                 </div>
                 <div>
                   <p className="font-headline font-black italic uppercase text-3xl text-white leading-none mb-1">
-                    Houston, TX
+                    United States
                   </p>
                   <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant">
-                    United States 🇺🇸
+                    Vehicle Sourcing 🇺🇸
                   </p>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function AboutPage() {
             <span className="text-primary-container">Local Trust.</span>
           </h2>
           <p className="font-body text-on-surface-variant text-lg max-w-lg leading-relaxed mb-8">
-            From Houston auction lanes to your driveway in Accra — every
+            From U.S. auction lanes to your driveway in Accra — every
             kilometre tracked, every document handled.
           </p>
           <a

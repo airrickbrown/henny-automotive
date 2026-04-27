@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Car, MessageCircle, Flag, MapPin, type LucideIcon } from 'lucide-react'
+import { Car, MessageCircle, Search, MapPin, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
 
@@ -53,9 +53,9 @@ export default function MobileBottomNav() {
           <TabItem icon={MessageCircle} label="WhatsApp" className="active:bg-secondary/20" />
         </a>
 
-        {/* USA Hub — homepage anchor (client-side navigation) */}
-        <Link to={{ pathname: '/', hash: '#usa-hub' }} aria-label="USA Hub">
-          <TabItem icon={Flag} label="USA Hub" />
+        {/* Source a Car — links to USA Vehicle Sourcing section */}
+        <Link to={{ pathname: '/', hash: '#usa-sourcing' }} aria-label="Source a Car">
+          <TabItem icon={Search} label="Source" />
         </Link>
 
         {/* Ghana Hub — homepage anchor (client-side navigation) */}

@@ -133,7 +133,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
             <MapPin size={14} className="text-primary-container mt-0.5" />
             <div>
               <p className="font-label text-[10px] uppercase tracking-widest text-white/40">
-                Houston, TX &nbsp;·&nbsp; Accra, Ghana
+                USA Sourcing &nbsp;·&nbsp; Accra, Ghana
               </p>
               <p className="font-label text-[10px] uppercase tracking-widest text-white/20 mt-0.5">
                 Est. 2014

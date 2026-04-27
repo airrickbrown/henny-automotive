@@ -39,7 +39,7 @@ export default function GlobalLogistics() {
                 USA 🇺🇸
               </p>
               <p className="font-label text-xs uppercase tracking-widest text-primary-container font-bold mt-2">
-                HQ: Houston, Texas
+                Sourcing: U.S. Auctions
               </p>
             </div>
           </div>
