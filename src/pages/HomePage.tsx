@@ -4,6 +4,7 @@ import MarketSourcingGrid from '../components/sections/MarketSourcingGrid'
 import FeaturedPerformance from '../components/sections/FeaturedPerformance'
 import EngineeredForTrust from '../components/sections/EngineeredForTrust'
 import GlobalLogistics from '../components/sections/GlobalLogistics'
+import { HubUSA, HubGhana } from '../components/sections/LocationHubs'
 import PartsPreview from '../components/sections/PartsPreview'
 import TestimonialBlock from '../components/sections/TestimonialBlock'
 import CTABanner from '../components/sections/CTABanner'
@@ -21,6 +22,8 @@ export default function HomePage() {
       <FeaturedPerformance />
       <EngineeredForTrust />
       <GlobalLogistics />
+      <HubUSA />
+      <HubGhana />
       <PartsPreview />
       <TestimonialBlock />
       <CTABanner />
