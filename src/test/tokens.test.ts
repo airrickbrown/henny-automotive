@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildWhatsAppUrl, WHATSAPP_BASE_URL, SNAPCHAT_URL, SNAPCHAT_HANDLE } from '../lib/tokens'
+import { buildWhatsAppUrl, WHATSAPP_BASE_URL, SNAPCHAT_URL } from '../lib/tokens'
 
 describe('buildWhatsAppUrl', () => {
   it('returns the base URL when no message is provided', () => {
@@ -18,8 +18,7 @@ describe('buildWhatsAppUrl', () => {
 })
 
 describe('SNAPCHAT_URL', () => {
-  it('points to the correct Snapchat handle', () => {
-    expect(SNAPCHAT_URL).toContain(SNAPCHAT_HANDLE)
+  it('points to the Snapchat share link', () => {
     expect(SNAPCHAT_URL).toContain('snapchat.com')
   })
 })

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { WHATSAPP_NUMBER, SNAPCHAT_HANDLE } from '../../lib/tokens'
+import { WHATSAPP_NUMBER, SNAPCHAT_URL } from '../../lib/tokens'
 import { getAllVehicles } from '../../lib/vehicles'
 import { cn } from '../../lib/utils'
 
@@ -68,7 +68,7 @@ const CONDITIONS = ['NEW (LOW KM)', 'PRE-OWNED USA', 'LOCAL STOCK']
 
 export default function AdminSettingsPage() {
   const [whatsapp, setWhatsapp]     = useState(WHATSAPP_NUMBER)
-  const [snapchat, setSnapchat]     = useState(SNAPCHAT_HANDLE)
+  const [snapchat, setSnapchat]     = useState(SNAPCHAT_URL)
   const [siteName, setSiteName]     = useState('Henny Automotive')
   const [tagline, setTagline]       = useState('The Kinetic Monolith')
   const [showPrices, setShowPrices] = useState(true)
@@ -113,8 +113,8 @@ export default function AdminSettingsPage() {
           <FieldRow label="WhatsApp Number" description="International format. Used for all inquiry CTAs.">
             <input type="text" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} className={inputClass} placeholder="+233000000000" />
           </FieldRow>
-          <FieldRow label="Snapchat Handle" description="Username only, without @.">
-            <input type="text" value={snapchat} onChange={(e) => setSnapchat(e.target.value)} className={inputClass} placeholder="hennyauto" />
+          <FieldRow label="Snapchat URL" description="Full Snapchat share link (e.g. snapchat.com/t/...).">
+            <input type="text" value={snapchat} onChange={(e) => setSnapchat(e.target.value)} className={inputClass} placeholder="https://snapchat.com/t/..." />
           </FieldRow>
         </SettingsSection>
 

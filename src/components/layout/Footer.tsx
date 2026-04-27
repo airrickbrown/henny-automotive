@@ -1,7 +1,6 @@
 import { useState, useCallback, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  WHATSAPP_BASE_URL,
   SNAPCHAT_URL,
   INSTAGRAM_URL,
   TIKTOK_URL,
