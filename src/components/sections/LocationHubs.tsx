@@ -99,10 +99,10 @@ export function HubGhana() {
         <div className="bg-surface-container order-2 md:order-1 overflow-hidden">
 
           {/* Interactive map — edge to edge */}
-          <div className="relative h-56 w-full">
+          <div className="relative h-72 w-full">
             <iframe
               title="Tema Port, Ghana"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.01%2C5.58%2C0.05%2C5.64&layer=mapnik&marker=5.608%2C0.016"
+              src="https://maps.google.com/maps?q=Tema+Port,+Tema,+Ghana&t=k&z=15&output=embed"
               className="absolute inset-0 w-full h-full border-0"
               allowFullScreen
               loading="lazy"
