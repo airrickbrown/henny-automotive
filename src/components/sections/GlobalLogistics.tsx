@@ -29,7 +29,7 @@ export default function GlobalLogistics() {
                 loading="lazy"
               />
             </div>
-            <div className="bg-surface-bright p-6">
+            <div id="usa-hub" className="bg-surface-bright p-6">
               <p className="font-headline font-black text-white text-4xl italic">
                 USA 🇺🇸
               </p>
@@ -41,7 +41,7 @@ export default function GlobalLogistics() {
 
           {/* Column 2 — offset down, GH card top, photo bottom */}
           <div className="space-y-4 pt-12">
-            <div className="bg-primary-container p-6">
+            <div id="ghana-hub" className="bg-primary-container p-6">
               <p className="font-headline font-black text-white text-4xl italic">
                 GH 🇬🇭
               </p>
