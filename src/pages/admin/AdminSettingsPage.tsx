@@ -239,26 +239,6 @@ export default function AdminSettingsPage() {
           )}
         </div>
 
-        {/* SQL migration hint */}
-        <div className="bg-surface-container-low border-l-2 border-white/10 px-4 py-3">
-          <p className="font-label text-[10px] uppercase tracking-widest text-white/30">
-            <span className="text-white/50 font-bold">Setup:</span>{' '}
-            Run this SQL in your Supabase dashboard if the settings table does not exist yet:
-          </p>
-          <pre className="font-mono text-[10px] text-white/30 mt-2 whitespace-pre-wrap leading-relaxed">
-{`CREATE TABLE IF NOT EXISTS site_settings (
-  key   TEXT PRIMARY KEY,
-  value TEXT NOT NULL
-);
-INSERT INTO site_settings (key, value) VALUES
-  ('tagline',          'The Kinetic Monolith'),
-  ('site_name',        'Henny Automotive'),
-  ('show_prices',      'true'),
-  ('maintenance_mode', 'false')
-ON CONFLICT (key) DO NOTHING;`}
-          </pre>
-        </div>
-
       </div>
     </div>
   )

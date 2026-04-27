@@ -85,9 +85,13 @@ export default function HeroSection() {
         <div className="relative z-10 px-6 pb-28">
           <SectionLabel className="mb-4">Engineered for Prestige</SectionLabel>
 
-          <h1 className="font-headline font-black italic uppercase leading-[0.9] tracking-tighter text-[clamp(2.75rem,13vw,5rem)] mb-8">
+          <h1 className="font-headline font-black italic uppercase leading-[0.9] tracking-tighter text-[clamp(2.75rem,13vw,5rem)] mb-4">
             {tagline}
           </h1>
+
+          <p className="font-body text-on-surface-variant text-sm leading-relaxed mb-6">
+            Premium vehicles sourced from the USA, delivered to your door in Ghana.
+          </p>
 
           {/* Single WhatsApp CTA — the primary conversion action on mobile */}
           <a
