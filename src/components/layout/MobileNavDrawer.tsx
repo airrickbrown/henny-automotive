@@ -33,7 +33,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
       {/* Backdrop */}
       <div
         className={cn(
-          'fixed inset-0 bg-background/80 z-40 transition-opacity duration-300 md:hidden',
+          'fixed inset-0 bg-background/80 z-[60] transition-opacity duration-300 md:hidden',
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
@@ -43,7 +43,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
       {/* Drawer panel */}
       <aside
         className={cn(
-          'fixed top-0 right-0 h-screen w-[300px] bg-surface-container-low z-50 flex flex-col transition-transform duration-300 ease-in-out md:hidden',
+          'fixed top-0 right-0 h-screen w-[300px] bg-surface-container-low z-[70] flex flex-col transition-transform duration-300 ease-in-out md:hidden',
           open ? 'translate-x-0' : 'translate-x-full'
         )}
         aria-label="Navigation menu"
