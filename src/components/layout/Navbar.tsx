@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Search, Menu } from 'lucide-react'
 import { useScrolled } from '../../hooks/useScrolled'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
@@ -7,6 +8,7 @@ import { buildWhatsAppUrl } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
 import MobileNavDrawer from './MobileNavDrawer'
 import HennyLogo from '../ui/HennyLogo'
+import SearchOverlay from '../ui/SearchOverlay'
 
 interface NavbarProps {
   drawerOpen: boolean
@@ -16,7 +18,7 @@ interface NavbarProps {
 export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
   const isScrolled = useScrolled(50)
   const isActive = useActiveRoute()
-  const navigate = useNavigate()
+  const [searchOpen, setSearchOpen] = useState(false)
 
   return (
     <>
@@ -67,7 +69,7 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
         <div className="flex md:hidden items-center gap-1">
           <button
             aria-label="Search inventory"
-            onClick={() => navigate('/inventory')}
+            onClick={() => setSearchOpen(true)}
             className="w-11 h-11 flex items-center justify-center text-white hover:text-primary-container transition-colors duration-150"
           >
             <Search size={28} />
@@ -85,6 +87,7 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
     </nav>
 
     <MobileNavDrawer open={drawerOpen} onClose={() => onDrawerChange(false)} />
+    <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   )
 }
