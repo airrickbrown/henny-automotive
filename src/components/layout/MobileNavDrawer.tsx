@@ -50,7 +50,7 @@ export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps)
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5">
           <Link to="/" aria-label="Henny Automotive — Home">
-            <HennyLogo width={110} />
+            <HennyLogo width={90} />
           </Link>
           <button
             type="button"

@@ -32,7 +32,7 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
 
         {/* Brand logo */}
         <Link to="/" className="hover:opacity-90 transition-opacity flex-shrink-0" aria-label="Henny Automotive — Home">
-          <HennyLogo width={110} />
+          <HennyLogo width={80} />
         </Link>
 
         {/* Desktop nav links */}
