@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Search, Menu } from 'lucide-react'
 import { useScrolled } from '../../hooks/useScrolled'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
@@ -7,6 +8,7 @@ import { buildWhatsAppUrl } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
 import MobileNavDrawer from './MobileNavDrawer'
 import HennyLogo from '../ui/HennyLogo'
+import SearchOverlay from '../ui/SearchOverlay'
 
 interface NavbarProps {
   drawerOpen: boolean
@@ -16,7 +18,7 @@ interface NavbarProps {
 export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
   const isScrolled = useScrolled(50)
   const isActive = useActiveRoute()
-  const navigate = useNavigate()
+  const [searchOpen, setSearchOpen] = useState(false)
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
 
         {/* Brand logo */}
         <Link to="/" className="hover:opacity-90 transition-opacity flex-shrink-0" aria-label="Henny Automotive — Home">
-          <HennyLogo width={110} maxHeight={44} />
+          <HennyLogo width={110} />
         </Link>
 
         {/* Desktop nav links */}
@@ -51,15 +53,15 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
           ))}
         </div>
 
-        {/* Desktop right — WhatsApp CTA */}
+        {/* Desktop right — CTA */}
         <div className="hidden md:flex items-center">
           <a
-            href={buildWhatsAppUrl()}
+            href={buildWhatsAppUrl('Hi, I\'d like to get a quote for a vehicle.')}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-ignition font-headline font-black uppercase text-xs tracking-widest text-white px-6 py-2 rounded ignition-glow hover:-translate-y-0.5 active:scale-95 transition-all duration-150"
           >
-            WhatsApp
+            Get a Quote
           </a>
         </div>
 
@@ -67,7 +69,7 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
         <div className="flex md:hidden items-center gap-1">
           <button
             aria-label="Search inventory"
-            onClick={() => navigate('/inventory')}
+            onClick={() => setSearchOpen(true)}
             className="w-11 h-11 flex items-center justify-center text-white hover:text-primary-container transition-colors duration-150"
           >
             <Search size={28} />
@@ -85,6 +87,7 @@ export default function Navbar({ drawerOpen, onDrawerChange }: NavbarProps) {
     </nav>
 
     <MobileNavDrawer open={drawerOpen} onClose={() => onDrawerChange(false)} />
+    <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   )
 }

@@ -5,6 +5,8 @@ import AdminLayout from './layouts/AdminLayout'
 import RequireAuth from './components/admin/RequireAuth'
 import ErrorBoundary from './components/ErrorBoundary'
 import ScrollToTop from './components/ScrollToTop'
+import { SettingsProvider } from './contexts/SettingsContext'
+import { ImagesProvider } from './contexts/ImagesContext'
 
 const HomePage               = lazy(() => import('./pages/HomePage'))
 const InventoryPage          = lazy(() => import('./pages/InventoryPage'))
@@ -24,9 +26,12 @@ const AdminPartsPage         = lazy(() => import('./pages/admin/AdminPartsPage')
 const AdminLeadsPage         = lazy(() => import('./pages/admin/AdminLeadsPage'))
 const AdminSettingsPage      = lazy(() => import('./pages/admin/AdminSettingsPage'))
 const AdminNewsletterPage    = lazy(() => import('./pages/admin/AdminNewsletterPage'))
+const AdminImagesPage        = lazy(() => import('./pages/admin/AdminImagesPage'))
 
 export default function App() {
   return (
+    <SettingsProvider>
+    <ImagesProvider>
     <>
     <ScrollToTop />
     <Suspense fallback={null}>
@@ -57,6 +62,7 @@ export default function App() {
             <Route path="/admin/leads" element={<AdminLeadsPage />} />
             <Route path="/admin/newsletter" element={<AdminNewsletterPage />} />
             <Route path="/admin/settings" element={<AdminSettingsPage />} />
+            <Route path="/admin/images" element={<AdminImagesPage />} />
           </Route>
         </Route>
 
@@ -65,5 +71,7 @@ export default function App() {
       </Routes>
     </Suspense>
     </>
+    </ImagesProvider>
+    </SettingsProvider>
   )
 }

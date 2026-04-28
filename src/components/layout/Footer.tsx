@@ -179,9 +179,9 @@ export default function Footer() {
             <nav className="space-y-3.5">
               <NavLink to="/">Home</NavLink>
               <NavLink to="/inventory">Inventory</NavLink>
-              <NavLink to="/parts">Parts</NavLink>
               <NavLink to="/about">About</NavLink>
               <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/parts">Parts &amp; Accessories</NavLink>
             </nav>
 
             <ColHeading className="mt-10">Legal</ColHeading>
@@ -197,8 +197,8 @@ export default function Footer() {
             <div className="space-y-6">
 
               <div>
-                <p className="font-label text-[10px] uppercase tracking-widest text-primary-container mb-1.5">USA Logistics Hub</p>
-                <p className="font-body text-sm text-white/60 leading-relaxed">Houston, TX</p>
+                <p className="font-label text-[10px] uppercase tracking-widest text-primary-container mb-1.5">USA Vehicle Sourcing</p>
+                <p className="font-body text-sm text-white/60 leading-relaxed">Sourcing from U.S. auctions &amp; dealers</p>
               </div>
 
               <div>

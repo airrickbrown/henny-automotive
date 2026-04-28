@@ -4,15 +4,15 @@ import { buildWhatsAppUrl } from '../../lib/tokens'
 
 const IMAGE_PANELS = [
   {
-    image: '/images/parts-engine.jpg',
-    alt: 'High-performance engine block',
+    image: '/images/parts/v8-mustang-engine.jpg',
+    alt: 'High-performance V8 engine block',
     title: 'Engines',
     subtitle: 'Complete Swaps Available',
   },
   {
-    image: '/images/parts-tires.jpg',
-    alt: 'High-performance tires on black rims',
-    title: 'Tires',
+    image: '/images/parts/forged-alloy-wheels.jpg',
+    alt: 'Forged alloy wheels and performance tyres',
+    title: 'Wheels & Tyres',
     subtitle: 'Premium Brands Only',
   },
 ] as const

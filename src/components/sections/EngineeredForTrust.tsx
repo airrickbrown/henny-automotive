@@ -23,7 +23,7 @@ const CARDS: Array<{
     icon: Gauge,
     iconColor: 'white',
     title: 'Unmatched Speed',
-    body: 'Fast-track shipping from Houston/NJ to Tema Harbor.',
+    body: 'Fast-track shipping from U.S. ports to Tema Harbour, Ghana.',
     variant: 'accent',
     className: '',
   },

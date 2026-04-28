@@ -1,4 +1,5 @@
 import { Network, Anchor, type LucideIcon } from 'lucide-react'
+import { useImages } from '../../contexts/ImagesContext'
 
 const BULLETS: { icon: LucideIcon; title: string; body: string }[] = [
   {
@@ -16,7 +17,7 @@ const BULLETS: { icon: LucideIcon; title: string; body: string }[] = [
 
 
 export default function GlobalLogistics() {
-
+  const images = useImages()
   return (
     <section id="logistics" className="py-24 md:py-32 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
@@ -28,7 +29,7 @@ export default function GlobalLogistics() {
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden bg-surface-container">
               <img
-                src="/images/logistics-port-usa.jpg"
+                src={images['logistics-usa']}
                 alt="American container port"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 loading="lazy"
@@ -39,7 +40,7 @@ export default function GlobalLogistics() {
                 USA 🇺🇸
               </p>
               <p className="font-label text-xs uppercase tracking-widest text-primary-container font-bold mt-2">
-                HQ: Houston, Texas
+                Sourcing: U.S. Auctions
               </p>
             </div>
           </div>
@@ -56,7 +57,7 @@ export default function GlobalLogistics() {
             </div>
             <div className="aspect-square overflow-hidden bg-surface-container">
               <img
-                src="/images/logistics-workshop-gh.jpg"
+                src={images['logistics-ghana']}
                 alt="Ghana automotive workshop"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 loading="lazy"

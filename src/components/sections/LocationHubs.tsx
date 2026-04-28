@@ -1,5 +1,6 @@
-import { Gavel, ShieldCheck, Truck, MessageCircle, Anchor, CheckSquare, Handshake, ExternalLink, type LucideIcon } from 'lucide-react'
+import { Gavel, ShieldCheck, Ship, Car, MessageCircle, Anchor, CheckSquare, Handshake, ExternalLink, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
+import { useImages } from '../../contexts/ImagesContext'
 
 function Detail({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
   return (
@@ -11,66 +12,80 @@ function Detail({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
 }
 
 export function HubUSA() {
+  const images = useImages()
   return (
-    <section id="usa-hub" className="py-24 md:py-32 px-6 md:px-8 bg-surface-container-low">
+    <section id="usa-sourcing" className="py-24 md:py-32 px-6 md:px-8 bg-surface-container-low">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
 
         {/* Content */}
         <div>
           <p className="font-label text-xs uppercase tracking-[0.25em] text-primary-container font-bold mb-4">
-            🇺🇸 &nbsp;Houston, Texas
+            🇺🇸 &nbsp;United States
           </p>
           <h2 className="font-headline font-black text-white uppercase leading-none text-[clamp(2.5rem,5vw,3.75rem)] mb-6">
-            USA Logistics<br />
-            <span className="text-primary-container">Hub</span>
+            USA Vehicle<br />
+            <span className="text-primary-container">Sourcing</span>
           </h2>
           <p className="font-body text-lg text-on-surface-variant leading-relaxed mb-10">
-            Our Houston command center manages all North American vehicle sourcing
-            and export operations — from dealer-only auction floors to container
-            loading at the port.
+            Henny Automotive helps you source the right vehicle from the U.S. market
+            and coordinates every step of the process — from finding the car to
+            delivering it to your door in Ghana.
           </p>
           <ul className="space-y-4">
-            <Detail icon={Gavel}        text="Direct bidding access to insurance, salvage, and clean-title auctions across the USA" />
-            <Detail icon={ShieldCheck}  text="Licensed exporter with full documentation handled in-house — no third-party agents" />
-            <Detail icon={Truck}        text="Container booking and port logistics coordinated from our Houston office" />
+            <Detail icon={Gavel}      text="Sourcing from trusted U.S. auctions and licensed dealers — clean titles, inspected vehicles" />
+            <Detail icon={ShieldCheck} text="Vehicle selection support and condition checks before purchase — no guesswork" />
+            <Detail icon={Ship}        text="Full shipping coordination to Ghana, including container booking and port documentation" />
+            <Detail icon={Car}         text="Delivery support after arrival — customs clearance, DVLA processing, and handover at your location" />
           </ul>
         </div>
 
         {/* Info panel */}
-        <div className="bg-surface-container p-8 md:p-10 space-y-8">
+        <div className="bg-surface-container overflow-hidden">
 
-          <div>
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Base</p>
-            <p className="font-headline font-black text-white text-2xl">Houston, TX</p>
-          </div>
-
-          <div className="border-t border-white/[0.06] pt-8">
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-3">Operations</p>
-            <div className="flex flex-wrap gap-2">
-              {['Vehicle Sourcing', 'Auction Bidding', 'Export Licensing', 'Container Shipping'].map(tag => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 bg-surface-container-high font-label text-[10px] uppercase tracking-widest text-white/60"
-                >
-                  {tag}
-                </span>
-              ))}
+          {/* Sourcing image */}
+          <div className="relative h-56 w-full overflow-hidden">
+            <img
+              src={images['logistics-usa']}
+              alt="U.S. vehicle export port"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent" />
+            <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-surface-container/90 backdrop-blur-sm px-3 py-1.5 border border-white/[0.08]">
+              <span className="font-label text-[10px] uppercase tracking-widest text-primary-container">🇺🇸 U.S. Sourcing</span>
             </div>
           </div>
 
-          <div className="border-t border-white/[0.06] pt-8">
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Enquire about a vehicle</p>
-            <a
-              href={buildWhatsAppUrl('Hi, I have a question about sourcing a vehicle from your USA hub.')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-6 py-4 ignition-glow hover:brightness-110 active:scale-[0.98] transition-all duration-150"
-            >
-              <MessageCircle size={16} />
-              WhatsApp USA Team
-            </a>
-          </div>
+          <div className="p-8 md:p-10 space-y-8">
 
+            <div className="border-b border-white/[0.06] pb-8">
+              <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-3">What we handle for you</p>
+              <div className="flex flex-wrap gap-2">
+                {['Auction Sourcing', 'Vehicle Inspection', 'Export Docs', 'Container Shipping', 'Ghana Delivery'].map(tag => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 bg-surface-container-high font-label text-[10px] uppercase tracking-widest text-white/60"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Start your sourcing request</p>
+              <a
+                href={buildWhatsAppUrl('Hi, I\'d like to source a vehicle from the USA. Can you help me?')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-ignition text-white font-headline font-bold uppercase tracking-widest text-xs px-6 py-4 ignition-glow hover:brightness-110 active:scale-[0.98] transition-all duration-150"
+              >
+                <MessageCircle size={16} />
+                Source My Car on WhatsApp
+              </a>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
@@ -86,10 +101,10 @@ export function HubGhana() {
         <div className="bg-surface-container order-2 md:order-1 overflow-hidden">
 
           {/* Interactive map — edge to edge */}
-          <div className="relative h-56 w-full">
+          <div className="relative h-72 w-full">
             <iframe
               title="Tema Port, Ghana"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.01%2C5.58%2C0.05%2C5.64&layer=mapnik&marker=5.608%2C0.016"
+              src="https://maps.google.com/maps?q=Tema+Port,+Tema,+Ghana&t=k&z=15&output=embed"
               className="absolute inset-0 w-full h-full border-0"
               allowFullScreen
               loading="lazy"

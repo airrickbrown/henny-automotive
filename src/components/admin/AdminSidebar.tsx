@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { Car, Settings, X, LogOut, LayoutDashboard, User, Mail, SlidersHorizontal } from 'lucide-react'
+import { Car, Settings, X, LogOut, LayoutDashboard, User, Mail, SlidersHorizontal, ImageIcon } from 'lucide-react'
 import { useActiveRoute } from '../../hooks/useActiveRoute'
 import { useAuth } from '../../contexts/AuthContext'
 import { cn } from '../../lib/utils'
@@ -12,6 +12,7 @@ const NAV_ICON_MAP: Record<string, React.ComponentType<{ size?: number; classNam
   person:         User,
   mail:           Mail,
   tune:           SlidersHorizontal,
+  image:          ImageIcon,
 }
 
 const NAV_ITEMS = [
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
   { label: 'Inventory Management', href: '/admin/inventory',     icon: 'directions_car' },
   { label: 'Car Parts',            href: '/admin/parts',         icon: 'settings' },
   { label: 'Leads',                href: '/admin/leads',         icon: 'person' },
+  { label: 'Site Images',           href: '/admin/images',        icon: 'image' },
   { label: 'Newsletter',           href: '/admin/newsletter',    icon: 'mail' },
   { label: 'Settings',             href: '/admin/settings',      icon: 'tune' },
 ] as const

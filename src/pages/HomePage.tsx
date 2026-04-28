@@ -8,13 +8,15 @@ import { HubUSA, HubGhana } from '../components/sections/LocationHubs'
 import PartsPreview from '../components/sections/PartsPreview'
 import TestimonialBlock from '../components/sections/TestimonialBlock'
 import CTABanner from '../components/sections/CTABanner'
+import { useSettings } from '../contexts/SettingsContext'
 
 export default function HomePage() {
+  const { tagline, site_name } = useSettings()
   return (
     <>
       <PageMeta
-        title="The Kinetic Monolith"
-        description="Henny Automotive — elite vehicle sourcing from the USA to Ghana. Premium cars, performance parts, and seamless international logistics since 2014."
+        title={tagline}
+        description={`${site_name} — elite vehicle sourcing from the USA to Ghana. Premium cars, performance parts, and seamless international logistics since 2014.`}
         path="/"
       />
       <HeroSection />
