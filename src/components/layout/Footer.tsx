@@ -87,20 +87,6 @@ function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
   )
 }
 
-// ── External link ─────────────────────────────────────────────────────────────
-function ExtLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block font-body text-sm text-white/40 hover:text-white hover:translate-x-1 transition-all duration-200"
-    >
-      {children}
-    </a>
-  )
-}
-
 // ── Social icon button ────────────────────────────────────────────────────────
 function SocialIcon({
   href,
