@@ -33,7 +33,7 @@ export const shadows = {
   mobileNavTop: '0 -8px 32px rgba(0, 0, 0, 0.5)',
 } as const
 
-export const WHATSAPP_NUMBER = '+233000000000'
+export const WHATSAPP_NUMBER = '+233593204050'
 export const GHANA_PHONE = '+233593204050'
 export const GHANA_PHONE_DISPLAY = '059 320 4050'
 

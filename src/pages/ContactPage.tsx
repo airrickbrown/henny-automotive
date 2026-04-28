@@ -342,7 +342,7 @@ export default function ContactPage() {
         {/* ── Bottom strip ────────────────────────────────────── */}
         <div className="mt-20 border-t border-outline-variant/10 pt-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
-            <HennyLogo width={120} />
+            <HennyLogo width={90} />
             <p className="font-label text-[10px] uppercase tracking-widest text-white/30 mt-1">
               USA Sourcing &nbsp;·&nbsp; Accra, Ghana &nbsp;·&nbsp; Est. 2014
             </p>
@@ -363,7 +363,7 @@ export default function ContactPage() {
               href={SNAPCHAT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center bg-surface-container-high border border-outline-variant/20 text-[#FFFC00] hover:bg-[#FFFC00] hover:text-black hover:border-[#FFFC00] transition-all duration-150"
+              className="w-10 h-10 flex items-center justify-center bg-[#FFFC00] text-black hover:brightness-90 transition-all duration-150"
               aria-label="Snapchat"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
