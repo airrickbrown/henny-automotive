@@ -4,9 +4,11 @@ import PageMeta from '../components/seo/PageMeta'
 import { buildWhatsAppUrl } from '../lib/tokens'
 import PageWrapper from '../components/layout/PageWrapper'
 import SectionLabel from '../components/ui/SectionLabel'
+import { useImages } from '../contexts/ImagesContext'
 
 // ── About Page ───────────────────────────────────────────────────────────────
 export default function AboutPage() {
+  const images = useImages()
   return (
     <PageWrapper>
       <PageMeta
@@ -22,7 +24,7 @@ export default function AboutPage() {
         {/* Right: faded car image */}
         <div
           className="absolute right-0 top-0 w-full md:w-1/2 h-full bg-cover bg-center"
-          style={{ backgroundImage: 'url(/images/about-hero.jpg)' }}
+          style={{ backgroundImage: `url(${images['about-hero']})` }}
           aria-hidden="true"
         >
           {/* Gradient mask — fade left on desktop, fade bottom on mobile */}
@@ -65,7 +67,7 @@ export default function AboutPage() {
             <div className="relative md:col-span-2 bg-surface-container-high overflow-hidden group">
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-700"
-                style={{ backgroundImage: 'url(/images/houston.jpg)' }}
+                style={{ backgroundImage: `url(${images['about-usa']})` }}
               />
               <div className="relative z-10 p-7 h-full flex flex-col justify-between">
                 <div className="flex items-center gap-2">
@@ -89,7 +91,7 @@ export default function AboutPage() {
             <div className="relative md:col-span-2 bg-surface-container-high overflow-hidden group">
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-700"
-                style={{ backgroundImage: 'url(/images/accra.jpg)' }}
+                style={{ backgroundImage: `url(${images['about-accra']})` }}
               />
               <div className="relative z-10 p-7 h-full flex flex-col justify-between">
                 <div className="flex items-center gap-2">
@@ -159,7 +161,7 @@ export default function AboutPage() {
             <div className="relative w-full md:w-5/12 flex-shrink-0">
               <div className="aspect-[4/5] bg-surface-container-high overflow-hidden">
                 <img
-                  src="/images/about-vision.jpg"
+                  src={images['about-vision']}
                   alt="Henny Automotive — the origin story"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   loading="lazy"
@@ -230,7 +232,7 @@ export default function AboutPage() {
       <section className="relative h-[400px] md:h-[560px] overflow-hidden group">
         <div
           className="absolute inset-0 bg-cover bg-center scale-105 group-hover:scale-100 transition-transform duration-[2000ms]"
-          style={{ backgroundImage: 'url(/images/port.jpg)' }}
+          style={{ backgroundImage: `url(${images['port']})` }}
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-background/70" />

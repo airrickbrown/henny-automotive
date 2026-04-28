@@ -1,5 +1,6 @@
 import { Gavel, ShieldCheck, Ship, Car, MessageCircle, Anchor, CheckSquare, Handshake, ExternalLink, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
+import { useImages } from '../../contexts/ImagesContext'
 
 function Detail({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
   return (
@@ -11,6 +12,7 @@ function Detail({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
 }
 
 export function HubUSA() {
+  const images = useImages()
   return (
     <section id="usa-sourcing" className="py-24 md:py-32 px-6 md:px-8 bg-surface-container-low">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
@@ -43,7 +45,7 @@ export function HubUSA() {
           {/* Sourcing image */}
           <div className="relative h-56 w-full overflow-hidden">
             <img
-              src="/images/logistics-port-usa.jpg"
+              src={images['logistics-usa']}
               alt="U.S. vehicle export port"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               loading="lazy"
@@ -91,6 +93,7 @@ export function HubUSA() {
 }
 
 export function HubGhana() {
+  const images = useImages()
   return (
     <section id="ghana-hub" className="py-24 md:py-32 px-6 md:px-8 bg-surface">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">

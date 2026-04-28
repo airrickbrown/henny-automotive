@@ -1,6 +1,8 @@
 import { buildWhatsAppUrl } from '../../lib/tokens'
+import { useImages } from '../../contexts/ImagesContext'
 
 export default function CTABanner() {
+  const images = useImages()
   return (
     <section id="contact-cta" className="py-16 md:py-20 px-6 md:px-8">
       <div className="max-w-7xl mx-auto bg-primary-container p-10 md:p-20 relative overflow-hidden">
@@ -8,7 +10,7 @@ export default function CTABanner() {
         {/* Subtle background image — right edge, 10% opacity */}
         <div className="absolute right-0 top-0 w-1/3 h-full opacity-10 pointer-events-none select-none">
           <img
-            src="/images/cta-car-blur.jpg"
+            src={images['cta-background']}
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"

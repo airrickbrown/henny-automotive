@@ -3,6 +3,7 @@ import IgnitionButton from '../ui/IgnitionButton'
 import SectionLabel from '../ui/SectionLabel'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 import { useSettings } from '../../contexts/SettingsContext'
+import { useImages } from '../../contexts/ImagesContext'
 
 function WhatsAppIcon({ size = 22 }: { size?: number }) {
   return (
@@ -15,6 +16,7 @@ function WhatsAppIcon({ size = 22 }: { size?: number }) {
 export default function HeroSection() {
   const navigate    = useNavigate()
   const { tagline } = useSettings()
+  const images      = useImages()
 
   return (
     <header className="relative overflow-hidden">
@@ -25,7 +27,7 @@ export default function HeroSection() {
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero-car.jpg"
+            src={images['hero-desktop']}
             alt="Premium luxury car — Henny Automotive"
             className="w-full h-full object-cover opacity-60"
           />
@@ -73,7 +75,7 @@ export default function HeroSection() {
         {/* Background image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero-car-mobile.jpg"
+            src={images['hero-mobile']}
             alt="Premium luxury car — Henny Automotive"
             className="w-full h-full object-cover"
           />
