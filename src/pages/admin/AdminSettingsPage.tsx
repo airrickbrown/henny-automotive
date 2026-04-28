@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 import { getAllVehicles } from '../../lib/vehicles'
 import { getSettings, saveAllSettings, type SiteSettings } from '../../lib/settings'
+import { supabase } from '../../lib/supabase'
 import { cn } from '../../lib/utils'
 
 function SettingsSection({ title, description, children }: {
@@ -75,11 +76,12 @@ export default function AdminSettingsPage() {
 
   const [manufacturers, setManufacturers]     = useState<string[]>([])
   const [filtersLoading, setFiltersLoading]   = useState(true)
+  const [tableError, setTableError]           = useState(false)
 
   useEffect(() => {
     getSettings()
       .then(s => { setSettings(s); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch(() => { setTableError(true); setLoading(false) })
 
     getAllVehicles()
       .then(vehicles => {
@@ -88,6 +90,16 @@ export default function AdminSettingsPage() {
       })
       .catch(() => {})
       .finally(() => setFiltersLoading(false))
+
+    // Real-time: reload settings when another session saves them
+    const channel = supabase
+      .channel('admin-settings-rt')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'site_settings' }, () => {
+        getSettings().then(s => setSettings(s)).catch(() => {})
+      })
+      .subscribe()
+
+    return () => { supabase.removeChannel(channel) }
   }, [])
 
   const update = useCallback(<K extends keyof SiteSettings>(key: K, value: SiteSettings[K]) => {
@@ -108,6 +120,46 @@ export default function AdminSettingsPage() {
     } finally {
       setSaving(false)
     }
+  }
+
+  if (tableError) {
+    return (
+      <div className="max-w-[860px]">
+        <div className="bg-surface-container-low border-l-4 border-red-500 p-6">
+          <div className="flex items-start gap-3">
+            <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-headline font-bold text-white uppercase tracking-tight mb-2">
+                Settings Table Missing
+              </p>
+              <p className="font-body text-sm text-on-surface-variant mb-4">
+                The <code className="text-white bg-surface-container px-1">site_settings</code> table
+                doesn't exist in your Supabase database yet. Run this SQL in your Supabase
+                dashboard → SQL Editor to set it up:
+              </p>
+              <pre className="font-mono text-xs text-white/70 bg-surface-container p-4 leading-relaxed whitespace-pre-wrap">
+{`CREATE TABLE IF NOT EXISTS site_settings (
+  key   TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
+INSERT INTO site_settings (key, value) VALUES
+  ('tagline',          'The Kinetic Monolith'),
+  ('site_name',        'Henny Automotive'),
+  ('show_prices',      'true'),
+  ('maintenance_mode', 'false')
+ON CONFLICT (key) DO NOTHING;`}
+              </pre>
+              <button
+                onClick={() => { setTableError(false); setLoading(true); getSettings().then(s => { setSettings(s); setLoading(false) }).catch(() => setLoading(false)) }}
+                className="mt-4 font-label text-xs uppercase tracking-widest text-primary-container hover:text-white transition-colors"
+              >
+                Retry after running SQL →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (loading || !settings) {
@@ -234,7 +286,7 @@ export default function AdminSettingsPage() {
           {saveStatus === 'error' && (
             <span className="flex items-center gap-1.5 font-label text-xs uppercase tracking-widest text-red-400">
               <AlertCircle size={16} />
-              Save failed — check Supabase connection
+              Save failed — run the site_settings SQL in Supabase first
             </span>
           )}
         </div>
