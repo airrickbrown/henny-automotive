@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Car, Search, MapPin, type LucideIcon } from 'lucide-react'
+import { Car, Info, Phone, type LucideIcon } from 'lucide-react'
 import { buildWhatsAppUrl } from '../../lib/tokens'
 import { cn } from '../../lib/utils'
 
@@ -67,14 +67,14 @@ export default function MobileBottomNav() {
           <WhatsAppTab />
         </a>
 
-        {/* Source a Car — links to USA Vehicle Sourcing section */}
-        <Link to={{ pathname: '/', hash: '#usa-sourcing' }} aria-label="Source a Car">
-          <TabItem icon={Search} label="Source" />
+        {/* About — USA sourcing story */}
+        <Link to="/about" aria-label="About Us">
+          <TabItem icon={Info} label="About" active={pathname === '/about'} />
         </Link>
 
-        {/* Ghana Hub — homepage anchor */}
-        <Link to={{ pathname: '/', hash: '#ghana-hub' }} aria-label="Ghana Hub">
-          <TabItem icon={MapPin} label="Ghana Hub" />
+        {/* Contact — reach the Ghana team */}
+        <Link to="/contact" aria-label="Contact Us">
+          <TabItem icon={Phone} label="Contact" active={pathname === '/contact'} />
         </Link>
 
       </div>

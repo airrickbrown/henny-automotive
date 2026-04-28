@@ -8,7 +8,7 @@ export default function HennyLogo({ width = 140, className = '' }: HennyLogoProp
 
   return (
     <div
-      className={`flex-shrink-0 inline-flex items-center justify-center bg-white/[0.08] rounded-sm px-1.5 py-1 ${className}`}
+      className={`flex-shrink-0 inline-flex items-center justify-center bg-white/25 rounded-sm px-2 py-1.5 ${className}`}
     >
       <img
         src="/images/henny-logo.png"
