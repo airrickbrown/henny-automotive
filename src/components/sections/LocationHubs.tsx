@@ -93,7 +93,6 @@ export function HubUSA() {
 }
 
 export function HubGhana() {
-  const images = useImages()
   return (
     <section id="ghana-hub" className="py-24 md:py-32 px-6 md:px-8 bg-surface">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
